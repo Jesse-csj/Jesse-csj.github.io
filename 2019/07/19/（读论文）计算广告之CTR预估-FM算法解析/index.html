@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh_CN">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,26 +85,26 @@
 
 
 
-<meta name="description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率 （读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.ist.psu.edu">
+<meta name="description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率   tags: ctr（读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jesse&#39;s Blog">
 <meta property="og:url" content="http://yoursite.com/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率 （读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.ist.psu.edu">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1473228-20180904202838541-2090182057.png">
-<meta property="og:image" content="http://yoursite.com/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1473228-20180904202908102-215826983.png">
-<meta property="og:image" content="http://yoursite.com/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1630213-20190710174305361-1336985179.png">
-<meta property="og:image" content="http://yoursite.com/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1630213-20190710174342426-2098941787.png">
-<meta property="og:image" content="http://yoursite.com/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1630213-20190710174408535-2047182456.png">
-<meta property="og:image" content="http://yoursite.com/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1630213-20190710174437368-117236465.png">
-<meta property="og:image" content="http://yoursite.com/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1630213-20190710174801238-1060265372.png">
-<meta property="og:updated_time" content="2019-07-19T12:49:53.362Z">
+<meta property="og:description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率   tags: ctr（读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png">
+<meta property="og:image" content="http://yoursite.com/.com//1473228-20180904202908102-215826983.png">
+<meta property="og:image" content="http://yoursite.com/.com//1630213-20190710174305361-1336985179.png">
+<meta property="og:image" content="http://yoursite.com/.com//1630213-20190710174342426-2098941787.png">
+<meta property="og:image" content="http://yoursite.com/.com//1630213-20190710174408535-2047182456.png">
+<meta property="og:image" content="http://yoursite.com/.com//1630213-20190710174437368-117236465.png">
+<meta property="og:image" content="http://yoursite.com/.com//1630213-20190710174801238-1060265372.png">
+<meta property="og:updated_time" content="2019-07-19T13:25:38.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jesse&#39;s Blog">
-<meta name="twitter:description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率 （读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.ist.psu.edu">
-<meta name="twitter:image" content="http://yoursite.com/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1473228-20180904202838541-2090182057.png">
+<meta name="twitter:description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率   tags: ctr（读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.">
+<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png">
 
 
 
@@ -120,7 +120,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -152,7 +152,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh_CN">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -200,7 +200,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
-            Home
+            首页
           </a>
         </li>
       
@@ -210,7 +210,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
-            About
+            关于
           </a>
         </li>
       
@@ -220,7 +220,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
-            Tags
+            标签
           </a>
         </li>
       
@@ -230,7 +230,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            Categories
+            分类
           </a>
         </li>
       
@@ -240,7 +240,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
-            Archives
+            归档
           </a>
         </li>
       
@@ -304,9 +304,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-19T19:59:41+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-19T19:59:41+08:00">
                 2019-07-19
               </time>
             
@@ -346,7 +346,7 @@
       
         <hr>
 <p>  title: （读论文）计算广告之CTR预估-FM算法解析<br>  date: 2019-07-19 19:59:41<br>  categories: 广告点击率</p>
-<h1 id="（读论文）计算广告之CTR预估-FM算法解析"><a href="#（读论文）计算广告之CTR预估-FM算法解析" class="headerlink" title="（读论文）计算广告之CTR预估-FM算法解析"></a>（读论文）计算广告之CTR预估-FM算法解析</h1><p>  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：<br>  原文：Factorization Machines</p>
+<h2 id="tags-ctr"><a href="#tags-ctr" class="headerlink" title="  tags: ctr"></a>  tags: ctr</h2><h1 id="（读论文）计算广告之CTR预估-FM算法解析"><a href="#（读论文）计算广告之CTR预估-FM算法解析" class="headerlink" title="（读论文）计算广告之CTR预估-FM算法解析"></a>（读论文）计算广告之CTR预估-FM算法解析</h1><p>  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：<br>  原文：Factorization Machines</p>
 <p>  地址：<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.393.8529&rep=rep1&type=pdf" target="_blank" rel="noopener">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.393.8529&amp;rep=rep1&amp;type=pdf</a></p>
 <p>  <strong>一、问题由来</strong></p>
 <p>  在计算广告和推荐系统中，CTR预估(click-through rate)是非常重要的一个环节，判断一个商品的是否进行推荐需要根据CTR预估的点击率来进行。传统的逻辑回归模型是一种广义线性模型，非常容易实现大规模实时并行处理，因此在工业界获得了广泛应用，但是线性模型的学习能力有限，不能捕获高阶特征(非线性信息)，而在进行CTR预估时，除了单特征外，往往要对特征进行组合。对于特征组合来说，业界现在通用的做法主要有两大类：FM系列与DNN系列。今天，我们就来分享下FM算法。</p>
@@ -355,23 +355,22 @@
 <p>  　　　　2、高维的稀疏矩阵是实际工程中常见的问题，并直接会导致计算量过大，特征权值更新缓慢。试想一个10000<em>100的表，每一列都有8种元素，经过one-hot独热编码之后，会产生一个10000</em>800的表。因此表中每行元素只有100个值为1，700个值为0。特征空间急剧变大，以淘宝上的item为例，将item进行one-hot编码以后，样本空间有一个categorical变为了百万维的数值特征，特征空间一下子暴增一百万。所以大厂动不动上亿维度，就是这么来的。</p>
 <p>  　　　　而FM的优势就在于对这两方面问题的处理。首先是特征组合，通过对两两特征组合，引入交叉项特征，提高模型得分；其次是高维灾难，通过引入隐向量（对参数矩阵进行矩阵分解），完成对特征的参数估计。</p>
 <p>  <strong>三、原理及求解</strong></p>
-<p>  　　　　在看FM算法前，我们先回顾一下最常见的线性表达式：<br>                                                         <img src="/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1473228-20180904202838541-2090182057.png" alt></p>
-<p>  　　　　其中w0 为初始权值，或者理解为偏置项，wi 为每个特征xi 对应的权值。可以看到，这种线性表达式只描述了每个特征与输出的关系。</p>
+<p>  　　　　在看FM算法前，我们先回顾一下最常见的线性表达式：<br>                   <img src="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png" alt><br>  　　　　其中w0 为初始权值，或者理解为偏置项，wi 为每个特征xi 对应的权值。可以看到，这种线性表达式只描述了每个特征与输出的关系。</p>
 <p>  　　　　FM的表达式如下，可观察到，只是在线性表达式后面加入了新的交叉项特征及对应的权值。</p>
-<p><img src="/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1473228-20180904202908102-215826983.png" alt></p>
+<p><img src="/.com//1473228-20180904202908102-215826983.png" alt></p>
 <p>  *<em>求解过程 ：　*</em></p>
 <p>  　　　　从上面的式子可以很容易看出，组合部分的特征相关参数共有n(n−1)/2个。但是如第二部分所分析，在数据很稀疏的情况下，满足xi,xj都不为0的情况非常少，这样将导致ωij无法通过训练得出。</p>
 <p>  为了求出ωij，我们对每一个特征分量xi引入辅助向量Vi=(vi1,vi2,⋯,vik)。然后，利用vivj^T对ωij进行求解：</p>
-<p><img src="/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1630213-20190710174305361-1336985179.png" alt></p>
+<p>  　　　<br><img src="/.com//1630213-20190710174305361-1336985179.png" alt></p>
 <p>  　　　　那么ωij组成的矩阵可以表示为:</p>
-<p><img src="/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1630213-20190710174342426-2098941787.png" alt></p>
+<p><img src="/.com//1630213-20190710174342426-2098941787.png" alt></p>
 <p>  　　　　那么，如何求解vi和vj呢？主要采用了公式：</p>
-<p><img src="/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1630213-20190710174408535-2047182456.png" alt></p>
+<p><img src="/.com//1630213-20190710174408535-2047182456.png" alt></p>
 <p>  　　　　具体推导过程如下：（重要的化简过程）</p>
-<p><img src="/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1630213-20190710174437368-117236465.png" alt></p>
+<p><img src="/.com//1630213-20190710174437368-117236465.png" alt></p>
 <p>  <strong>四、参数求解</strong></p>
 <p>  　　　　利用梯度下降法，通过求损失函数对特征（输入项）的导数计算出梯度，从而更新权值。设m为样本个数，θ为权值。</p>
-<p>​                                 <img src="/.com//D:%5Chexo%5Csource_posts%5C%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90%5C1630213-20190710174801238-1060265372.png" alt><br> 其中，<br>$$<br>\sum_{j=1}^nv_{j,f}x_j<br>$$</p>
+<p><img src="/.com//1630213-20190710174801238-1060265372.png" alt><br> 其中，<br>$$<br>\sum_{j=1}^nv_{j,f}x_j<br>$$</p>
 <p>是和i无关的，可以事先求出来。每个梯度都可以在O(1)时间内求得，整体的参数更新的时间为O(kn)。</p>
 <p>  第一篇博客就到此结束啦~ 之后会继续分享计算广告相关的论文和知识。</p>
 
@@ -460,10 +459,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            站点概览
           </li>
         </ul>
       
@@ -484,7 +483,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -561,7 +560,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#（读论文）计算广告之CTR预估-FM算法解析"><span class="nav-number">1.</span> <span class="nav-text">（读论文）计算广告之CTR预估-FM算法解析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-ctr"><span class="nav-number">1.</span> <span class="nav-text">  tags: ctr</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#（读论文）计算广告之CTR预估-FM算法解析"><span class="nav-number"></span> <span class="nav-text">（读论文）计算广告之CTR预估-FM算法解析</span></a></li></div>
             
 
           </div>
@@ -591,7 +590,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -599,7 +598,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
