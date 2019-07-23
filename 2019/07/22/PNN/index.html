@@ -119,7 +119,7 @@
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-8e3fe7702bab617eb1b1b3a40018fb98_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-8736f30fa55d4afe8bb9624dafc44301_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-cf8d155b2332e3e287410f7f381e1db3_hd.png">
-<meta property="og:updated_time" content="2019-07-23T08:43:14.330Z">
+<meta property="og:updated_time" content="2019-07-23T09:26:16.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-PNN模型解析">
 <meta name="twitter:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016">
@@ -480,7 +480,7 @@
 <p>那最终就会得到一个高维稀疏向量。但是这个数据集不能直接用神经网络训练：如果直接用One-Hot Binary进行编码，那输入特征至少有一百万，第一层至少需要500个节点，那么第一层我们就需要训练5亿个参数，那就需要20亿或是50亿的数据集，而要获得如此大的数据集基本上是很困难的事情。</p>
 <p><strong>回顾FM、FNN模型</strong></p>
 <p>因为上述原因需要将非常大的特征向量嵌入到低维向量空间中来减小模型复杂度，而FM（Factorisation machine）是很有效的embedding model：</p>
-<p><img src="https://pic1.zhimg.com/v2-c555093943338233d6bde77544ffcc8c_r.jpg" alt></p>
+<p><img src="https://pic1.zhimg.com/v2-c555093943338233d6bde77544ffcc8c_r.jpg" alt="FM公式"></p>
 <p>第一部分仍然为Logistic Regression，第二部分是通过两两向量之间的点积来判断特征向量之间和目标变量之间的关系。比如上述的迪斯尼广告，occupation=Student和City=Shanghai这两个向量之间的角度应该小于90，它们之间的点积应该大于0，说明和迪斯尼广告的点击率是正相关的。这种算法在推荐系统领域应用比较广泛。</p>
 <p>那就基于这个模型来考虑神经网络模型，其实这个模型本质上就是一个三层网络：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-b046c93f125596de5265f7c6342542f6_hd.png" alt></p>
