@@ -117,7 +117,7 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/14.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/15.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/16.jpg">
-<meta property="og:updated_time" content="2019-07-23T13:18:58.699Z">
+<meta property="og:updated_time" content="2019-07-23T13:25:04.358Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-PNN模型解析">
 <meta name="twitter:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016">
@@ -431,7 +431,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.6k 
+                  2.5k 
                 </span>
               
 
@@ -447,7 +447,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9 分钟
+                  8 分钟
                 </span>
               
             </div>
@@ -517,7 +517,7 @@
 
 <h1 id="2、Product-Layer详细介绍"><a href="#2、Product-Layer详细介绍" class="headerlink" title="2、Product Layer详细介绍"></a>2、Product Layer详细介绍</h1><p>前面提到了，product layer可以分成两个部分，一部分是线性部分lz，一部分是非线性部分lp。它们同维度，其具体形式如下：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-37e77e50b3a109ed916b6396046b55c0_hd.png" alt></p>
-<p>$$<br>其中z,p为信号向量，z为线性信号向量，p为二次信号向量，其中 W_{z}^{i} ,W_{p}^{i}为权重矩阵。（权重矩阵与z,p同维，经过定义的这种点乘运算后都得到一个标量作为DNN的输入）看上面的公式，我们首先需要知道z和p，这都是由我们的embedding层得到的，其中z是线性信号向量，因此我们直接用embedding层得到：<br>$$ {W_{z}^{i}<br>（权重矩阵与z,p同维，经过定义的这种点乘运算后都得到一个标量作为DNN的输入）看上面的公式，我们首先需要知道z和p，这都是由我们的embedding层得到的，其中z是线性信号向量，因此我们直接用embedding层得到：</p>
+<p>其中z,p为信号向量，z为线性信号向量，p为二次信号向量,<br>$$<br>其中W_{z}^{i},W_{p}^{i}为权重矩阵。<br>$$<br>(权重矩阵与z,p同维，经过定义的这种点乘运算后都得到一个标量作为DNN的输入）看上面的公式，我们首先需要知道z和p，这都是由我们的embedding层得到的，其中z是线性信号向量，因此我们直接用embedding层得到：</p>
 <p>看上面的公式，我们首先需要知道z和p，这都是由我们的embedding层得到的，其中z是线性信号向量，因此我们直接用embedding层得到：</p>
  <img src="/2019/07/22/PNN/9.jpg">
 
@@ -834,7 +834,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">4.5k</span> 字
+      博客全站共： <span class="post-count">4.4k</span> 字
     </span>
 </div>
 <!-- 新增访客统计代码 END-->
