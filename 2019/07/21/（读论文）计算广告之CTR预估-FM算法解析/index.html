@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="#    大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.393.8529&amp;amp;rep=rep1&amp;amp;type=pdf 一、问题由来  在计算广告和推荐系统中，CTR预估(click-th">
+<meta name="description" content="大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines">
 <meta name="keywords" content="推荐系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="（读论文）计算广告之CTR预估-FM算法解析">
+<meta property="og:title" content="（读论文）推荐系统之ctr预估-FM算法解析">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="#    大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.393.8529&amp;amp;rep=rep1&amp;amp;type=pdf 一、问题由来  在计算广告和推荐系统中，CTR预估(click-th">
+<meta property="og:description" content="大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1473228-20180904202908102-215826983.png">
@@ -102,10 +102,10 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174408535-2047182456.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174437368-117236465.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174801238-1060265372.png">
-<meta property="og:updated_time" content="2019-07-23T08:15:14.740Z">
+<meta property="og:updated_time" content="2019-07-23T08:23:45.015Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="（读论文）计算广告之CTR预估-FM算法解析">
-<meta name="twitter:description" content="#    大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.393.8529&amp;amp;rep=rep1&amp;amp;type=pdf 一、问题由来  在计算广告和推荐系统中，CTR预估(click-th">
+<meta name="twitter:title" content="（读论文）推荐系统之ctr预估-FM算法解析">
+<meta name="twitter:description" content="大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines">
 <meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png">
 
 
@@ -142,7 +142,7 @@
 
 
 
-  <title>（读论文）计算广告之CTR预估-FM算法解析 | Jesse's Blog</title>
+  <title>（读论文）推荐系统之ctr预估-FM算法解析 | Jesse's Blog</title>
   
 
 
@@ -350,7 +350,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">（读论文）计算广告之CTR预估-FM算法解析</h1>
+          <h1 class="post-title" itemprop="name headline">（读论文）推荐系统之ctr预估-FM算法解析</h1>
         
 
         <div class="post-meta">
@@ -422,8 +422,9 @@
       
 
       
-        <p># </p>
-<p>  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：<br>  原文：Factorization Machines</p>
+        <p> 大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：<br>  原文：Factorization Machines</p>
+<a id="more"></a>
+
 <p>  地址：<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.393.8529&rep=rep1&type=pdf" target="_blank" rel="noopener">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.393.8529&amp;rep=rep1&amp;type=pdf</a></p>
 <h1 id="一、问题由来"><a href="#一、问题由来" class="headerlink" title="一、问题由来"></a><strong>一、问题由来</strong></h1><p>  在计算广告和推荐系统中，CTR预估(click-through rate)是非常重要的一个环节，判断一个商品的是否进行推荐需要根据CTR预估的点击率来进行。传统的逻辑回归模型是一种广义线性模型，非常容易实现大规模实时并行处理，因此在工业界获得了广泛应用，但是线性模型的学习能力有限，不能捕获高阶特征(非线性信息)，而在进行CTR预估时，除了单特征外，往往要对特征进行组合。对于特征组合来说，业界现在通用的做法主要有两大类：FM系列与DNN系列。今天，我们就来分享下FM算法。</p>
 <h1 id="二、为什么需要FM"><a href="#二、为什么需要FM" class="headerlink" title="二、为什么需要FM"></a><strong>二、为什么需要FM</strong></h1><p>  　　　　1、特征组合是许多机器学习建模过程中遇到的问题，如果对特征直接建模，很有可能会忽略掉特征与特征之间的关联信息，因此，可以通过构建新的交叉特征这一特征组合方式提高模型的效果。</p>
@@ -493,8 +494,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/22/PNN/" rel="prev" title>
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/22/PNN/" rel="prev" title="（读论文）推荐系统之ctr预估-PNN模型解析">
+                （读论文）推荐系统之ctr预估-PNN模型解析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
