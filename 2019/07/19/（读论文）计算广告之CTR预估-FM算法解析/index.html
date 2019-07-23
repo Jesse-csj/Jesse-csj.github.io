@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率   tags: ctr（读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.">
+<meta name="description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率  （读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.ist.psu.ed">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jesse&#39;s Blog">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率   tags: ctr（读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.">
+<meta property="og:description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率  （读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.ist.psu.ed">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1473228-20180904202908102-215826983.png">
@@ -102,10 +102,10 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174408535-2047182456.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174437368-117236465.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174801238-1060265372.png">
-<meta property="og:updated_time" content="2019-07-19T13:25:38.692Z">
+<meta property="og:updated_time" content="2019-07-23T08:06:17.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jesse&#39;s Blog">
-<meta name="twitter:description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率   tags: ctr（读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.">
+<meta name="twitter:description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率  （读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.ist.psu.ed">
 <meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png">
 
 
@@ -402,7 +402,8 @@
       
         <hr>
 <p>  title: （读论文）计算广告之CTR预估-FM算法解析<br>  date: 2019-07-19 19:59:41<br>  categories: 广告点击率</p>
-<h2 id="tags-ctr"><a href="#tags-ctr" class="headerlink" title="  tags: ctr"></a>  tags: ctr</h2><h1 id="（读论文）计算广告之CTR预估-FM算法解析"><a href="#（读论文）计算广告之CTR预估-FM算法解析" class="headerlink" title="（读论文）计算广告之CTR预估-FM算法解析"></a>（读论文）计算广告之CTR预估-FM算法解析</h1><p>  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：<br>  原文：Factorization Machines</p>
+<hr>
+<h1 id="（读论文）计算广告之CTR预估-FM算法解析"><a href="#（读论文）计算广告之CTR预估-FM算法解析" class="headerlink" title="（读论文）计算广告之CTR预估-FM算法解析"></a>（读论文）计算广告之CTR预估-FM算法解析</h1><p>  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：<br>  原文：Factorization Machines</p>
 <p>  地址：<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.393.8529&rep=rep1&type=pdf" target="_blank" rel="noopener">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.393.8529&amp;rep=rep1&amp;type=pdf</a></p>
 <p>  <strong>一、问题由来</strong></p>
 <p>  在计算广告和推荐系统中，CTR预估(click-through rate)是非常重要的一个环节，判断一个商品的是否进行推荐需要根据CTR预估的点击率来进行。传统的逻辑回归模型是一种广义线性模型，非常容易实现大规模实时并行处理，因此在工业界获得了广泛应用，但是线性模型的学习能力有限，不能捕获高阶特征(非线性信息)，而在进行CTR预估时，除了单特征外，往往要对特征进行组合。对于特征组合来说，业界现在通用的做法主要有两大类：FM系列与DNN系列。今天，我们就来分享下FM算法。</p>
@@ -417,7 +418,7 @@
 <p>  *<em>求解过程 ：　*</em></p>
 <p>  　　　　从上面的式子可以很容易看出，组合部分的特征相关参数共有n(n−1)/2个。但是如第二部分所分析，在数据很稀疏的情况下，满足xi,xj都不为0的情况非常少，这样将导致ωij无法通过训练得出。</p>
 <p>  为了求出ωij，我们对每一个特征分量xi引入辅助向量Vi=(vi1,vi2,⋯,vik)。然后，利用vivj^T对ωij进行求解：</p>
-<p>  　　　<br><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174305361-1336985179.png" alt></p>
+<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174305361-1336985179.png" alt></p>
 <p>  　　　　那么ωij组成的矩阵可以表示为:</p>
 <p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174342426-2098941787.png" alt></p>
 <p>  　　　　那么，如何求解vi和vj呢？主要采用了公式：</p>
@@ -627,7 +628,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-ctr"><span class="nav-text">  tags: ctr</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#（读论文）计算广告之CTR预估-FM算法解析"><span class="nav-text">（读论文）计算广告之CTR预估-FM算法解析</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#（读论文）计算广告之CTR预估-FM算法解析"><span class="nav-text">（读论文）计算广告之CTR预估-FM算法解析</span></a></li></ol></div>
             
 
           </div>
