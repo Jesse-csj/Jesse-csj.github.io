@@ -11,6 +11,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
 
 
 
@@ -89,17 +91,17 @@
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jesse&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/index.html">
+<meta property="og:url" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
 <meta property="og:description" content="title: （读论文）计算广告之CTR预估-FM算法解析  date: 2019-07-19 19:59:41  categories: 广告点击率   tags: ctr（读论文）计算广告之CTR预估-FM算法解析  大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines   地址：http://citeseerx.">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png">
-<meta property="og:image" content="http://yoursite.com/.com//1473228-20180904202908102-215826983.png">
-<meta property="og:image" content="http://yoursite.com/.com//1630213-20190710174305361-1336985179.png">
-<meta property="og:image" content="http://yoursite.com/.com//1630213-20190710174342426-2098941787.png">
-<meta property="og:image" content="http://yoursite.com/.com//1630213-20190710174408535-2047182456.png">
-<meta property="og:image" content="http://yoursite.com/.com//1630213-20190710174437368-117236465.png">
-<meta property="og:image" content="http://yoursite.com/.com//1630213-20190710174801238-1060265372.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1473228-20180904202908102-215826983.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174305361-1336985179.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174342426-2098941787.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174408535-2047182456.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174437368-117236465.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174801238-1060265372.png">
 <meta property="og:updated_time" content="2019-07-19T13:25:38.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jesse&#39;s Blog">
@@ -134,7 +136,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/">
+  <link rel="canonical" href="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/">
 
 
 
@@ -161,6 +163,10 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
+    
+    <a href="https://github.com/Jesse-csj"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -175,7 +181,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">直落夜深花睡去</p>
+        <p class="site-subtitle">直落夜深花睡去，临风春华便思君。</p>
       
   </div>
 
@@ -309,10 +315,10 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/">
+    <link itemprop="mainEntityOfPage" href="https://jesse-csj.github.io/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jesse jia">
+      <meta itemprop="name" content="Jesse_jia">
       <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -389,20 +395,20 @@
 <p>  <strong>三、原理及求解</strong></p>
 <p>  　　　　在看FM算法前，我们先回顾一下最常见的线性表达式：<br>                   <img src="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png" alt><br>  　　　　其中w0 为初始权值，或者理解为偏置项，wi 为每个特征xi 对应的权值。可以看到，这种线性表达式只描述了每个特征与输出的关系。</p>
 <p>  　　　　FM的表达式如下，可观察到，只是在线性表达式后面加入了新的交叉项特征及对应的权值。</p>
-<p><img src="/.com//1473228-20180904202908102-215826983.png" alt></p>
+<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1473228-20180904202908102-215826983.png" alt></p>
 <p>  *<em>求解过程 ：　*</em></p>
 <p>  　　　　从上面的式子可以很容易看出，组合部分的特征相关参数共有n(n−1)/2个。但是如第二部分所分析，在数据很稀疏的情况下，满足xi,xj都不为0的情况非常少，这样将导致ωij无法通过训练得出。</p>
 <p>  为了求出ωij，我们对每一个特征分量xi引入辅助向量Vi=(vi1,vi2,⋯,vik)。然后，利用vivj^T对ωij进行求解：</p>
-<p>  　　　<br><img src="/.com//1630213-20190710174305361-1336985179.png" alt></p>
+<p>  　　　<br><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174305361-1336985179.png" alt></p>
 <p>  　　　　那么ωij组成的矩阵可以表示为:</p>
-<p><img src="/.com//1630213-20190710174342426-2098941787.png" alt></p>
+<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174342426-2098941787.png" alt></p>
 <p>  　　　　那么，如何求解vi和vj呢？主要采用了公式：</p>
-<p><img src="/.com//1630213-20190710174408535-2047182456.png" alt></p>
+<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174408535-2047182456.png" alt></p>
 <p>  　　　　具体推导过程如下：（重要的化简过程）</p>
-<p><img src="/.com//1630213-20190710174437368-117236465.png" alt></p>
+<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174437368-117236465.png" alt></p>
 <p>  <strong>四、参数求解</strong></p>
 <p>  　　　　利用梯度下降法，通过求损失函数对特征（输入项）的导数计算出梯度，从而更新权值。设m为样本个数，θ为权值。</p>
-<p><img src="/.com//1630213-20190710174801238-1060265372.png" alt><br> 其中，<br>$$<br>\sum_{j=1}^nv_{j,f}x_j<br>$$</p>
+<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174801238-1060265372.png" alt><br> 其中，<br>$$<br>\sum_{j=1}^nv_{j,f}x_j<br>$$</p>
 <p>是和i无关的，可以事先求出来。每个梯度都可以在O(1)时间内求得，整体的参数更新的时间为O(kn)。</p>
 <p>  第一篇博客就到此结束啦~ 之后会继续分享计算广告相关的论文和知识。</p>
 
@@ -507,7 +513,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">Jesse jia</p>
+              <p class="site-author-name" itemprop="name">Jesse_jia</p>
               <p class="site-description motion-element" itemprop="description">分享与学习，算法与人生</p>
           </div>
 
@@ -596,7 +602,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-ctr"><span class="nav-number">1.</span> <span class="nav-text">  tags: ctr</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#（读论文）计算广告之CTR预估-FM算法解析"><span class="nav-number"></span> <span class="nav-text">（读论文）计算广告之CTR预估-FM算法解析</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-ctr"><span class="nav-text">  tags: ctr</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#（读论文）计算广告之CTR预估-FM算法解析"><span class="nav-text">（读论文）计算广告之CTR预估-FM算法解析</span></a></li></div>
             
 
           </div>
@@ -618,9 +624,9 @@
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Jesse jia</span>
+  <span class="author" itemprop="copyrightHolder">Jesse_jia</span>
 
   
 </div>
@@ -638,16 +644,7 @@
   <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
-<div>
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<span id="busuanzi_container_site_pv" style="display:none">
-    本站总访问量 <span id="busuanzi_value_site_pv"></span> 次
-    <span class="post-meta-divider">|</span>
-</span>
-<span id="busuanzi_container_site_uv" style="display:none">
-    有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
-</span>
-</div>
+
 
 
 
