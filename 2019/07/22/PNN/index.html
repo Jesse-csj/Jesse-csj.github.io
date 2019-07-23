@@ -117,7 +117,7 @@
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-8e3fe7702bab617eb1b1b3a40018fb98_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-8736f30fa55d4afe8bb9624dafc44301_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-cf8d155b2332e3e287410f7f381e1db3_hd.png">
-<meta property="og:updated_time" content="2019-07-23T02:46:51.782Z">
+<meta property="og:updated_time" content="2019-07-23T02:55:11.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jesse&#39;s Blog">
 <meta name="twitter:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016 地址：https://arxiv.org/pdf/1611.00144.pdf 1、原理给大家举例一个直观的场景：比如现在有一">
@@ -413,7 +413,7 @@
 <p><img src="https://pic3.zhimg.com/80/v2-807b29032ca8d6b89924dc5498d21140_hd.png" alt></p>
 <p>按照论文的思路，从上往下来看这个网络结构：</p>
 <p>输出层 输出层很简单，将上一层的网络输出通过一个全链接层，经过sigmoid函数转换后映射到(0,1)的区间中，得到我们的点击率的预测值：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-1ca29173890655a4c5ea8a75f6127887_hd.png" alt><br><strong>l2层</strong></p>
+<p>​                                                <img src="https://pic3.zhimg.com/80/v2-1ca29173890655a4c5ea8a75f6127887_hd.png" alt><br><strong>l2层</strong></p>
 <p>根据l1层的输出，经一个全链接层 ，并使用relu进行激活，得到我们l2的输出结果：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-351a6340a114e7abaa23f24381b717a8_hd.png" alt></p>
 <p><strong>l1层</strong> </p>
@@ -457,7 +457,7 @@
 <p>通过元素相乘的叠加，也就是先叠加N个field的Embedding向量，然后做乘法，可以大幅减少时间复杂度，定义p为：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-8e3fe7702bab617eb1b1b3a40018fb98_hd.png" alt></p>
 <p>这里计算p的时间复杂度就变为了D1_M_(M+N)。</p>
-<h1 id="3-Discussion"><a href="#3-Discussion" class="headerlink" title="3.Discussion"></a>3.Discussion</h1><p>和FNN相比，PNN多了一个product层，和FM相比，PNN多了隐层，并且输出不是简单的叠加；在训练部分，可以单独训练FNN或者FM部分作为初始化，然后BP算法应用整个网络，那么至少效果不会差于FNN和FM；</p>
+<h1 id="3、Discussion"><a href="#3、Discussion" class="headerlink" title="3、Discussion"></a>3、Discussion</h1><p>和FNN相比，PNN多了一个product层，和FM相比，PNN多了隐层，并且输出不是简单的叠加；在训练部分，可以单独训练FNN或者FM部分作为初始化，然后BP算法应用整个网络，那么至少效果不会差于FNN和FM；</p>
 <h1 id="4、EXPERIMENTS"><a href="#4、EXPERIMENTS" class="headerlink" title="4、EXPERIMENTS"></a>4、EXPERIMENTS</h1><p>使用Criteo和iPinYou的数据集，并用SGD算法比较了7种模型：LR、FM、FNN、CCPM、IPNN、OPNN、PNN（拼接内积和外积层），正则化部分（L2和Dropout）；</p>
 <p>实验结果如下图所示：</p>
 <p><img src="https://pic4.zhimg.com/80/v2-8736f30fa55d4afe8bb9624dafc44301_hd.png" alt></p>
@@ -651,7 +651,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、原理"><span class="nav-number">1.</span> <span class="nav-text">1、原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、Product-Layer详细介绍"><span class="nav-number">2.</span> <span class="nav-text">2、Product Layer详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-IPNN"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 IPNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-OPNN"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 OPNN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Discussion"><span class="nav-number">3.</span> <span class="nav-text">3.Discussion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、EXPERIMENTS"><span class="nav-number">4.</span> <span class="nav-text">4、EXPERIMENTS</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、原理"><span class="nav-number">1.</span> <span class="nav-text">1、原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、Product-Layer详细介绍"><span class="nav-number">2.</span> <span class="nav-text">2、Product Layer详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-IPNN"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 IPNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-OPNN"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 OPNN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、Discussion"><span class="nav-number">3.</span> <span class="nav-text">3、Discussion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、EXPERIMENTS"><span class="nav-number">4.</span> <span class="nav-text">4、EXPERIMENTS</span></a></li></ol></div>
             
 
           </div>
