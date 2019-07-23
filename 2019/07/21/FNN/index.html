@@ -87,26 +87,32 @@
 
 
 
-<meta name="description" content="大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines">
+<meta name="description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data">
 <meta name="keywords" content="推荐系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="（读论文）推荐系统之ctr预估-FM算法解析">
-<meta property="og:url" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/index.html">
+<meta property="og:title" content="（读论文）推荐系统之ctr预估-FNN模型解析">
+<meta property="og:url" content="https://jesse-csj.github.io/2019/07/21/FNN/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines">
+<meta property="og:description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1473228-20180904202908102-215826983.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174305361-1336985179.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174342426-2098941787.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174408535-2047182456.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174437368-117236465.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174801238-1060265372.png">
-<meta property="og:updated_time" content="2019-07-23T08:23:45.015Z">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-67e9af999f4bfbd54f49b84ebee082c8_b.png">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=X%5Bstart_%7Bi%7D%2Cend_%7Bi%7D%5D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=W_%7B0%7D%5E%7Bi%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=Z_%7Bi%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=W_%7Bi%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=V_%7Bi%7D%3D(V_%7Bi%7D%5E%7B1%7D%2CV_%7Bi%7D%5E%7B2%7D...V_%7Bi%7D%5E%7Bk%7D%2C)">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=l_%7B1%7D%2Cl_%7B2%7D%2C">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=Z_%7Bi%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=(w_%7Bi%7D%2Cv_%7Bi%7D%5E%7B1%7D%2Cv_%7Bi%7D%5E%7B2%7D...v_%7Bi%7D%5E%7Bk%7D%2C)">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=w_%7Bi%7D">
+<meta property="og:image" content="https://www.zhihu.com/equation?tex=v_%7Bi%7D%5E%7Bk%7D">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-869f40f8d7d754d66f1bf5a371990dc3_b.png">
+<meta property="og:image" content="https://pic1.zhimg.com/v2-609c3a22419dfc2e8fce458505d448bc_b.png">
+<meta property="og:updated_time" content="2019-07-23T08:26:58.468Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="（读论文）推荐系统之ctr预估-FM算法解析">
-<meta name="twitter:description" content="大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines">
-<meta name="twitter:image" content="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png">
+<meta name="twitter:title" content="（读论文）推荐系统之ctr预估-FNN模型解析">
+<meta name="twitter:description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data">
+<meta name="twitter:image" content="https://pic1.zhimg.com/v2-67e9af999f4bfbd54f49b84ebee082c8_b.png">
 
 
 
@@ -136,13 +142,13 @@
 
 
 
-  <link rel="canonical" href="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/">
+  <link rel="canonical" href="https://jesse-csj.github.io/2019/07/21/FNN/">
 
 
 
 
 
-  <title>（读论文）推荐系统之ctr预估-FM算法解析 | Jesse's Blog</title>
+  <title>（读论文）推荐系统之ctr预估-FNN模型解析 | Jesse's Blog</title>
   
 
 
@@ -333,7 +339,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://jesse-csj.github.io/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/">
+    <link itemprop="mainEntityOfPage" href="https://jesse-csj.github.io/2019/07/21/FNN/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jesse_jia">
@@ -350,7 +356,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">（读论文）推荐系统之ctr预估-FM算法解析</h1>
+          <h1 class="post-title" itemprop="name headline">（读论文）推荐系统之ctr预估-FNN模型解析</h1>
         
 
         <div class="post-meta">
@@ -406,6 +412,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                   字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                   分钟
+                </span>
+              
+            </div>
+          
 
           
 
@@ -422,31 +459,30 @@
       
 
       
-        <p> 大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：<br>  原文：Factorization Machines</p>
+        <h1 id><a href="#" class="headerlink" title=" "></a> </h1><p>今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。</p>
+<p>原论文：Deep learning over multi-field categorical data</p>
 <a id="more"></a>
 
-<p>  地址：<a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.393.8529&rep=rep1&type=pdf" target="_blank" rel="noopener">http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.393.8529&amp;rep=rep1&amp;type=pdf</a></p>
-<h1 id="一、问题由来"><a href="#一、问题由来" class="headerlink" title="一、问题由来"></a><strong>一、问题由来</strong></h1><p>  在计算广告和推荐系统中，CTR预估(click-through rate)是非常重要的一个环节，判断一个商品的是否进行推荐需要根据CTR预估的点击率来进行。传统的逻辑回归模型是一种广义线性模型，非常容易实现大规模实时并行处理，因此在工业界获得了广泛应用，但是线性模型的学习能力有限，不能捕获高阶特征(非线性信息)，而在进行CTR预估时，除了单特征外，往往要对特征进行组合。对于特征组合来说，业界现在通用的做法主要有两大类：FM系列与DNN系列。今天，我们就来分享下FM算法。</p>
-<h1 id="二、为什么需要FM"><a href="#二、为什么需要FM" class="headerlink" title="二、为什么需要FM"></a><strong>二、为什么需要FM</strong></h1><p>  　　　　1、特征组合是许多机器学习建模过程中遇到的问题，如果对特征直接建模，很有可能会忽略掉特征与特征之间的关联信息，因此，可以通过构建新的交叉特征这一特征组合方式提高模型的效果。</p>
-<p>  　　　　2、高维的稀疏矩阵是实际工程中常见的问题，并直接会导致计算量过大，特征权值更新缓慢。试想一个10000<em>100的表，每一列都有8种元素，经过one-hot独热编码之后，会产生一个10000</em>800的表。因此表中每行元素只有100个值为1，700个值为0。特征空间急剧变大，以淘宝上的item为例，将item进行one-hot编码以后，样本空间有一个categorical变为了百万维的数值特征，特征空间一下子暴增一百万。所以大厂动不动上亿维度，就是这么来的。</p>
-<p>  　　　　而FM的优势就在于对这两方面问题的处理。首先是特征组合，通过对两两特征组合，引入交叉项特征，提高模型得分；其次是高维灾难，通过引入隐向量（对参数矩阵进行矩阵分解），完成对特征的参数估计。</p>
-<h1 id="三、原理及求解"><a href="#三、原理及求解" class="headerlink" title="三、原理及求解"></a><strong>三、原理及求解</strong></h1><p>  　　　　在看FM算法前，我们先回顾一下最常见的线性表达式：<br>                   <img src="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png" alt><br>  　　　　其中w0 为初始权值，或者理解为偏置项，wi 为每个特征xi 对应的权值。可以看到，这种线性表达式只描述了每个特征与输出的关系。</p>
-<p>  　　　　FM的表达式如下，可观察到，只是在线性表达式后面加入了新的交叉项特征及对应的权值。</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1473228-20180904202908102-215826983.png" alt></p>
-<p>  *<em>求解过程 ：　*</em></p>
-<p>  　　　　从上面的式子可以很容易看出，组合部分的特征相关参数共有n(n−1)/2个。但是如第二部分所分析，在数据很稀疏的情况下，满足xi,xj都不为0的情况非常少，这样将导致ωij无法通过训练得出。</p>
-<p>  为了求出ωij，我们对每一个特征分量xi引入辅助向量Vi=(vi1,vi2,⋯,vik)。然后，利用vivj^T对ωij进行求解：</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174305361-1336985179.png" alt></p>
-<p>  　　　　那么ωij组成的矩阵可以表示为:</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174342426-2098941787.png" alt></p>
-<p>  　　　　那么，如何求解vi和vj呢？主要采用了公式：</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174408535-2047182456.png" alt></p>
-<p>  　　　　具体推导过程如下：（重要的化简过程）</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174437368-117236465.png" alt></p>
-<h1 id="四、参数求解"><a href="#四、参数求解" class="headerlink" title="四、参数求解"></a><strong>四、参数求解</strong></h1><p>  　　　　利用梯度下降法，通过求损失函数对特征（输入项）的导数计算出梯度，从而更新权值。设m为样本个数，θ为权值。</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174801238-1060265372.png" alt><br> 其中，<br>$$<br>\sum_{j=1}^nv_{j,f}x_j<br>$$</p>
-<p>是和i无关的，可以事先求出来。每个梯度都可以在O(1)时间内求得，整体的参数更新的时间为O(kn)。</p>
-<p>  第一篇博客就到此结束啦~ 之后会继续分享计算广告相关的论文和知识。</p>
+<p>地址：<a href="https://arxiv.org/pdf/1601.02376.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1601.02376.pdf</a></p>
+<h1 id="1、问题由来"><a href="#1、问题由来" class="headerlink" title="1、问题由来"></a><strong>1、问题由来</strong></h1><p>　　基于传统机器学习模型（如LR、FM等）的CTR预测方案又被称为基于浅层模型的方案，其优点是模型简单，预测性能较好，可解释性强；缺点主要在于很难自动提取高阶组合特征携带的信息，目前一般通过特征工程来手动的提取高阶组合特征。而随着深度学习在计算机视觉、语音识别、自然语言处理等领域取得巨大成功，其在探索特征间高阶隐含信息的能力也被应用到了CTR预测中。较早有影响力的基于深度学习模型的CTR预测方案是在2016年提出的基于因子分解机的神经网络(Factorization Machine supported Neural Network, FNN)模型，就是我们今天要分享的内容，一起来看下。</p>
+<h1 id="2、模型"><a href="#2、模型" class="headerlink" title="2、模型"></a><strong>2、模型</strong></h1><p> FNN模型如下图所示：</p>
+<p><img src="https://pic1.zhimg.com/v2-67e9af999f4bfbd54f49b84ebee082c8_b.png" alt="img"></p>
+<p>FNN模型结构</p>
+<p>​      对图中的一些变量进行一下解释：x是输入的特征，它是大规模离散稀疏的。它可以分成N个Field，每一个Field中，只有一个值为1，其余都为0（即one-hot）。Field i的则可以表示成 <img src="https://www.zhihu.com/equation?tex=X%5Bstart_%7Bi%7D%2Cend_%7Bi%7D%5D" alt="X[start_{i},end_{i}]">X[start_{i},end_{i}] , <img src="https://www.zhihu.com/equation?tex=W_%7B0%7D%5E%7Bi%7D" alt="W_{0}^{i}">W_{0}^{i} 为Field i的embedding矩阵。 <img src="https://www.zhihu.com/equation?tex=Z_%7Bi%7D" alt="Z_{i}">Z_{i} 为embedding后的向量。它由一次项 <img src="https://www.zhihu.com/equation?tex=W_%7Bi%7D" alt="W_{i}">W_{i} ，二次项 <img src="https://www.zhihu.com/equation?tex=V_%7Bi%7D%3D(V_%7Bi%7D%5E%7B1%7D%2CV_%7Bi%7D%5E%7B2%7D...V_%7Bi%7D%5E%7Bk%7D%2C)" alt="V_{i}=(V_{i}^{1},V_{i}^{2}...V_{i}^{k},)">V_{i}=(V_{i}^{1},V_{i}^{2}…V_{i}^{k},) 组成，其中K是FM中二次项的向量的维度。而后面的 <img src="https://www.zhihu.com/equation?tex=l_%7B1%7D%2Cl_%7B2%7D%2C" alt="l_{1},l_{2},">l_{1},l_{2}, 则为神经网络的全连接层的表示。</p>
+<p>​      详细解释一下基于FM的预训练：嵌入后的向量 <img src="https://www.zhihu.com/equation?tex=Z_%7Bi%7D" alt="Z_{i}">Z_{i} = <img src="https://www.zhihu.com/equation?tex=(w_%7Bi%7D%2Cv_%7Bi%7D%5E%7B1%7D%2Cv_%7Bi%7D%5E%7B2%7D...v_%7Bi%7D%5E%7Bk%7D%2C)" alt="(w_{i},v_{i}^{1},v_{i}^{2}...v_{i}^{k},)">(w_{i},v_{i}^{1},v_{i}^{2}…v_{i}^{k},) ,其中 <img src="https://www.zhihu.com/equation?tex=w_%7Bi%7D" alt="w_{i}">w_{i} 就是FM里面的一次性系数，而 <img src="https://www.zhihu.com/equation?tex=v_%7Bi%7D%5E%7Bk%7D" alt="v_{i}^{k}">v_{i}^{k} 就是二次项的系数，可以详细对照看FM的公式如下（FM的详细解释可看我上一篇<a href="https://zhuanlan.zhihu.com/p/74337279" target="_blank" rel="noopener">文章</a>）：</p>
+<p><img src="https://pic4.zhimg.com/v2-869f40f8d7d754d66f1bf5a371990dc3_b.png" alt="img"></p>
+<p>基于FM的预训练得到嵌入向量</p>
+<p>　  我们可以看出这个模型有着十分显著的特点：</p>
+<p>　　　　1. 采用FM预训练得到的隐含层及其权重作为神经网络的第一层的初始值，之后再不断堆叠全连接层，最终输出预测的点击率。 　　　　2. 可以将FNN理解成一种特殊的embedding+MLP，其要求第一层嵌入后的各领域特征维度一致，并且嵌入权重的初始化是FM预训练好的。 　　　　3. 这不是一个端到端的训练过程，有贪心训练的思路。而且如果不考虑预训练过程，模型网络结构也没有考虑低阶特征组合。</p>
+<p>　  为了方便理解，如下图所示，FNN = FM + MLP <strong>，相当于用FM模型得到了每一维特征的嵌入向量，做了一次特征工程，得到特征送入分类器，不是端到端的思路，有贪心训练的思路。</strong></p>
+<p><img src="https://pic1.zhimg.com/v2-609c3a22419dfc2e8fce458505d448bc_b.png" alt="img"></p>
+<h1 id="3、FNN的优缺点"><a href="#3、FNN的优缺点" class="headerlink" title="3、FNN的优缺点"></a><strong>3、FNN的优缺点</strong></h1><p><strong>优点</strong>：每个特征的嵌入向量是预先采用FM模型训练的，因此在学习DNN模型时，训练开销降低，模型能够更快达到收敛。</p>
+<p><strong>缺点：</strong></p>
+<ol>
+<li>Embedding 的参数受 FM 的影响，不一定准确</li>
+<li>预训练阶段增加了计算复杂度，训练效率低</li>
+<li>FNN 只能学习到高阶的组合特征；模型中没有对低阶特征建模。</li>
+</ol>
 
       
     </div>
@@ -487,6 +523,10 @@
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/" rel="next" title="（读论文）推荐系统之ctr预估-FM算法解析">
+                <i class="fa fa-chevron-left"></i> （读论文）推荐系统之ctr预估-FM算法解析
+              </a>
             
           </div>
 
@@ -669,7 +709,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、问题由来"><span class="nav-text">一、问题由来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、为什么需要FM"><span class="nav-text">二、为什么需要FM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、原理及求解"><span class="nav-text">三、原理及求解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、参数求解"><span class="nav-text">四、参数求解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-text"> </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1、问题由来"><span class="nav-text">1、问题由来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、模型"><span class="nav-text">2、模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、FNN的优缺点"><span class="nav-text">3、FNN的优缺点</span></a></li></ol></div>
             
 
           </div>
@@ -695,6 +735,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Jesse_jia</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
   
 </div>
 
