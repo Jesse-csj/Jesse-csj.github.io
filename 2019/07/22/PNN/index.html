@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016 地址：https://arxiv.org/pdf/1611.00144.pdf 1、原理给大家举例一个直观的场景：比如现在有一">
+<meta name="description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jesse&#39;s Blog">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/22/PNN/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016 地址：https://arxiv.org/pdf/1611.00144.pdf 1、原理给大家举例一个直观的场景：比如现在有一">
+<meta property="og:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://pic1.zhimg.com/v2-c555093943338233d6bde77544ffcc8c_r.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-b046c93f125596de5265f7c6342542f6_hd.png">
@@ -119,10 +119,10 @@
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-8e3fe7702bab617eb1b1b3a40018fb98_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-8736f30fa55d4afe8bb9624dafc44301_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-cf8d155b2332e3e287410f7f381e1db3_hd.png">
-<meta property="og:updated_time" content="2019-07-23T04:43:04.372Z">
+<meta property="og:updated_time" content="2019-07-23T07:54:28.365Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jesse&#39;s Blog">
-<meta name="twitter:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016 地址：https://arxiv.org/pdf/1611.00144.pdf 1、原理给大家举例一个直观的场景：比如现在有一">
+<meta name="twitter:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。">
 <meta name="twitter:image" content="https://pic1.zhimg.com/v2-c555093943338233d6bde77544ffcc8c_r.jpg">
 
 
@@ -418,6 +418,8 @@
 
       
         <p>今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。</p>
+<a id="more"></a>
+
 <p>原论文：Product-based Neural Networks for User Response Prediction ：2016</p>
 <p>地址：<a href="https://arxiv.org/pdf/1611.00144.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.00144.pdf</a></p>
 <h1 id="1、原理"><a href="#1、原理" class="headerlink" title="1、原理"></a><strong>1、原理</strong></h1><p>给大家举例一个直观的场景：比如现在有一个凤凰网站，网站上面有一个迪斯尼广告，那我们现在想知道用户进入这个网站之后会不会有兴趣点击这个广告，类似这种用户点击率预测在信息检索领域就是一个非常核心的问题。普遍的做法就是通过不同的域来描述这个事件然后预测用户的点击行为，而这个域可以有很多。那么什么样的用户会点击这个广告呢？我们可能猜想：目前在上海的年轻的用户可能会有需求，如果今天是周五，看到这个广告，可能会点击这个广告为周末做活动参考。那可能的特征会是：[Weekday=Friday, occupation=Student, City=Shanghai]，当这些特征同时出现时，我们认为这个用户点击这个迪斯尼广告的概率会比较大。</p>
@@ -488,7 +490,7 @@
 <p>结果表明PNN提升还是蛮大的；这里介绍一下关于激活函数的选择问题，作者进行了对比如下：</p>
 <p><img src="https://pic4.zhimg.com/80/v2-cf8d155b2332e3e287410f7f381e1db3_hd.png" alt></p>
 <p>从图中看出，anh在某些方面要优于relu，但作者采用的是relu，relu的作用： 1、稀疏的激活函数（负数会被丢失）；2、有效的梯度传播（缓解梯度消失和梯度爆炸）；3、有效的计算（仅有加法、乘法、比较操作）.</p>
-<a id="more"></a>
+
       
     </div>
     
@@ -608,7 +610,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
