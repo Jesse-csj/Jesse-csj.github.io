@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。">
+<meta name="description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jesse&#39;s Blog">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/22/PNN/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。">
+<meta property="og:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://pic1.zhimg.com/v2-c555093943338233d6bde77544ffcc8c_r.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-b046c93f125596de5265f7c6342542f6_hd.png">
@@ -119,10 +119,10 @@
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-8e3fe7702bab617eb1b1b3a40018fb98_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-8736f30fa55d4afe8bb9624dafc44301_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-cf8d155b2332e3e287410f7f381e1db3_hd.png">
-<meta property="og:updated_time" content="2019-07-23T07:54:28.365Z">
+<meta property="og:updated_time" content="2019-07-23T08:12:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jesse&#39;s Blog">
-<meta name="twitter:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。">
+<meta name="twitter:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016">
 <meta name="twitter:image" content="https://pic1.zhimg.com/v2-c555093943338233d6bde77544ffcc8c_r.jpg">
 
 
@@ -418,9 +418,9 @@
 
       
         <p>今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。</p>
+<p>原论文：Product-based Neural Networks for User Response Prediction ：2016</p>
 <a id="more"></a>
 
-<p>原论文：Product-based Neural Networks for User Response Prediction ：2016</p>
 <p>地址：<a href="https://arxiv.org/pdf/1611.00144.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.00144.pdf</a></p>
 <h1 id="1、原理"><a href="#1、原理" class="headerlink" title="1、原理"></a><strong>1、原理</strong></h1><p>给大家举例一个直观的场景：比如现在有一个凤凰网站，网站上面有一个迪斯尼广告，那我们现在想知道用户进入这个网站之后会不会有兴趣点击这个广告，类似这种用户点击率预测在信息检索领域就是一个非常核心的问题。普遍的做法就是通过不同的域来描述这个事件然后预测用户的点击行为，而这个域可以有很多。那么什么样的用户会点击这个广告呢？我们可能猜想：目前在上海的年轻的用户可能会有需求，如果今天是周五，看到这个广告，可能会点击这个广告为周末做活动参考。那可能的特征会是：[Weekday=Friday, occupation=Student, City=Shanghai]，当这些特征同时出现时，我们认为这个用户点击这个迪斯尼广告的概率会比较大。</p>
 <p>传统的做法是应用One-Hot Binary的编码方式去处理这类数据，例如现在有三个域的数据X=[Weekday=Wednesday, Gender=Male, City=Shanghai],其中 Weekday有7个取值，我们就把它编译为7维的二进制向量，其中只有Wednesday是1，其他都是0，因为它只有一个特征值；Gender有两维，其中一维是1；如果有一万个城市的话，那City就有一万维，只有上海这个取值是1，其他是0。</p>
@@ -525,8 +525,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/19/（读论文）计算广告之CTR预估-FM算法解析/" rel="next" title>
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2019/07/21/（读论文）计算广告之CTR预估-FM算法解析/" rel="next" title="（读论文）计算广告之CTR预估-FM算法解析">
+                <i class="fa fa-chevron-left"></i> （读论文）计算广告之CTR预估-FM算法解析
               </a>
             
           </div>
