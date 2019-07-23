@@ -101,8 +101,8 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174342426-2098941787.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174408535-2047182456.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174437368-117236465.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174801238-1060265372.png">
-<meta property="og:updated_time" content="2019-07-23T08:26:16.971Z">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/7.png">
+<meta property="og:updated_time" content="2019-07-23T12:24:01.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-FM算法解析">
 <meta name="twitter:description" content="大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines">
@@ -475,7 +475,9 @@
 <p>  　　　　具体推导过程如下：（重要的化简过程）</p>
 <p><img src="//jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174437368-117236465.png" alt></p>
 <h1 id="四、参数求解"><a href="#四、参数求解" class="headerlink" title="四、参数求解"></a><strong>四、参数求解</strong></h1><p>  　　　　利用梯度下降法，通过求损失函数对特征（输入项）的导数计算出梯度，从而更新权值。设m为样本个数，θ为权值。</p>
-<p><img src="//jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174801238-1060265372.png" alt><br> 其中，<br>$$<br>\sum_{j=1}^nv_{j,f}x_j<br>$$</p>
+<img src="/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/7.png" title="This is an example image">
+
+<p> 其中，<br>$$<br>\sum_{j=1}^nv_{j,f}x_j<br>$$</p>
 <p>是和i无关的，可以事先求出来。每个梯度都可以在O(1)时间内求得，整体的参数更新的时间为O(kn)。</p>
 <p>  第一篇博客就到此结束啦~ 之后会继续分享计算广告相关的论文和知识。</p>
 
