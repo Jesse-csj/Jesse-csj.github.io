@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="推荐系统,">
 
 
 
@@ -87,17 +87,20 @@
 
 
 
-<meta name="description" content="分享与学习，算法与人生">
-<meta name="keywords" content="机器学习">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jesse&#39;s Blog">
-<meta property="og:url" content="https://jesse-csj.github.io/archives/2019/index.html">
+<meta name="description" content="测试图片：">
+<meta name="keywords" content="推荐系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（读论文）推荐系统之ctr预估-Wide＆Deep模型解析">
+<meta property="og:url" content="https://jesse-csj.github.io/2019/07/23/Wide-Deep/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="分享与学习，算法与人生">
+<meta property="og:description" content="测试图片：">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/23/Wide-Deep/Wide-Deep%5Ctest.jpg">
+<meta property="og:updated_time" content="2019-07-23T11:40:15.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jesse&#39;s Blog">
-<meta name="twitter:description" content="分享与学习，算法与人生">
+<meta name="twitter:title" content="（读论文）推荐系统之ctr预估-Wide＆Deep模型解析">
+<meta name="twitter:description" content="测试图片：">
+<meta name="twitter:image" content="https://jesse-csj.github.io/2019/07/23/Wide-Deep/Wide-Deep%5Ctest.jpg">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="https://jesse-csj.github.io/archives/2019/">
+  <link rel="canonical" href="https://jesse-csj.github.io/2019/07/23/Wide-Deep/">
 
 
 
 
 
-  <title>归档 | Jesse's Blog</title>
+  <title>（读论文）推荐系统之ctr预估-Wide＆Deep模型解析 | Jesse's Blog</title>
   
 
 
@@ -152,7 +155,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     
     <a href="https://github.com/Jesse-csj"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
@@ -310,177 +313,214 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jesse-csj.github.io/2019/07/23/Wide-Deep/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jesse_jia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jesse's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">（读论文）推荐系统之ctr预估-Wide＆Deep模型解析</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-23T19:33:22+08:00">
+                2019-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 4 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ctr/" itemprop="url" rel="index">
+                    <span itemprop="name">ctr</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/23/Wide-Deep/" itemprop="url">
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">（读论文）推荐系统之ctr预估-Wide＆Deep模型解析</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4 
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-23T19:33:22+08:00" content="2019-07-23">
-          07-23
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1 分钟
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/22/PNN/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-PNN模型解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-22T16:01:40+08:00" content="2019-07-22">
-          07-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/21/FNN/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-FNN模型解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-21T16:01:40+08:00" content="2019-07-21">
-          07-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>测试图片：</p>
+<p><img src="//jesse-csj.github.io/2019/07/23/Wide-Deep/Wide-Deep%5Ctest.jpg" alt="test"></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-FM算法解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-20T16:01:40+08:00" content="2019-07-20">
-          07-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #555;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢阅读-------------</div>
+    
+</div>
+
+
+
+  
+      </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/推荐系统/" rel="tag"># 推荐系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/22/PNN/" rel="next" title="（读论文）推荐系统之ctr预估-PNN模型解析">
+                <i class="fa fa-chevron-left"></i> （读论文）推荐系统之ctr预估-PNN模型解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -488,6 +528,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -781,6 +825,10 @@ setInterval("createtime()",250);
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
