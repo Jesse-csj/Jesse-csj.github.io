@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="（读论文）计算广告之CTR预估-FNN解析今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data 地址：https://arxiv.org/pdf/1601.02376.pdf 一、问题由来　　基于传统机器学习模型（如LR、FM等）的CTR预测方">
+<meta name="description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data 地址：https://arxiv.org/pdf/1601.02376.pdf 一、问题由来　　基于传统机器学习模型（如LR、FM等）的CTR预测方案又被称为基于浅层模型的方案，其优点是模">
 <meta name="keywords" content="推荐系统">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FNN">
+<meta property="og:title" content="（读论文）计算广告之CTR预估-FNN解析">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/23/FNN/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="（读论文）计算广告之CTR预估-FNN解析今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data 地址：https://arxiv.org/pdf/1601.02376.pdf 一、问题由来　　基于传统机器学习模型（如LR、FM等）的CTR预测方">
+<meta property="og:description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data 地址：https://arxiv.org/pdf/1601.02376.pdf 一、问题由来　　基于传统机器学习模型（如LR、FM等）的CTR预测方案又被称为基于浅层模型的方案，其优点是模">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://pic1.zhimg.com/v2-67e9af999f4bfbd54f49b84ebee082c8_b.png">
 <meta property="og:image" content="https://www.zhihu.com/equation?tex=X%5Bstart_%7Bi%7D%2Cend_%7Bi%7D%5D">
@@ -108,10 +108,10 @@
 <meta property="og:image" content="https://www.zhihu.com/equation?tex=v_%7Bi%7D%5E%7Bk%7D">
 <meta property="og:image" content="https://pic4.zhimg.com/v2-869f40f8d7d754d66f1bf5a371990dc3_b.png">
 <meta property="og:image" content="https://pic1.zhimg.com/v2-609c3a22419dfc2e8fce458505d448bc_b.png">
-<meta property="og:updated_time" content="2019-07-23T08:08:37.496Z">
+<meta property="og:updated_time" content="2019-07-23T08:10:58.307Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FNN">
-<meta name="twitter:description" content="（读论文）计算广告之CTR预估-FNN解析今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data 地址：https://arxiv.org/pdf/1601.02376.pdf 一、问题由来　　基于传统机器学习模型（如LR、FM等）的CTR预测方">
+<meta name="twitter:title" content="（读论文）计算广告之CTR预估-FNN解析">
+<meta name="twitter:description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data 地址：https://arxiv.org/pdf/1601.02376.pdf 一、问题由来　　基于传统机器学习模型（如LR、FM等）的CTR预测方案又被称为基于浅层模型的方案，其优点是模">
 <meta name="twitter:image" content="https://pic1.zhimg.com/v2-67e9af999f4bfbd54f49b84ebee082c8_b.png">
 
 
@@ -148,7 +148,7 @@
 
 
 
-  <title>FNN | Jesse's Blog</title>
+  <title>（读论文）计算广告之CTR预估-FNN解析 | Jesse's Blog</title>
   
 
 
@@ -356,7 +356,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">FNN</h1>
+          <h1 class="post-title" itemprop="name headline">（读论文）计算广告之CTR预估-FNN解析</h1>
         
 
         <div class="post-meta">
@@ -428,7 +428,7 @@
       
 
       
-        <h1 id="（读论文）计算广告之CTR预估-FNN解析"><a href="#（读论文）计算广告之CTR预估-FNN解析" class="headerlink" title="（读论文）计算广告之CTR预估-FNN解析"></a>（读论文）计算广告之CTR预估-FNN解析</h1><p>今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。</p>
+        <h1 id><a href="#" class="headerlink" title=" "></a> </h1><p>今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。</p>
 <p>原论文：Deep learning over multi-field categorical data</p>
 <p>地址：<a href="https://arxiv.org/pdf/1601.02376.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1601.02376.pdf</a></p>
 <h2 id="一、问题由来"><a href="#一、问题由来" class="headerlink" title="一、问题由来"></a><strong>一、问题由来</strong></h2><p>　　基于传统机器学习模型（如LR、FM等）的CTR预测方案又被称为基于浅层模型的方案，其优点是模型简单，预测性能较好，可解释性强；缺点主要在于很难自动提取高阶组合特征携带的信息，目前一般通过特征工程来手动的提取高阶组合特征。而随着深度学习在计算机视觉、语音识别、自然语言处理等领域取得巨大成功，其在探索特征间高阶隐含信息的能力也被应用到了CTR预测中。较早有影响力的基于深度学习模型的CTR预测方案是在2016年提出的基于因子分解机的神经网络(Factorization Machine supported Neural Network, FNN)模型，就是我们今天要分享的内容，一起来看下。</p>
@@ -672,7 +672,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#（读论文）计算广告之CTR预估-FNN解析"><span class="nav-text">（读论文）计算广告之CTR预估-FNN解析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、问题由来"><span class="nav-text">一、问题由来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、模型"><span class="nav-text">二、模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、FNN的优缺点"><span class="nav-text">三、FNN的优缺点</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-text"> </span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、问题由来"><span class="nav-text">一、问题由来</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、模型"><span class="nav-text">二、模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、FNN的优缺点"><span class="nav-text">三、FNN的优缺点</span></a></li></ol></li></ol></div>
             
 
           </div>
