@@ -102,24 +102,24 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/3.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/4.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/5.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-37e77e50b3a109ed916b6396046b55c0_hd.png">
-<meta property="og:image" content="https://pic3.zhimg.com/80/v2-41eaa2a77669bb8200e20a7c24b7a5dd_hd.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/6.jpg">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/7.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-b46b0d082980847e97b4e4448be2c5ba_hd.png">
-<meta property="og:image" content="https://pic1.zhimg.com/80/v2-8d567d10d305b2e9d8a2e5acc487fa2c_hd.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/8.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-37e77e50b3a109ed916b6396046b55c0_hd.png">
 <meta property="og:image" content="https://www.zhihu.com/equation?tex=W_%7Bz%7D%5E%7Bi%7D">
 <meta property="og:image" content="https://www.zhihu.com/equation?tex=W_%7Bp%7D%5E%7Bi%7D">
-<meta property="og:image" content="https://pic1.zhimg.com/80/v2-bf743a28a4fb4bbf2d86cc0a91de5f9d_hd.png">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-b1fb4fc0989288cc9e18dded4ee1f1a4_hd.png">
-<meta property="og:image" content="https://pic1.zhimg.com/80/v2-731803947caf6411575279977b1a9841_hd.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/9.jpg">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/10.jpg">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/11.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-10fdbd46cde76ec299fbf090d89161b8_hd.png">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-efe977966a70061095c3026407bbe0ac_hd.png">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-f0370a6c5e2562f5c4f3a2afd9dc09ad_hd.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/12.jpg">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/13.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-6d6e9313125ef15bfcbefa0b42596f86_hd.png">
-<meta property="og:image" content="https://pic1.zhimg.com/80/v2-8e3fe7702bab617eb1b1b3a40018fb98_hd.png">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-8736f30fa55d4afe8bb9624dafc44301_hd.png">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-cf8d155b2332e3e287410f7f381e1db3_hd.png">
-<meta property="og:updated_time" content="2019-07-23T13:00:45.982Z">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/14.jpg">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/15.jpg">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/16.jpg">
+<meta property="og:updated_time" content="2019-07-23T13:08:35.952Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-PNN模型解析">
 <meta name="twitter:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016">
@@ -504,47 +504,58 @@
 <p><strong>Product Layer</strong></p>
 <p>product思想来源于，在ctr预估中，认为特征之间的关系更多是一种and“且”的关系，而非add”或”的关系。例如，性别为男且喜欢游戏的人群，比起性别男和喜欢游戏的人群，前者的组合比后者更能体现特征交叉的意义。</p>
 <p>product layer可以分成两个部分，一部分是线性部分lz，一部分是非线性部分lp。二者的形式如下：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-37e77e50b3a109ed916b6396046b55c0_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/6.jpg">
+
 <p>在这里，我们要使用到论文中所定义的一种运算方式，其实就是矩阵的点乘（对应位置相乘然后求和，最终得到的是一个标量）:</p>
-<p><img src="https://pic3.zhimg.com/80/v2-41eaa2a77669bb8200e20a7c24b7a5dd_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/7.jpg">
+
 <p>这里先继续介绍网络结构，下一章中详细介绍Product Layer。</p>
 <p><strong>Embedding Layer</strong></p>
 <p>Embedding Layer跟DeepFM中相同，将每一个field的特征转换成同样长度的向量，这里用f来表示。</p>
 <p><img src="https://pic2.zhimg.com/80/v2-b46b0d082980847e97b4e4448be2c5ba_hd.png" alt></p>
 <p><strong>损失函数</strong> </p>
 <p>损失函数使用交叉熵：</p>
-<p><img src="https://pic1.zhimg.com/80/v2-8d567d10d305b2e9d8a2e5acc487fa2c_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/8.jpg">
+
 <h1 id="2、Product-Layer详细介绍"><a href="#2、Product-Layer详细介绍" class="headerlink" title="2、Product Layer详细介绍"></a>2、Product Layer详细介绍</h1><p>前面提到了，product layer可以分成两个部分，一部分是线性部分lz，一部分是非线性部分lp。它们同维度，其具体形式如下：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-37e77e50b3a109ed916b6396046b55c0_hd.png" alt></p>
 <p>其中z,p为信号向量，z为线性信号向量，p为二次信号向量， <img src="https://www.zhihu.com/equation?tex=W_%7Bz%7D%5E%7Bi%7D" alt="W\_{z}^{i}">   , <img src="https://www.zhihu.com/equation?tex=W_%7Bp%7D%5E%7Bi%7D" alt="W\_{p}^{i}">   为权重矩阵。（权重矩阵与z,p同维，经过定义的这种点乘运算后都得到一个标量作为DNN的输入）</p>
 <p>看上面的公式，我们首先需要知道z和p，这都是由我们的embedding层得到的，其中z是线性信号向量，因此我们直接用embedding层得到：</p>
-<p><img src="https://pic1.zhimg.com/80/v2-bf743a28a4fb4bbf2d86cc0a91de5f9d_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/9.jpg">
+
 <p>论文中使用的等号加一个三角形，其实就是相等的意思，可以认为z就是embedding层的复制。</p>
 <p>对于p来说，这里需要一个公式进行映射：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-b1fb4fc0989288cc9e18dded4ee1f1a4_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/10.jpg">
+
 <p>不同的g函数的选择使得我们有了两种PNN的计算方法，一种叫做Inner PNN，简称IPNN，一种叫做Outer PNN，简称OPNN。</p>
 <p>接下来分别来具体介绍这两种形式的PNN模型，由于涉及到复杂度的分析，所以我们这里先定义Embedding的大小为M，field的大小为N，而lz和lp的长度为D1。</p>
 <h2 id="2-1-IPNN"><a href="#2-1-IPNN" class="headerlink" title="2.1 IPNN"></a>2.1 IPNN</h2><p>IPNN中p的计算方式如下，即使用内积来代表pij：</p>
-<p><img src="https://pic1.zhimg.com/80/v2-731803947caf6411575279977b1a9841_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/11.jpg">
+
 <p>所以，pij其实是一个数（标量），得到一个pij的时间复杂度为M，p的大小为N_N，因此计算得到p的时间复杂度为N_N_M。而再由p得到lp的时间复杂度是N_N_D1。因此 对于IPNN来说，总的时间复杂度为N_N(D1+M)。文章对这一结构进行了优化，可以看到，我们的p是一个对称矩阵，因此我们的权重也是一个对称矩阵，对这个对称矩阵进行如下的分解：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-10fdbd46cde76ec299fbf090d89161b8_hd.png" alt></p>
 <p>因此：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-efe977966a70061095c3026407bbe0ac_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/12.jpg">
+
 <p>因此：</p>
-<p><img src="https://pic2.zhimg.com/80/v2-f0370a6c5e2562f5c4f3a2afd9dc09ad_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/13.jpg">
+
 <h2 id="2-2-OPNN"><a href="#2-2-OPNN" class="headerlink" title="2.2 OPNN"></a>2.2 OPNN</h2><p>OPNN中p的计算方式如下：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-6d6e9313125ef15bfcbefa0b42596f86_hd.png" alt></p>
 <p>此时pij为M_M的矩阵，计算一个pij的时间复杂度为M_M，而p是N_N_M_M的矩阵，因此计算p的事件复杂度为N_N_M_M。从而计算lp的时间复杂度变为D1 _ N_N_M_M。这个显然代价很高的。为了减少复杂度，论文使用了叠加的思想，它重新定义了p矩阵：</p>
 <p>通过元素相乘的叠加，也就是先叠加N个field的Embedding向量，然后做乘法，可以大幅减少时间复杂度，定义p为：</p>
-<p><img src="https://pic1.zhimg.com/80/v2-8e3fe7702bab617eb1b1b3a40018fb98_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/14.jpg">
+
 <p>这里计算p的时间复杂度就变为了D1_M_(M+N)。</p>
 <h1 id="3、Discussion"><a href="#3、Discussion" class="headerlink" title="3、Discussion"></a>3、Discussion</h1><p>和FNN相比，PNN多了一个product层，和FM相比，PNN多了隐层，并且输出不是简单的叠加；在训练部分，可以单独训练FNN或者FM部分作为初始化，然后BP算法应用整个网络，那么至少效果不会差于FNN和FM；</p>
 <h1 id="4、Experiments"><a href="#4、Experiments" class="headerlink" title="4、Experiments"></a>4、Experiments</h1><p>使用Criteo和iPinYou的数据集，并用SGD算法比较了7种模型：LR、FM、FNN、CCPM、IPNN、OPNN、PNN（拼接内积和外积层），正则化部分（L2和Dropout）；</p>
 <p>实验结果如下图所示：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-8736f30fa55d4afe8bb9624dafc44301_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/15.jpg">
+
 <p>结果表明PNN提升还是蛮大的；这里介绍一下关于激活函数的选择问题，作者进行了对比如下：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-cf8d155b2332e3e287410f7f381e1db3_hd.png" alt></p>
-<p>从图中看出，anh在某些方面要优于relu，但作者采用的是relu，relu的作用： 1、稀疏的激活函数（负数会被丢失）；2、有效的梯度传播（缓解梯度消失和梯度爆炸）；3、有效的计算（仅有加法、乘法、比较操作）.</p>
+ <img src="/2019/07/22/PNN/16.jpg">
+
+<p>从图中看出，anh在某些方面要优于relu，但作者采用的是relu，relu的作用： 1、稀疏的激活函数（负数会被丢失）；2、有效的梯度传播（缓解梯度消失和梯度爆炸）；3、有效的计算（仅有加法、乘法、比较操作）。</p>
 
       
     </div>
