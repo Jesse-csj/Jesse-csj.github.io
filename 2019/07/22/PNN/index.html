@@ -117,7 +117,7 @@
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-8e3fe7702bab617eb1b1b3a40018fb98_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-8736f30fa55d4afe8bb9624dafc44301_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-cf8d155b2332e3e287410f7f381e1db3_hd.png">
-<meta property="og:updated_time" content="2019-07-23T02:41:59.362Z">
+<meta property="og:updated_time" content="2019-07-23T02:46:51.782Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jesse&#39;s Blog">
 <meta name="twitter:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016 地址：https://arxiv.org/pdf/1611.00144.pdf 1、原理给大家举例一个直观的场景：比如现在有一">
@@ -396,10 +396,10 @@
         <p>今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。</p>
 <p>原论文：Product-based Neural Networks for User Response Prediction ：2016</p>
 <p>地址：<a href="https://arxiv.org/pdf/1611.00144.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1611.00144.pdf</a></p>
-<h2 id="1、原理"><a href="#1、原理" class="headerlink" title="1、原理"></a><strong>1、原理</strong></h2><p>给大家举例一个直观的场景：比如现在有一个凤凰网站，网站上面有一个迪斯尼广告，那我们现在想知道用户进入这个网站之后会不会有兴趣点击这个广告，类似这种用户点击率预测在信息检索领域就是一个非常核心的问题。普遍的做法就是通过不同的域来描述这个事件然后预测用户的点击行为，而这个域可以有很多。那么什么样的用户会点击这个广告呢？我们可能猜想：目前在上海的年轻的用户可能会有需求，如果今天是周五，看到这个广告，可能会点击这个广告为周末做活动参考。那可能的特征会是：[Weekday=Friday, occupation=Student, City=Shanghai]，当这些特征同时出现时，我们认为这个用户点击这个迪斯尼广告的概率会比较大。</p>
+<h1 id="1、原理"><a href="#1、原理" class="headerlink" title="1、原理"></a><strong>1、原理</strong></h1><p>给大家举例一个直观的场景：比如现在有一个凤凰网站，网站上面有一个迪斯尼广告，那我们现在想知道用户进入这个网站之后会不会有兴趣点击这个广告，类似这种用户点击率预测在信息检索领域就是一个非常核心的问题。普遍的做法就是通过不同的域来描述这个事件然后预测用户的点击行为，而这个域可以有很多。那么什么样的用户会点击这个广告呢？我们可能猜想：目前在上海的年轻的用户可能会有需求，如果今天是周五，看到这个广告，可能会点击这个广告为周末做活动参考。那可能的特征会是：[Weekday=Friday, occupation=Student, City=Shanghai]，当这些特征同时出现时，我们认为这个用户点击这个迪斯尼广告的概率会比较大。</p>
 <p>传统的做法是应用One-Hot Binary的编码方式去处理这类数据，例如现在有三个域的数据X=[Weekday=Wednesday, Gender=Male, City=Shanghai],其中 Weekday有7个取值，我们就把它编译为7维的二进制向量，其中只有Wednesday是1，其他都是0，因为它只有一个特征值；Gender有两维，其中一维是1；如果有一万个城市的话，那City就有一万维，只有上海这个取值是1，其他是0。</p>
 <p>那最终就会得到一个高维稀疏向量。但是这个数据集不能直接用神经网络训练：如果直接用One-Hot Binary进行编码，那输入特征至少有一百万，第一层至少需要500个节点，那么第一层我们就需要训练5亿个参数，那就需要20亿或是50亿的数据集，而要获得如此大的数据集基本上是很困难的事情。</p>
-<p>回顾FM、FNN模型</p>
+<p><strong>回顾FM、FNN模型</strong></p>
 <p>因为上述原因需要将非常大的特征向量嵌入到低维向量空间中来减小模型复杂度，而FM（Factorisation machine）是很有效的embedding model：</p>
 <p><img src="https://pic1.zhimg.com/v2-c555093943338233d6bde77544ffcc8c_r.jpg" alt></p>
 <p>第一部分仍然为Logistic Regression，第二部分是通过两两向量之间的点积来判断特征向量之间和目标变量之间的关系。比如上述的迪斯尼广告，occupation=Student和City=Shanghai这两个向量之间的角度应该小于90，它们之间的点积应该大于0，说明和迪斯尼广告的点击率是正相关的。这种算法在推荐系统领域应用比较广泛。</p>
@@ -413,8 +413,7 @@
 <p><img src="https://pic3.zhimg.com/80/v2-807b29032ca8d6b89924dc5498d21140_hd.png" alt></p>
 <p>按照论文的思路，从上往下来看这个网络结构：</p>
 <p>输出层 输出层很简单，将上一层的网络输出通过一个全链接层，经过sigmoid函数转换后映射到(0,1)的区间中，得到我们的点击率的预测值：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-1ca29173890655a4c5ea8a75f6127887_hd.png" alt></p>
-<p><strong>l2层</strong></p>
+<p><img src="https://pic3.zhimg.com/80/v2-1ca29173890655a4c5ea8a75f6127887_hd.png" alt><br><strong>l2层</strong></p>
 <p>根据l1层的输出，经一个全链接层 ，并使用relu进行激活，得到我们l2的输出结果：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-351a6340a114e7abaa23f24381b717a8_hd.png" alt></p>
 <p><strong>l1层</strong> </p>
@@ -434,9 +433,9 @@
 <p><strong>损失函数</strong> </p>
 <p>损失函数使用交叉熵：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-8d567d10d305b2e9d8a2e5acc487fa2c_hd.png" alt></p>
-<h2 id="2、Product-Layer详细介绍"><a href="#2、Product-Layer详细介绍" class="headerlink" title="2、Product Layer详细介绍"></a>2、Product Layer详细介绍</h2><p>前面提到了，product layer可以分成两个部分，一部分是线性部分lz，一部分是非线性部分lp。它们同维度，其具体形式如下：</p>
+<h1 id="2、Product-Layer详细介绍"><a href="#2、Product-Layer详细介绍" class="headerlink" title="2、Product Layer详细介绍"></a>2、Product Layer详细介绍</h1><p>前面提到了，product layer可以分成两个部分，一部分是线性部分lz，一部分是非线性部分lp。它们同维度，其具体形式如下：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-37e77e50b3a109ed916b6396046b55c0_hd.png" alt></p>
-<p>其中z,p为信号向量，z为线性信号向量，p为二次信号向量， <img src="https://www.zhihu.com/equation?tex=W_%7Bz%7D%5E%7Bi%7D" alt="W_{z}^{i}">   , <img src="https://www.zhihu.com/equation?tex=W_%7Bp%7D%5E%7Bi%7D" alt="W_{p}^{i}">   为权重矩阵。（权重矩阵与z,p同维，经过定义的这种点乘运算后都得到一个标量作为DNN的输入）</p>
+<p>其中z,p为信号向量，z为线性信号向量，p为二次信号向量， <img src="https://www.zhihu.com/equation?tex=W_%7Bz%7D%5E%7Bi%7D" alt="W\_{z}^{i}">   , <img src="https://www.zhihu.com/equation?tex=W_%7Bp%7D%5E%7Bi%7D" alt="W\_{p}^{i}">   为权重矩阵。（权重矩阵与z,p同维，经过定义的这种点乘运算后都得到一个标量作为DNN的输入）</p>
 <p>看上面的公式，我们首先需要知道z和p，这都是由我们的embedding层得到的，其中z是线性信号向量，因此我们直接用embedding层得到：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-bf743a28a4fb4bbf2d86cc0a91de5f9d_hd.png" alt></p>
 <p>论文中使用的等号加一个三角形，其实就是相等的意思，可以认为z就是embedding层的复制。</p>
@@ -444,22 +443,22 @@
 <p><img src="https://pic4.zhimg.com/80/v2-b1fb4fc0989288cc9e18dded4ee1f1a4_hd.png" alt></p>
 <p>不同的g函数的选择使得我们有了两种PNN的计算方法，一种叫做Inner PNN，简称IPNN，一种叫做Outer PNN，简称OPNN。</p>
 <p>接下来分别来具体介绍这两种形式的PNN模型，由于涉及到复杂度的分析，所以我们这里先定义Embedding的大小为M，field的大小为N，而lz和lp的长度为D1。</p>
-<h3 id="2-1-IPNN"><a href="#2-1-IPNN" class="headerlink" title="2.1 IPNN"></a>2.1 IPNN</h3><p>IPNN中p的计算方式如下，即使用内积来代表pij：</p>
+<h2 id="2-1-IPNN"><a href="#2-1-IPNN" class="headerlink" title="2.1 IPNN"></a>2.1 IPNN</h2><p>IPNN中p的计算方式如下，即使用内积来代表pij：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-731803947caf6411575279977b1a9841_hd.png" alt></p>
-<p>所以，pij其实是一个数（标量），得到一个pij的时间复杂度为M，p的大小为N<em>N，因此计算得到p的时间复杂度为N</em>N<em>M。而再由p得到lp的时间复杂度是N</em>N<em>D1。因此 对于IPNN来说，总的时间复杂度为N</em>N(D1+M)。文章对这一结构进行了优化，可以看到，我们的p是一个对称矩阵，因此我们的权重也是一个对称矩阵，对这个对称矩阵进行如下的分解：</p>
+<p>所以，pij其实是一个数（标量），得到一个pij的时间复杂度为M，p的大小为N_N，因此计算得到p的时间复杂度为N_N_M。而再由p得到lp的时间复杂度是N_N_D1。因此 对于IPNN来说，总的时间复杂度为N_N(D1+M)。文章对这一结构进行了优化，可以看到，我们的p是一个对称矩阵，因此我们的权重也是一个对称矩阵，对这个对称矩阵进行如下的分解：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-10fdbd46cde76ec299fbf090d89161b8_hd.png" alt></p>
 <p>因此：</p>
 <p><img src="https://pic4.zhimg.com/80/v2-efe977966a70061095c3026407bbe0ac_hd.png" alt></p>
 <p>因此：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-f0370a6c5e2562f5c4f3a2afd9dc09ad_hd.png" alt></p>
-<h3 id="2-2-OPNN"><a href="#2-2-OPNN" class="headerlink" title="2.2 OPNN"></a>2.2 OPNN</h3><p>OPNN中p的计算方式如下：</p>
+<h2 id="2-2-OPNN"><a href="#2-2-OPNN" class="headerlink" title="2.2 OPNN"></a>2.2 OPNN</h2><p>OPNN中p的计算方式如下：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-6d6e9313125ef15bfcbefa0b42596f86_hd.png" alt></p>
-<p>此时pij为M<em>M的矩阵，计算一个pij的时间复杂度为M</em>M，而p是N<em>N</em>M<em>M的矩阵，因此计算p的事件复杂度为N</em>N<em>M</em>M。从而计算lp的时间复杂度变为D1 * N<em>N</em>M*M。这个显然代价很高的。为了减少复杂度，论文使用了叠加的思想，它重新定义了p矩阵：</p>
+<p>此时pij为M_M的矩阵，计算一个pij的时间复杂度为M_M，而p是N_N_M_M的矩阵，因此计算p的事件复杂度为N_N_M_M。从而计算lp的时间复杂度变为D1 _ N_N_M_M。这个显然代价很高的。为了减少复杂度，论文使用了叠加的思想，它重新定义了p矩阵：</p>
 <p>通过元素相乘的叠加，也就是先叠加N个field的Embedding向量，然后做乘法，可以大幅减少时间复杂度，定义p为：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-8e3fe7702bab617eb1b1b3a40018fb98_hd.png" alt></p>
-<p>这里计算p的时间复杂度就变为了D1<em>M</em>(M+N)。</p>
-<h2 id="3-Discussion"><a href="#3-Discussion" class="headerlink" title="3.Discussion"></a>3.Discussion</h2><p>和FNN相比，PNN多了一个product层，和FM相比，PNN多了隐层，并且输出不是简单的叠加；在训练部分，可以单独训练FNN或者FM部分作为初始化，然后BP算法应用整个网络，那么至少效果不会差于FNN和FM；</p>
-<h2 id="4、EXPERIMENTS"><a href="#4、EXPERIMENTS" class="headerlink" title="4、EXPERIMENTS"></a>4、EXPERIMENTS</h2><p>使用Criteo和iPinYou的数据集，并用SGD算法比较了7种模型：LR、FM、FNN、CCPM、IPNN、OPNN、PNN（拼接内积和外积层），正则化部分（L2和Dropout）；</p>
+<p>这里计算p的时间复杂度就变为了D1_M_(M+N)。</p>
+<h1 id="3-Discussion"><a href="#3-Discussion" class="headerlink" title="3.Discussion"></a>3.Discussion</h1><p>和FNN相比，PNN多了一个product层，和FM相比，PNN多了隐层，并且输出不是简单的叠加；在训练部分，可以单独训练FNN或者FM部分作为初始化，然后BP算法应用整个网络，那么至少效果不会差于FNN和FM；</p>
+<h1 id="4、EXPERIMENTS"><a href="#4、EXPERIMENTS" class="headerlink" title="4、EXPERIMENTS"></a>4、EXPERIMENTS</h1><p>使用Criteo和iPinYou的数据集，并用SGD算法比较了7种模型：LR、FM、FNN、CCPM、IPNN、OPNN、PNN（拼接内积和外积层），正则化部分（L2和Dropout）；</p>
 <p>实验结果如下图所示：</p>
 <p><img src="https://pic4.zhimg.com/80/v2-8736f30fa55d4afe8bb9624dafc44301_hd.png" alt></p>
 <p>结果表明PNN提升还是蛮大的；这里介绍一下关于激活函数的选择问题，作者进行了对比如下：</p>
@@ -652,7 +651,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、原理"><span class="nav-number">1.</span> <span class="nav-text">1、原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、Product-Layer详细介绍"><span class="nav-number">2.</span> <span class="nav-text">2、Product Layer详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-IPNN"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 IPNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-OPNN"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 OPNN</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Discussion"><span class="nav-number">3.</span> <span class="nav-text">3.Discussion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、EXPERIMENTS"><span class="nav-number">4.</span> <span class="nav-text">4、EXPERIMENTS</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、原理"><span class="nav-number">1.</span> <span class="nav-text">1、原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、Product-Layer详细介绍"><span class="nav-number">2.</span> <span class="nav-text">2、Product Layer详细介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-IPNN"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 IPNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-OPNN"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 OPNN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Discussion"><span class="nav-number">3.</span> <span class="nav-text">3.Discussion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、EXPERIMENTS"><span class="nav-number">4.</span> <span class="nav-text">4、EXPERIMENTS</span></a></li></ol></div>
             
 
           </div>
