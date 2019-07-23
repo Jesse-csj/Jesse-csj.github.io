@@ -40,6 +40,12 @@
 
 
 
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css">
+
 
 
 
@@ -90,12 +96,12 @@
 <meta property="og:description" content="大家好，我是csj，这是我的第一篇个人博客，以一篇经典的论文FM开始吧：  原文：Factorization Machines">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1473228-20180904202908102-215826983.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174305361-1336985179.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174342426-2098941787.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174408535-2047182456.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174437368-117236465.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174801238-1060265372.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1473228-20180904202908102-215826983.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174305361-1336985179.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174342426-2098941787.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174408535-2047182456.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174437368-117236465.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174801238-1060265372.png">
 <meta property="og:updated_time" content="2019-07-23T08:26:16.971Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-FM算法解析">
@@ -111,7 +117,7 @@
     scheme: 'Muse',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: false,
+    fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
@@ -457,19 +463,19 @@
 <p>  　　　　而FM的优势就在于对这两方面问题的处理。首先是特征组合，通过对两两特征组合，引入交叉项特征，提高模型得分；其次是高维灾难，通过引入隐向量（对参数矩阵进行矩阵分解），完成对特征的参数估计。</p>
 <h1 id="三、原理及求解"><a href="#三、原理及求解" class="headerlink" title="三、原理及求解"></a><strong>三、原理及求解</strong></h1><p>  　　　　在看FM算法前，我们先回顾一下最常见的线性表达式：<br>                   <img src="https://img2018.cnblogs.com/blog/1473228/201809/1473228-20180904202838541-2090182057.png" alt><br>  　　　　其中w0 为初始权值，或者理解为偏置项，wi 为每个特征xi 对应的权值。可以看到，这种线性表达式只描述了每个特征与输出的关系。</p>
 <p>  　　　　FM的表达式如下，可观察到，只是在线性表达式后面加入了新的交叉项特征及对应的权值。</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1473228-20180904202908102-215826983.png" alt></p>
+<p><img src="//jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1473228-20180904202908102-215826983.png" alt></p>
 <p>  *<em>求解过程 ：　*</em></p>
 <p>  　　　　从上面的式子可以很容易看出，组合部分的特征相关参数共有n(n−1)/2个。但是如第二部分所分析，在数据很稀疏的情况下，满足xi,xj都不为0的情况非常少，这样将导致ωij无法通过训练得出。</p>
 <p>  为了求出ωij，我们对每一个特征分量xi引入辅助向量Vi=(vi1,vi2,⋯,vik)。然后，利用vivj^T对ωij进行求解：</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174305361-1336985179.png" alt></p>
+<p><img src="//jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174305361-1336985179.png" alt></p>
 <p>  　　　　那么ωij组成的矩阵可以表示为:</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174342426-2098941787.png" alt></p>
+<p><img src="//jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174342426-2098941787.png" alt></p>
 <p>  　　　　那么，如何求解vi和vj呢？主要采用了公式：</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174408535-2047182456.png" alt></p>
+<p><img src="//jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174408535-2047182456.png" alt></p>
 <p>  　　　　具体推导过程如下：（重要的化简过程）</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174437368-117236465.png" alt></p>
+<p><img src="//jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174437368-117236465.png" alt></p>
 <h1 id="四、参数求解"><a href="#四、参数求解" class="headerlink" title="四、参数求解"></a><strong>四、参数求解</strong></h1><p>  　　　　利用梯度下降法，通过求损失函数对特征（输入项）的导数计算出梯度，从而更新权值。设m为样本个数，θ为权值。</p>
-<p><img src="%EF%BC%88%E8%AF%BB%E8%AE%BA%E6%96%87%EF%BC%89%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E4%B9%8BCTR%E9%A2%84%E4%BC%B0-FM%E7%AE%97%E6%B3%95%E8%A7%A3%E6%9E%90/1630213-20190710174801238-1060265372.png" alt><br> 其中，<br>$$<br>\sum_{j=1}^nv_{j,f}x_j<br>$$</p>
+<p><img src="//jesse-csj.github.io/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/1630213-20190710174801238-1060265372.png" alt><br> 其中，<br>$$<br>\sum_{j=1}^nv_{j,f}x_j<br>$$</p>
 <p>是和i无关的，可以事先求出来。每个梯度都可以在O(1)时间内求得，整体的参数更新的时间为O(kn)。</p>
 <p>  第一篇博客就到此结束啦~ 之后会继续分享计算广告相关的论文和知识。</p>
 
@@ -816,6 +822,8 @@ setInterval("createtime()",250);
 
 
 
+  
+
 
 
 
@@ -850,6 +858,11 @@ setInterval("createtime()",250);
   
   
     <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
   
 
 
