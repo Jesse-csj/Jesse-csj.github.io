@@ -95,13 +95,13 @@
 <meta property="og:site_name" content="Jesse&#39;s Blog">
 <meta property="og:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/C:%5CUsers%5C98019%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563874697101.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/1.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-b046c93f125596de5265f7c6342542f6_hd.png">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-9fb5ca82bca2cd35f3751aca3ca5ac45_hd.png">
-<meta property="og:image" content="https://pic3.zhimg.com/80/v2-807b29032ca8d6b89924dc5498d21140_hd.png">
-<meta property="og:image" content="https://pic3.zhimg.com/80/v2-1ca29173890655a4c5ea8a75f6127887_hd.png">
-<meta property="og:image" content="https://pic1.zhimg.com/80/v2-351a6340a114e7abaa23f24381b717a8_hd.png">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-c6f73780db40e5d667fc6941e876ca60_hd.png">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/2.jpg">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/3.jpg">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/4.jpg">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/22/PNN/5.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-37e77e50b3a109ed916b6396046b55c0_hd.png">
 <meta property="og:image" content="https://pic3.zhimg.com/80/v2-41eaa2a77669bb8200e20a7c24b7a5dd_hd.png">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-b46b0d082980847e97b4e4448be2c5ba_hd.png">
@@ -119,11 +119,11 @@
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-8e3fe7702bab617eb1b1b3a40018fb98_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-8736f30fa55d4afe8bb9624dafc44301_hd.png">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-cf8d155b2332e3e287410f7f381e1db3_hd.png">
-<meta property="og:updated_time" content="2019-07-23T09:38:27.974Z">
+<meta property="og:updated_time" content="2019-07-23T13:00:45.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-PNN模型解析">
 <meta name="twitter:description" content="今天第二篇，还是之前的经典论文（PNN）还是基于DNN的深度模型用于预测点击率，不过相比于FNN提出了不少新的idea，一起来看下吧。 原论文：Product-based Neural Networks for User Response Prediction ：2016">
-<meta name="twitter:image" content="https://jesse-csj.github.io/2019/07/22/PNN/C:%5CUsers%5C98019%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563874697101.png">
+<meta name="twitter:image" content="https://jesse-csj.github.io/2019/07/22/PNN/1.jpg">
 
 
 
@@ -479,8 +479,7 @@
 <p>传统的做法是应用One-Hot Binary的编码方式去处理这类数据，例如现在有三个域的数据X=[Weekday=Wednesday, Gender=Male, City=Shanghai],其中 Weekday有7个取值，我们就把它编译为7维的二进制向量，其中只有Wednesday是1，其他都是0，因为它只有一个特征值；Gender有两维，其中一维是1；如果有一万个城市的话，那City就有一万维，只有上海这个取值是1，其他是0。</p>
 <p>那最终就会得到一个高维稀疏向量。但是这个数据集不能直接用神经网络训练：如果直接用One-Hot Binary进行编码，那输入特征至少有一百万，第一层至少需要500个节点，那么第一层我们就需要训练5亿个参数，那就需要20亿或是50亿的数据集，而要获得如此大的数据集基本上是很困难的事情。</p>
 <p><strong>回顾FM、FNN模型</strong></p>
-<p>因为上述原因需要将非常大的特征向量嵌入到低维向量空间中来减小模型复杂度，而FM（Factorisation machine）是很有效的embedding model：</p>
-<p><img src="//jesse-csj.github.io/2019/07/22/PNN/C:%5CUsers%5C98019%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1563874697101.png" alt="1563874697101"></p>
+<p>因为上述原因需要将非常大的特征向量嵌入到低维向量空间中来减小模型复杂度，而FM（Factorisation machine）是很有效的embedding model：<br>                              <img src="/2019/07/22/PNN/1.jpg"></p>
 <p>第一部分仍然为Logistic Regression，第二部分是通过两两向量之间的点积来判断特征向量之间和目标变量之间的关系。比如上述的迪斯尼广告，occupation=Student和City=Shanghai这两个向量之间的角度应该小于90，它们之间的点积应该大于0，说明和迪斯尼广告的点击率是正相关的。这种算法在推荐系统领域应用比较广泛。</p>
 <p>那就基于这个模型来考虑神经网络模型，其实这个模型本质上就是一个三层网络：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-b046c93f125596de5265f7c6342542f6_hd.png" alt></p>
@@ -489,15 +488,18 @@
 <p><img src="https://pic2.zhimg.com/80/v2-9fb5ca82bca2cd35f3751aca3ca5ac45_hd.png" alt></p>
 <p>那现在进一步考虑FNN与一般的神经网络的区别是什么？大部分的神经网络模型对向量之间的处理都是采用加法操作，而FM 则是通过向量之间的乘法来衡量两者之间的关系。我们知道乘法关系其实相当于逻辑“且”的关系，拿上述例子来说，只有特征是学生而且在上海的人才有更大的概率去点击迪斯尼广告。但是加法仅相当于逻辑中“或”的关系，显然“且”比“或”更能严格区分目标变量。（加法就是正常拼接后作为输出，这里就是先做乘积再拼接作为DNN的输入）</p>
 <p>所以我们接下来的工作就是对乘法关系建模。可以对两个向量做内积和外积的乘法操作，在此基础之上我们搭建的神经网络PNN：提出了一种product layer的思想，既基于乘法的运算来体现特征交叉的DNN网络结构，如下图：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-807b29032ca8d6b89924dc5498d21140_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/2.jpg">
+
 <p>按照论文的思路，从上往下来看这个网络结构：</p>
 <p>输出层 输出层很简单，将上一层的网络输出通过一个全链接层，经过sigmoid函数转换后映射到(0,1)的区间中，得到我们的点击率的预测值：</p>
-<p>​                                                <img src="https://pic3.zhimg.com/80/v2-1ca29173890655a4c5ea8a75f6127887_hd.png" alt><br><strong>l2层</strong></p>
+<p>​                <img src="/2019/07/22/PNN/3.jpg"><br><strong>l2层</strong></p>
 <p>根据l1层的输出，经一个全链接层 ，并使用relu进行激活，得到我们l2的输出结果：</p>
-<p><img src="https://pic1.zhimg.com/80/v2-351a6340a114e7abaa23f24381b717a8_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/4.jpg">
+
 <p><strong>l1层</strong> </p>
 <p>l1层的输出由如下的公式计算：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-c6f73780db40e5d667fc6941e876ca60_hd.png" alt></p>
+ <img src="/2019/07/22/PNN/5.jpg">
+
 <p>可以看到在得到l1层输出时，这里输入了三部分，分别是lz，lp 和 b1，b1是偏置项，这里可以先不管。lz和lp的计算就是PNN的重点所在了。</p>
 <p><strong>Product Layer</strong></p>
 <p>product思想来源于，在ctr预估中，认为特征之间的关系更多是一种and“且”的关系，而非add”或”的关系。例如，性别为男且喜欢游戏的人群，比起性别男和喜欢游戏的人群，前者的组合比后者更能体现特征交叉的意义。</p>
