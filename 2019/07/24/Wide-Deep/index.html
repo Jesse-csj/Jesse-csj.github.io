@@ -87,21 +87,21 @@
 
 
 
-<meta name="description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：Wide &amp;amp; Deep Learning for Recommender Systems地址： https://arxiv">
+<meta name="description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：Wide &amp;amp; Deep Learning for Recommender Systems">
 <meta name="keywords" content="推荐系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（读论文）推荐系统之ctr预估-Wide＆Deep模型解析">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/24/Wide-Deep/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：Wide &amp;amp; Deep Learning for Recommender Systems地址： https://arxiv">
+<meta property="og:description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：Wide &amp;amp; Deep Learning for Recommender Systems">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/Wide-Deep/1.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/Wide-Deep/2.png">
-<meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/Wide-Deep/2.png">
-<meta property="og:updated_time" content="2019-07-24T03:13:29.275Z">
+<meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/Wide-Deep/3.png">
+<meta property="og:updated_time" content="2019-07-24T03:17:22.029Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-Wide＆Deep模型解析">
-<meta name="twitter:description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：Wide &amp;amp; Deep Learning for Recommender Systems地址： https://arxiv">
+<meta name="twitter:description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：Wide &amp;amp; Deep Learning for Recommender Systems">
 <meta name="twitter:image" content="https://jesse-csj.github.io/2019/07/24/Wide-Deep/1.png">
 
 
@@ -449,7 +449,10 @@
       
 
       
-        <p>在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。<br>原文：Wide &amp; Deep Learning for Recommender Systems<br>地址： <a href="https://arxiv.org/pdf/1606.07792.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1606.07792.pdf</a></p>
+        <p>在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。<br>原文：Wide &amp; Deep Learning for Recommender Systems</p>
+<a id="more"></a>
+
+<p>地址： <a href="https://arxiv.org/pdf/1606.07792.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1606.07792.pdf</a></p>
 <h1 id="1、问题由来"><a href="#1、问题由来" class="headerlink" title="1、问题由来"></a><strong>1、问题由来</strong></h1><h2 id="1-1、背景"><a href="#1-1、背景" class="headerlink" title="1.1、背景"></a><strong>1.1、背景</strong></h2><p>本文提出时是针对推荐系统中应用的，当然也可以应用在ctr预估中。<br>首先介绍论文中通篇出现的两个名词：</p>
 <ul>
 <li>memorization（暂且翻译为记忆）：即从历史数据中发现item或者特征之间的相关性。</li>
@@ -490,7 +493,7 @@
 <h2 id="2-4、The-Deep-Component"><a href="#2-4、The-Deep-Component" class="headerlink" title="2.4、The Deep Component"></a>2.4、<strong>The Deep Component</strong></h2><p>如模型右边所示：Deep Part通过学习一个低纬度的dense representation（也叫做embedding vector）对于每一个query和item，来<strong>泛化</strong>给你推荐一些字符上看起来不那么相关，但是你可能也是需要的。比如说：你想要炸鸡，Embedding Space中，炸鸡和汉堡很接近，所以也会给你推荐汉堡。</p>
 <p>Embedding vectors被随机初始化，并根据最终的loss来反向训练更新。这些低维度的dense embedding vectors被作为第一个隐藏层的输入。隐藏层的激活函数通常使用ReLU。</p>
 <h1 id="3、模型训练"><a href="#3、模型训练" class="headerlink" title="3、模型训练"></a><strong>3、模型训练</strong></h1><p>训练中原始的稀疏特征，在两个组件中都会用到，比如query=”fried chicken” item=”chicken fried rice”:</p>
-<img src="/2019/07/24/Wide-Deep/2.png">
+<img src="/2019/07/24/Wide-Deep/3.png">
 
 <p>在训练的时候，根据最终的loss计算出gradient，反向传播到Wide和Deep两部分中，分别训练自己的参数。也就是说，<strong>两个模块是一起训练的</strong>（也就是论文中的联合训练），注意这不是模型融合。</p>
 <ul>
