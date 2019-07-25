@@ -99,7 +99,7 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/FNN/4.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/FNN/2.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/FNN/3.png">
-<meta property="og:updated_time" content="2019-07-25T06:50:40.751Z">
+<meta property="og:updated_time" content="2019-07-25T06:53:40.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-FNN模型解析">
 <meta name="twitter:description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data">
@@ -474,8 +474,8 @@
 <h1 id="3、FNN的优缺点"><a href="#3、FNN的优缺点" class="headerlink" title="3、FNN的优缺点"></a><strong>3、FNN的优缺点</strong></h1><p><strong>优点</strong>：每个特征的嵌入向量是预先采用FM模型训练的，因此在学习DNN模型时，训练开销降低，模型能够更快达到收敛。</p>
 <p><strong>缺点：</strong></p>
 <ol>
-<li>Embedding 的参数受 FM 的影响，不一定准确</li>
-<li>预训练阶段增加了计算复杂度，训练效率低</li>
+<li>Embedding 的参数受 FM 的影响，不一定准确。</li>
+<li>预训练阶段增加了计算复杂度，训练效率低。</li>
 <li>FNN 只能学习到高阶的组合特征；模型中没有对低阶特征建模。</li>
 </ol>
 
