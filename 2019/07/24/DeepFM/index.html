@@ -102,7 +102,7 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/DeepFM/5.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/DeepFM/6.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/DeepFM/7.png">
-<meta property="og:updated_time" content="2019-07-29T13:29:59.985Z">
+<meta property="og:updated_time" content="2019-07-29T13:35:22.233Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-DeepFM模型解析">
 <meta name="twitter:description" content="今天第二篇（最近更新的都是Deep模型，传统的线性模型会后面找个时间更新的哈）。本篇介绍华为的DeepFM模型 (2017年)，此模型在 Wide&amp;amp;Deep 的基础上进行改进，成功解决了一些问题，具体的话下面一起来看下吧。 原文：Deepfm: a factorization-machine based neural network for ctr prediction">
@@ -472,7 +472,9 @@
 <p>CTR 预估 重点 在于 学习组合特征。注意，组合特征包括二阶、三阶甚至更高阶的，阶数越高越复杂，越不容易学习。Google 的论文研究得出结论：高阶和低阶的组合特征都非常重要，同时学习到这两种组合特征的性能要比只考虑其中一种的性能要好。</p>
 <p>那么关键问题转化成：如何高效的提取这些组合特征。一种办法就是引入领域知识人工进行特征工程。这样做的弊端是高阶组合特征非常难提取，会耗费极大的人力。而且，有些组合特征是隐藏在数据中的，即使是专家也不一定能提取出来，比如著名的“尿布与啤酒”问题。</p>
 <p>在 DeepFM 提出之前，已有 LR（线性或广义线性模型后面更新），FM、FFM、FNN、PNN（以及三种变体：IPNN,OPNN,PNN*）,Wide&amp;Deep 模型，这些模型在 CTR 或者是推荐系统中被广泛使用。</p>
-<h2 id="1-2、现有模型的问题"><a href="#1-2、现有模型的问题" class="headerlink" title="1.2、现有模型的问题"></a>1.2、现有模型的问题</h2><p>线性模型：最开始 CTR 或者是推荐系统领域，一些线性模型取得了不错的效果（线性模型LR简单、快速并且模型具有可解释，有着很好的拟合能力），但是LR模型是线性模型，表达能力有限，泛化能力较弱，需要做好特征工程，尤其需要交叉特征，才能取得一个良好的效果，然而在工业场景中，特征的数量会很多，可能达到成千上万，甚至数十万，这时特征工程就很难做，还不一定能取得更好的效果。</p>
+<h2 id="1-2、现有模型的问题"><a href="#1-2、现有模型的问题" class="headerlink" title="1.2、现有模型的问题"></a>1.2、现有模型的问题</h2><br>
+
+<p>线性模型：最开始 CTR 或者是推荐系统领域，一些线性模型取得了不错的效果（线性模型LR简单、快速并且模型具有可解释，有着很好的拟合能力），但是LR模型是线性模型，表达能力有限，泛化能力较弱，需要做好特征工程，尤其需要交叉特征，才能取得一个良好的效果，然而在工业场景中，特征的数量会很多，可能达到成千上万，甚至数十万，这时特征工程就很难做，还不一定能取得更好的效果。</p>
 <p>FM模型：线性模型差强人意，直接导致了 FM 模型应运而生（在 Kaggle 上打比赛提出来的，取得了第一名的成绩）。FM 通过隐向量 latent vector 做内积来表示组合特征，从理论上解决了低阶和高阶组合特征提取的问题。但是实际应用中受限于计算复杂度，一般也就只考虑到 2 阶交叉特征。后面又进行了改进，提出了 FFM，增加了 Field 的概念。</p>
 <p>遇上深度学习：随着 DNN 在图像、语音、NLP 等领域取得突破，人们渐渐意识到 DNN 在特征表示上的天然优势。相继提出了使用 CNN 或 RNN 来做 CTR 预估的模型。但是，CNN 模型的缺点是：偏向于学习相邻特征的组合特征。  RNN 模型的缺点是：比较适用于有序列 (时序) 关系的数据。</p>
 <p>FNN 的提出，应该算是一次非常不错的尝试：先使用预先训练好的 FM，得到隐向量，然后作为 DNN 的输入来训练模型。缺点在于：受限于 FM 预训练的效果。</p>
@@ -498,7 +500,9 @@
 </li>
 </ol>
 <p>下面就一直来走进模型的细节。</p>
-<h1 id="2、模型细节"><a href="#2、模型细节" class="headerlink" title="2、模型细节"></a>2、模型细节</h1><p>DeepFM主要做法如下：</p>
+<h1 id="2、模型细节"><a href="#2、模型细节" class="headerlink" title="2、模型细节"></a>2、模型细节</h1><br>
+
+<p>DeepFM主要做法如下：</p>
 <ol>
 <li><p>FM Component + Deep Component。FM 提取低阶组合特征，Deep 提取高阶组合特征。但是和 Wide&amp;Deep 不同的是，DeepFM 是端到端的训练，不需要人工特征工程。</p>
 </li>
@@ -564,7 +568,9 @@
 <li><p>不再需要人工特征工程。Wide&amp;Deep 中低阶组合特征就是同过特征工程得到的。</p>
 </li>
 </ol>
-<h1 id="3、总结（具体的对比实验和实现细节等请参阅原论文）"><a href="#3、总结（具体的对比实验和实现细节等请参阅原论文）" class="headerlink" title="3、总结（具体的对比实验和实现细节等请参阅原论文）"></a>3、总结（具体的对比实验和实现细节等请参阅原论文）</h1><p>DeepFM优点：</p>
+<h1 id="3、总结（具体的对比实验和实现细节等请参阅原论文）"><a href="#3、总结（具体的对比实验和实现细节等请参阅原论文）" class="headerlink" title="3、总结（具体的对比实验和实现细节等请参阅原论文）"></a>3、总结（具体的对比实验和实现细节等请参阅原论文）</h1><br>
+
+<p>DeepFM优点：</p>
 <ol>
 <li><p>没有用 FM 去预训练隐向量 Vi，并用 Vi去初始化神经网络。（相比之下 FNN 就需要预训练 FM 来初始化 DNN）。</p>
 </li>

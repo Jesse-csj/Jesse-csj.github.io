@@ -101,7 +101,7 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/NFM/4.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/NFM/5.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/NFM/6.png">
-<meta property="og:updated_time" content="2019-07-29T13:31:22.689Z">
+<meta property="og:updated_time" content="2019-07-29T13:35:23.954Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-NFM模型解析">
 <meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 周末没更新呀…今天要分享的是另一个Deep模型NFM(串行结构)。NFM也是用FM+DNN来对问题建模的，相比于之前提到的Wide&amp;amp;Deep(Google)、DeepFM(华为+哈工大)、PNN(上交)和之后会分享的的DCN(Google)、DIN(阿里)等，NFM有什么优点呢，下面就走进模型我们一起来看看吧。 原文：Neural Factori">
@@ -458,7 +458,9 @@
 <a id="more"></a>
 
 <p>地址：<a href="https://arxiv.org/pdf/1708.05027.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1708.05027.pdf</a></p>
-<h1 id="1、问题由来"><a href="#1、问题由来" class="headerlink" title="1、问题由来"></a>1、问题由来</h1><p>老生常谈，再聊数据特点：对于广告中的大量的类别特征，特征组合也是非常多的。传统的做法是通过人工特征工程或者利用决策树来进行特征选择，选择出比较重要的特征。但是这样的做法都有一个缺点，就是：<strong>无法学习训练集中没有出现的特征组合</strong>。</p>
+<h1 id="1、问题由来"><a href="#1、问题由来" class="headerlink" title="1、问题由来"></a>1、问题由来</h1><br>
+
+<p>老生常谈，再聊数据特点：对于广告中的大量的类别特征，特征组合也是非常多的。传统的做法是通过人工特征工程或者利用决策树来进行特征选择，选择出比较重要的特征。但是这样的做法都有一个缺点，就是：<strong>无法学习训练集中没有出现的特征组合</strong>。</p>
 <p>最近几年，Embedding-based方法开始成为主流，通过把高维稀疏的输入_embed_到低维度的稠密的隐向量空间中，模型可以学习到训练集中没有出现过的特征组合。</p>
 <p>Embedding-based大致可以分为两类：</p>
 <p><strong>1.factorization machine-based linear models</strong></p>
@@ -493,7 +495,9 @@
 <p>NFM最重要的区别就在于Bi-Interaction Layer。Wide&amp;Deep和DeepCross都是用拼接操作(concatenation)替换了Bi-Interaction。</p>
 <p>Concatenation操作的最大缺点就是它并没有考虑任何的特征组合信息，所以就全部依赖后面的MLP去学习特征组合，但是很不幸，MLP的学习优化非常困难。</p>
 <p>使用Bi-Interaction考虑到了二阶特征组合，使得输入的表示包含更多的信息，减轻了后面MLP部分的学习压力，所以可以用更简单的模型（实验中只一层隐层），取得更好的效果。</p>
-<h1 id="3、总结（具体的对比实验和实现细节等请参阅原论文）"><a href="#3、总结（具体的对比实验和实现细节等请参阅原论文）" class="headerlink" title="3、总结（具体的对比实验和实现细节等请参阅原论文）"></a>3、总结（具体的对比实验和实现细节等请参阅原论文）</h1><p>NFM主要的特点如下：</p>
+<h1 id="3、总结（具体的对比实验和实现细节等请参阅原论文）"><a href="#3、总结（具体的对比实验和实现细节等请参阅原论文）" class="headerlink" title="3、总结（具体的对比实验和实现细节等请参阅原论文）"></a>3、总结（具体的对比实验和实现细节等请参阅原论文）</h1><br>
+
+<p>NFM主要的特点如下：</p>
 <p>1. NFM核心就是在NN中引入了Bilinear Interaction(Bi-Interaction) pooling操作。基于此，NN可以在low level就学习到包含更多信息的组合特征。</p>
 <p>2. 通过deepen FM来学习高阶的非线性的组合特征。</p>
 <p>3. NFM相比于上面提到的DNN模型，模型结构更浅、更简单(shallower structure)，但是性能更好，训练和调整参数更加容易。</p>
