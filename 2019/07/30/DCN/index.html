@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/30/DCN/9.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/30/DCN/10.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/30/DCN/11.png">
-<meta property="og:updated_time" content="2019-07-31T01:56:36.515Z">
+<meta property="og:updated_time" content="2019-07-31T02:00:36.532Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-DCN模型解析">
 <meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是2017年谷歌提出的DCN模型，和明天要分享的XDeepFM是配套的，本人写文章的顺序尽量严格按照时间顺序来的哈。话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。 原文：Deep &amp;amp; Cross Network for Ad Click Predictions">
@@ -473,7 +473,7 @@
 <p>于是提出DCN进行进一步探索，下面一起来看下细节：</p>
 <h1 id="2、DEEP-amp-CROSS-NETWORK"><a href="#2、DEEP-amp-CROSS-NETWORK" class="headerlink" title="2、DEEP &amp; CROSS NETWORK"></a>2、DEEP &amp; CROSS NETWORK</h1><img src="/2019/07/30/DCN/1.png"> 
 
-<p>DCN整体模型的架构图如上：底层是Embedding and stacking layer，然后是并行的Cross Network和Deep Network，最后是Combination Layer把Cross NetworkDeep Network_的结果stack得到Output。</p>
+<p>DCN整体模型的架构图如上：底层是Embedding and stacking layer，然后是并行的Cross Network和Deep Network，最后是Combination Layer把Cross NetworkDeep Network的结果stack得到Output。</p>
 <h2 id="2-1-Embedding-and-stacking-layer"><a href="#2-1-Embedding-and-stacking-layer" class="headerlink" title="2.1 Embedding and stacking layer"></a>2.1 Embedding and stacking layer</h2><p>DCN底层的两个功能是Embed和Stack。</p>
 <p><strong>Embed</strong>：<br>在web-scale的推荐系统比如CTR预估中，输入的大部分特征都是类别型特征，通常的处理办</p>
 <p>法就是编码为one-hot向量，对于实际应用中维度会非常高且稀疏，因此使用：</p>
