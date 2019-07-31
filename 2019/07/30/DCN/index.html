@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/30/DCN/9.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/30/DCN/10.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/30/DCN/11.png">
-<meta property="og:updated_time" content="2019-07-31T01:51:03.759Z">
+<meta property="og:updated_time" content="2019-07-31T01:56:36.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-DCN模型解析">
 <meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是2017年谷歌提出的DCN模型，和明天要分享的XDeepFM是配套的，本人写文章的顺序尽量严格按照时间顺序来的哈。话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。 原文：Deep &amp;amp; Cross Network for Ad Click Predictions">
@@ -465,7 +465,7 @@
 <p>地址：<a href="https://arxiv.org/pdf/1708.05123.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1708.05123.pdf</a></p>
 <h1 id="1、背景及相关工作"><a href="#1、背景及相关工作" class="headerlink" title="1、背景及相关工作"></a>1、背景及相关工作</h1><br>
 
-<p>（每篇文章都重复下这些背景哈，希望大家别看烦，尽量换种方式）<br>传统的CTR预估模型需要大量的人工特征工程，耗时耗力；引入DNN之后，依靠神经网络强大的学习能力，可以一定程度上实现自动学习特征组合。但是DNN的缺点在于隐式的学习特征组合带来的不可解释性，以及低效率的学习(并不是所有的特征组合都是有用的)。这时交叉网络应运而生，同时联合DNN，发挥两者的共同优势。传统的CTR预估模型需要大量的人工特征工程，耗时耗力；引入DNN之后，依靠神经网络强大的学习能力，可以一定程度上实现自动学习特征组合。但是DNN的缺点在于隐式的学习特征组合带来的不可解释性，以及低效率的学习(并不是所有的特征组合都是有用的)。这时交叉网络应运而生，同时联合DNN，发挥两者的共同优势。</p>
+<p>（每篇文章都重复下这些背景哈，希望大家别看烦，尽量换种方式）：传统的CTR预估模型需要大量的人工特征工程，耗时耗力；引入DNN之后，依靠神经网络强大的学习能力，可以一定程度上实现自动学习特征组合。但是DNN的缺点在于隐式的学习特征组合带来的不可解释性，以及低效率的学习(并不是所有的特征组合都是有用的)。这时交叉网络应运而生，同时联合DNN，发挥两者的共同优势。传统的CTR预估模型需要大量的人工特征工程，耗时耗力；引入DNN之后，依靠神经网络强大的学习能力，可以一定程度上实现自动学习特征组合。但是DNN的缺点在于隐式的学习特征组合带来的不可解释性，以及低效率的学习(并不是所有的特征组合都是有用的)。这时交叉网络应运而生，同时联合DNN，发挥两者的共同优势。</p>
 <p><strong>相关工作：</strong>由于数据集规模和维数的急剧增加，之前已经提出了许多方法：</p>
 <p>最开始FM使用隐向量的内积来建模组合特征；</p>
 <p>FFM在此基础上引入field的概念，针对不同的field使用不同的隐向量。但是，这两者都是针对低阶（二阶，高阶会产生非常大的计算成本）的特征组合进行建模的；  随着DNN在计算机视觉、自然语言处理、语音识别等领域取得重要进展，DNN几乎无限的表达能力被广泛的研究。同样也尝试被用来解决web产品中输入数据高维高稀疏的问题。DNN可以对高维组合特征进行建模，但是DNN的不可解释性让DNN是否是目前最高效的针对此类问题的建模方式成为了一个问题；  另一方面，在Kaggle上的很多比赛中，大部分的获胜方案都是使用的人工特征工程，构造低阶的组合特征，这些特征意义明确且高效。而DNN学习到的特征都是隐式的、高度非线性的高阶组合特征，含义非常难以解释。这揭示了一个模型能够比通用的DNN设计更能够有效地学习的有界度特征的相互作用，那是否能设计一种DNN的特定网络结构来改善DNN，使得其学习起来更加高效呢？</p>
@@ -473,22 +473,22 @@
 <p>于是提出DCN进行进一步探索，下面一起来看下细节：</p>
 <h1 id="2、DEEP-amp-CROSS-NETWORK"><a href="#2、DEEP-amp-CROSS-NETWORK" class="headerlink" title="2、DEEP &amp; CROSS NETWORK"></a>2、DEEP &amp; CROSS NETWORK</h1><img src="/2019/07/30/DCN/1.png"> 
 
-<p>DCN整体模型的架构图如上：底层是_Embedding and stacking layer_，然后是并行的_Cross Network_和_Deep Network_，最后是_Combination Layer_把_Cross Network_和_Deep Network_的结果stack得到_Output_。</p>
-<h2 id="2-1-Embedding-and-stacking-layer"><a href="#2-1-Embedding-and-stacking-layer" class="headerlink" title="2.1 Embedding and stacking layer"></a>2.1 Embedding and stacking layer</h2><p>DCN底层的两个功能是_Embed_和_Stack_。</p>
+<p>DCN整体模型的架构图如上：底层是Embedding and stacking layer，然后是并行的Cross Network和Deep Network，最后是Combination Layer把Cross NetworkDeep Network_的结果stack得到Output。</p>
+<h2 id="2-1-Embedding-and-stacking-layer"><a href="#2-1-Embedding-and-stacking-layer" class="headerlink" title="2.1 Embedding and stacking layer"></a>2.1 Embedding and stacking layer</h2><p>DCN底层的两个功能是Embed和Stack。</p>
 <p><strong>Embed</strong>：<br>在web-scale的推荐系统比如CTR预估中，输入的大部分特征都是类别型特征，通常的处理办</p>
-<p>法就是编码为_one-hot向量_，对于实际应用中维度会非常高且稀疏，因此使用：</p>
+<p>法就是编码为one-hot向量，对于实际应用中维度会非常高且稀疏，因此使用：</p>
 <img src="/2019/07/30/DCN/2.png">
 <p>来将这些离散特征转换成实数值的稠密向量。</p>
-<p><strong>Stack</strong>：<br>处理完了类别型特征，还有连续型特征需要处理。所以我们把连续型特征规范化之后，和嵌入向量_stacking（堆叠）_到一起形成一个向量，就得到了原始的输入：</p>
+<p><strong>Stack</strong>：<br>处理完了类别型特征，还有连续型特征需要处理。所以我们把连续型特征规范化之后，和嵌入向量stacking（堆叠）到一起形成一个向量，就得到了原始的输入：</p>
 <img src="/2019/07/30/DCN/3.png">
 
 
 
-<h2 id="2-2-Cross-network"><a href="#2-2-Cross-network" class="headerlink" title="2.2 Cross network"></a>2.2 Cross network</h2><p>_Cross Network_是这个模型的核心，它被设计来<strong>高效地应用</strong>显式的交叉特征，关键在于如何高效地进行<strong>feature crossing</strong>。对于每层的计算，使用下述公式：</p>
+<h2 id="2-2-Cross-network"><a href="#2-2-Cross-network" class="headerlink" title="2.2 Cross network"></a>2.2 Cross network</h2><p>Cross Network是这个模型的核心，它被设计来<strong>高效地应用</strong>显式的交叉特征，关键在于如何高效地进行<strong>feature crossing</strong>。对于每层的计算，使用下述公式：</p>
 <img src="/2019/07/30/DCN/4.png">
 
 <p>其中xl和xl+1 分别是第l层和第l+1层cross layer的输出（的列向量），wl和bl是这两层之间的连接参数。注意上式中所有的变量均是<strong>列向量</strong>，W也是列向量，并不是矩阵。</p>
-<p><strong>理解</strong>：<br>这其实应用了残差网络的思想，<strong>xl+1 = f(xl, wl, bl) + xl：</strong>每一层的输出，都是上一层的输出加上<em>feature crossing</em> <strong>f</strong>。而<strong>f</strong>就是在<strong>拟合该层输出和上一层输出的残差（</strong><em>x__l</em>+1​−_x__l_​<strong>）。</strong>一层交叉层的可视化如下图所示：</p>
+<p><strong>理解</strong>：<br>这其实应用了残差网络的思想，<strong>xl+1 = f(xl, wl, bl) + xl：</strong>每一层的输出，都是上一层的输出加上<strong>feature crossing</strong> <strong>f</strong>。而<strong>f</strong>就是在<strong>拟合该层输出和上一层输出的残差（</strong>xl+1​−xl​<strong>）。</strong>一层交叉层的可视化如下图所示：</p>
 <img src="/2019/07/30/DCN/5.png">
 
 <p><strong>High-degree Interaction Across Features:</strong><br>Cross Network特殊的网络结构使得cross feature的阶数随着layer depth的增加而增加。相对于输入x0来说，一个l层的cross network的cross feature的阶数为l+1。</p>
@@ -500,11 +500,11 @@
 <p>分析计算一下参数的数量来估计下复杂度。假设输入x0维度为d，一共有Lc层神经网络，每一层的神经元个数都是m个。那么总的参数或者复杂度为：</p>
 <img src="/2019/07/30/DCN/8.png">
 
-<h2 id="2-4-Combination-layer"><a href="#2-4-Combination-layer" class="headerlink" title="2.4 Combination layer"></a>2.4 Combination layer</h2><p>_Combination Layer_把Cross Network和Deep Network的输出拼接起来，然后经过一个加权求和后得到logits，然后输入到标准的逻辑回归函数得到最终的预测概率。形式化如下：</p>
+<h2 id="2-4-Combination-layer"><a href="#2-4-Combination-layer" class="headerlink" title="2.4 Combination layer"></a>2.4 Combination layer</h2><p>Combination Layer把Cross Network和Deep Network的输出拼接起来，然后经过一个加权求和后得到logits，然后输入到标准的逻辑回归函数得到最终的预测概率。形式化如下：</p>
 <img src="/2019/07/30/DCN/9.png">
 
 <p>p是最终的预测概率；XL1是d维的，表示Cross Network的最终输出；hL2是m维的，表示Deep Network的最终输出；Wlogits是Combination Layer的权重；最后经过sigmoid函数，得到最终预测概率。</p>
-<p>损失函数使用_带正则项的log loss_，形式化如下：</p>
+<p>损失函数使用带正则项的log loss，形式化如下：</p>
 <img src="/2019/07/30/DCN/10.png">
 
 <p>此外，Cross Network和Deep Network，DCN是一起训练Cross Network和Deep Network的，这样网络可以知道另外一个网络的存在。</p>
@@ -513,15 +513,14 @@
 <h1 id="4、总结（具体的对比实验和实现细节等请参阅原论文）"><a href="#4、总结（具体的对比实验和实现细节等请参阅原论文）" class="headerlink" title="4、总结（具体的对比实验和实现细节等请参阅原论文）"></a>4、总结（具体的对比实验和实现细节等请参阅原论文）</h1><br>
 
 <p>DCN模型的特点：</p>
-<p>1. 在cross network中，在每一层都应用feature crossing。高效的学习了_bounded degree_组合特征。不需要人工特征工程。</p>
-<p>2. 网络结构简单且高效。多项式复杂度由_layer depth_决定。</p>
+<p>1. 在cross network中，在每一层都应用feature crossing。高效的学习了bounded degree组合特征。不需要人工特征工程。</p>
+<p>2. 网络结构简单且高效。多项式复杂度由layer depth决定。</p>
 <p>3. 相比于DNN，DCN的logloss更低，而且参数的数量将近少了一个数量级。</p>
 <p>4. 但是经过对cross network的分析如下，最终得到的输出就相当于X0 不断乘以一个数（标量），而且它们的特征交互是发生在元素级（bit-wise）。这种处理方式可能是存在问题的。</p>
 <img src="/2019/07/30/DCN/11.png">
 
 
-<p>（当然，指出这些问题的就是我们下一篇论文XDeepFM啦，我们下篇再见）</p>
-<p>实现DCN的一个Demo，感兴趣的童鞋可以看下我的<a href="https://link.zhihu.com/?target=https%3A//github.com/Jesse-csj/TensorFlow_Practice" target="_blank" rel="noopener">github</a>。</p>
+<p>（当然，指出这些问题的就是我们下一篇论文XDeepFM啦，我们下篇再见）<br><br><br>实现DCN的一个Demo，感兴趣的童鞋可以看下我的<a href="https://link.zhihu.com/?target=https%3A//github.com/Jesse-csj/TensorFlow_Practice" target="_blank" rel="noopener">github</a>。</p>
 
       
     </div>
