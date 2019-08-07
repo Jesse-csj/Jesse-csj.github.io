@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/05/LR/3.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/05/LR/1.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/05/LR/2.png">
-<meta property="og:updated_time" content="2019-08-07T06:55:12.522Z">
+<meta property="og:updated_time" content="2019-08-07T06:56:26.612Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-LR与GBDT+LR模型解析">
 <meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 本系列接下来几天要分享的文章是关于线性模型的，在15年后深度模型在ctr预估领域百花齐放之时，仍觉得传统的LR模型有着基石的作用，于是有了今天的分享。话不多说，今天会介绍的是经典的LR模型及Facebook在2014年提出的GBDT+LR（重点）。当时深度学习几乎还没有应用到到计算广告领域，Facebook提出利用GBDT的叶节点编号作为非线性特征的表示">
@@ -475,8 +475,9 @@
 逻辑回归（logistics regression）作为广义线性模型的一种，它的假设是因变量y服从**伯努利分布**。那么在点击率预估这个问题上，“点击”这个事件是否发生就是模型的因变量y。而用户是否点击广告这个问题是一个经典的掷偏心硬币（二分类）问题，因此CTR模型的因变量显然应该服从伯努利分布。所以采用LR作为CTR模型是符合“点击”这一事件的物理意义的。
 在了解这一基础假设的情况下，再来看LR的数学形式就极具解释性了：
 <img src="/2019/08/05/LR/3.png">
+其中x是输入向量，θ 是我们要学习的参数向量。结合CTR模型的问题来说，x就是输入的特征向量，h(x)就是我们最终希望得到的点击率。
 
-<p>其中x是输入向量，θ 是我们要学习的参数向量。结合CTR模型的问题来说，x就是输入的特征向量，h(x)就是我们最终希望得到的点击率。</p>
+
 <h2 id="2-2、朴素的直觉和可解释性"><a href="#2-2、朴素的直觉和可解释性" class="headerlink" title="2.2、朴素的直觉和可解释性"></a>2.2、朴素的直觉和可解释性</h2><br>
 直观来讲，LR模型目标函数的形式就是各特征的加权和，最后再加以sigmoid函数。忽略其数学基础，仅靠我们的直觉认知也可以一定程度上得出使用LR作为CTR模型的合理性：**使用各特征的加权和是为了综合不同特征对CTR的影响，而由于不同特征的重要程度不一样，所以为不同特征指定不同的权重来代表不同特征的重要程度。最后要加上sigmoid函数，是希望其值能够映射到0-1之间，使其符合CTR的概率意义。**
 
