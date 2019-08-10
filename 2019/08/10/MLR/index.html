@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="推荐系统,">
 
 
 
@@ -87,17 +87,18 @@
 
 
 
-<meta name="description" content="分享与学习，算法与人生">
-<meta name="keywords" content="机器学习">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jesse&#39;s Blog">
-<meta property="og:url" content="https://jesse-csj.github.io/archives/index.html">
+<meta name="description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是2017年斯坦福与Google联合提出的DCN模型，和明天要分享的XDeepFM是配套的，同时这篇论文是Google 对 Wide &amp;amp; Deep工作的一个后续研究。本人写文章的顺序尽量严格按照时间顺序来的~话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。 原文：Deep &amp;amp; Cross Network for">
+<meta name="keywords" content="推荐系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析">
+<meta property="og:url" content="https://jesse-csj.github.io/2019/08/10/MLR/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="分享与学习，算法与人生">
+<meta property="og:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是2017年斯坦福与Google联合提出的DCN模型，和明天要分享的XDeepFM是配套的，同时这篇论文是Google 对 Wide &amp;amp; Deep工作的一个后续研究。本人写文章的顺序尽量严格按照时间顺序来的~话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。 原文：Deep &amp;amp; Cross Network for">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-10T02:13:57.704Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Jesse&#39;s Blog">
-<meta name="twitter:description" content="分享与学习，算法与人生">
+<meta name="twitter:title" content="（读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析">
+<meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是2017年斯坦福与Google联合提出的DCN模型，和明天要分享的XDeepFM是配套的，同时这篇论文是Google 对 Wide &amp;amp; Deep工作的一个后续研究。本人写文章的顺序尽量严格按照时间顺序来的~话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。 原文：Deep &amp;amp; Cross Network for">
 
 
 
@@ -127,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://jesse-csj.github.io/archives/">
+  <link rel="canonical" href="https://jesse-csj.github.io/2019/08/10/MLR/">
 
 
 
 
 
-  <title>归档 | Jesse's Blog</title>
+  <title>（读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析 | Jesse's Blog</title>
   
 
 
@@ -152,7 +153,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
     
     <a href="https://github.com/Jesse-csj"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
@@ -310,387 +311,276 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://jesse-csj.github.io/2019/08/10/MLR/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jesse_jia">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jesse's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">（读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-10T10:11:19+08:00">
+                2019-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 10 篇日志。 继续努力。
-      </span>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ctr/" itemprop="url" rel="index">
+                    <span itemprop="name">ctr</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/10/MLR/" itemprop="url">
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">（读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.2k 
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-10T10:11:19+08:00" content="2019-08-10">
-          08-10
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8 分钟
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/05/LR/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-LR与GBDT+LR模型解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-05T16:18:19+08:00" content="2019-08-05">
-          08-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <p>本人才疏学浅，不足之处欢迎大家指出和交流。</p>
+<p>今天要分享的是2017年斯坦福与Google联合提出的DCN模型，和明天要分享的XDeepFM是配套的，同时这篇论文是Google 对 Wide &amp; Deep工作的一个后续研究。本人写文章的顺序尽量严格按照时间顺序来的~话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。</p>
+<p>原文：Deep &amp; Cross Network for Ad Click Predictions</p>
+<a id="more"></a>
 
-        
-        
+<p>地址：<a href="https://arxiv.org/pdf/1708.05123.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1708.05123.pdf</a></p>
+<h1 id="1、背景及相关工作"><a href="#1、背景及相关工作" class="headerlink" title="1、背景及相关工作"></a>1、背景及相关工作</h1><br>
 
-        
+<p>（每篇文章都重复下这些背景哈，希望大家别看烦，尽量换种方式）：传统的CTR预估模型需要大量的人工特征工程，耗时耗力；引入DNN之后，依靠神经网络强大的学习能力，可以一定程度上实现自动学习特征组合。但是DNN的缺点在于隐式的学习特征组合带来的不可解释性，以及低效率的学习(并不是所有的特征组合都是有用的)。这时交叉网络应运而生，同时联合DNN，发挥两者的共同优势。传统的CTR预估模型需要大量的人工特征工程，耗时耗力；引入DNN之后，依靠神经网络强大的学习能力，可以一定程度上实现自动学习特征组合。但是DNN的缺点在于隐式的学习特征组合带来的不可解释性，以及低效率的学习(并不是所有的特征组合都是有用的)。这时交叉网络应运而生，同时联合DNN，发挥两者的共同优势。</p>
+<p><strong>相关工作：</strong>由于数据集规模和维数的急剧增加，之前已经提出了许多方法：</p>
+<p>最开始FM使用隐向量的内积来建模组合特征；</p>
+<p>FFM在此基础上引入field的概念，针对不同的field使用不同的隐向量。但是，这两者都是针对低阶（二阶，高阶会产生非常大的计算成本）的特征组合进行建模的；  随着DNN在计算机视觉、自然语言处理、语音识别等领域取得重要进展，DNN几乎无限的表达能力被广泛的研究。同样也尝试被用来解决web产品中输入数据高维高稀疏的问题。DNN可以对高维组合特征进行建模，但是DNN的不可解释性让DNN是否是目前最高效的针对此类问题的建模方式成为了一个问题；  另一方面，在Kaggle上的很多比赛中，大部分的获胜方案都是使用的人工特征工程，构造低阶的组合特征，这些特征意义明确且高效。而DNN学习到的特征都是隐式的、高度非线性的高阶组合特征，含义非常难以解释。这揭示了一个模型能够比通用的DNN设计更能够有效地学习的有界度特征的相互作用，那是否能设计一种DNN的特定网络结构来改善DNN，使得其学习起来更加高效呢？</p>
+<p>Wide＆Deep是其中一个探索的例子，它以交叉特征作为一个线性模型的输入，与一个DNN模型一起训练，然而，W&amp;D网络的成功取决于正确的交叉特征的选择（仍依赖人工特征工程），这是一个至今还没有明确有效的方法解决的指数问题。</p>
+<p>于是提出DCN进行进一步探索，将Wide部分替换为由特殊网络结构实现的Cross，<strong>自动构造有限高阶的交叉特征</strong>，并学习对应权重，告别了繁琐的人工叉乘。下面一起来看下细节：</p>
+<h1 id="2、DEEP-amp-CROSS-NETWORK"><a href="#2、DEEP-amp-CROSS-NETWORK" class="headerlink" title="2、DEEP &amp; CROSS NETWORK"></a>2、DEEP &amp; CROSS NETWORK</h1> 
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p>DCN整体模型的架构图如上：底层是Embedding and stacking layer，然后是并行的Cross Network和Deep Network，最后是Combination Layer把Cross NetworkDeep Network的结果stack得到Output。</p>
+<h2 id="2-1-Embedding-and-stacking-layer"><a href="#2-1-Embedding-and-stacking-layer" class="headerlink" title="2.1 Embedding and stacking layer"></a>2.1 Embedding and stacking layer</h2><p>DCN底层的两个功能是Embed和Stack。</p>
+<p><strong>Embed</strong>：<br>在web-scale的推荐系统比如CTR预估中，输入的大部分特征都是类别型特征，通常的处理办</p>
+<p>法就是编码为one-hot向量，对于实际应用中维度会非常高且稀疏，因此使用：</p>
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/08/01/XDeepFM/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-XDeepFM模型解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-08-01T16:18:19+08:00" content="2019-08-01">
-          08-01
-        </time>
-      </div>
-
-    </header>
-  </article>
+<p>来将这些离散特征转换成实数值的稠密向量。</p>
+<p><strong>Stack</strong>：<br>处理完了类别型特征，还有连续型特征需要处理。所以我们把连续型特征规范化之后，和嵌入向量stacking（堆叠）到一起形成一个向量，就得到了原始的输入：</p>
 
 
+
+
+<h2 id="2-2-Cross-network"><a href="#2-2-Cross-network" class="headerlink" title="2.2 Cross network"></a>2.2 Cross network</h2><p>Cross Network是这个模型的核心，它被设计来<strong>高效地应用</strong>显式的交叉特征，关键在于如何高效地进行<strong>feature crossing</strong>。对于每层的计算，使用下述公式：</p>
+
+
+<p>其中xl和xl+1 分别是第l层和第l+1层cross layer的输出（的列向量），wl和bl是这两层之间的连接参数。注意上式中所有的变量均是<strong>列向量</strong>，W也是列向量，并不是矩阵。</p>
+<p><strong>理解</strong>：<br>这其实应用了残差网络的思想，<strong>xl+1 = f(xl, wl, bl) + xl：</strong>每一层的输出，都是上一层的输出加上<strong>feature crossing</strong> <strong>f</strong>。而<strong>f</strong>就是在<strong>拟合该层输出和上一层输出的残差（</strong>xl+1​−xl​<strong>）。残差网络有很多优点，其中一点是处理梯度退化/消失的问题，使神经网络可以“更深”.</strong>一层交叉层的可视化如下图所示：</p>
+
+
+<p><strong>High-degree Interaction Across Features:</strong><br>Cross Network特殊的网络结构使得cross feature的阶数随着layer depth的增加而增加。相对于输入x0来说，一个l层的cross network的cross feature的阶数为l+1。</p>
+<p><strong>复杂度分析：</strong><br>假设一共有Lc层cross layer，起始输入x0的维度为d。那么整个cross network的参数个数为:</p>
+
+<p>因为每一层的W和b都是d维的。从上式可以发现，复杂度是输入维度d的线性函数，所以相比于deep network，cross network引入的复杂度微不足道。这样就保证了DCN的复杂度和DNN是一个级别的。论文中分析Cross Network的这种效率是因为x0 * xT的秩为1，使得我们不用计算并存储整个的矩阵就可以得到所有的cross terms。<br>但是，正是因为cross network的参数比较少导致它的表达能力受限，为了能够学习高阶非线性的组合特征，DCN并行的引入了Deep Network。</p>
+<h2 id="2-3-Deep-network"><a href="#2-3-Deep-network" class="headerlink" title="2.3 Deep network"></a>2.3 Deep network</h2><p>深度网络就是一个全连接的前馈神经网络，每个深度层具有如下公式:</p>
+
+<p>分析计算一下参数的数量来估计下复杂度。假设输入x0维度为d，一共有Lc层神经网络，每一层的神经元个数都是m个。那么总的参数或者复杂度为：</p>
+
+
+<h2 id="2-4-Combination-layer"><a href="#2-4-Combination-layer" class="headerlink" title="2.4 Combination layer"></a>2.4 Combination layer</h2><p>Combination Layer把Cross Network和Deep Network的输出拼接起来，然后经过一个加权求和后得到logits，然后输入到标准的逻辑回归函数得到最终的预测概率。形式化如下：</p>
+
+
+<p>p是最终的预测概率；XL1是d维的，表示Cross Network的最终输出；hL2是m维的，表示Deep Network的最终输出；Wlogits是Combination Layer的权重；最后经过sigmoid函数，得到最终预测概率。</p>
+<p>损失函数使用带正则项的log loss，形式化如下：</p>
+
+
+<p>此外，Cross Network和Deep Network，DCN是一起训练Cross Network和Deep Network的，这样网络可以知道另外一个网络的存在。</p>
+<h1 id="3、CROSS-NETWORK-ANALYSIS"><a href="#3、CROSS-NETWORK-ANALYSIS" class="headerlink" title="3、CROSS NETWORK ANALYSIS"></a>3、CROSS NETWORK ANALYSIS</h1><p>本节是为了解释DCN的高效性,从三个角度：</p>
+<p><strong>1、polynomial approximation；2、generalization to FMs；3、efficientprojection。</strong><br>（具体的分析请大家参阅原论文：这部分是非常重要的一部分，是论文中解释DCN为何高效的理论部分，然而本人还没有完全看懂，等之后再仔细看下再更新-  。-）</p>
+<h1 id="4、总结（具体的对比实验和实现细节等请参阅原论文）"><a href="#4、总结（具体的对比实验和实现细节等请参阅原论文）" class="headerlink" title="4、总结（具体的对比实验和实现细节等请参阅原论文）"></a>4、总结（具体的对比实验和实现细节等请参阅原论文）</h1><br>
+
+<p>DCN模型的特点：</p>
+<p>1. 在cross network中，在每一层都应用feature crossing。高效的学习了bounded degree组合特征。不需要人工特征工程。</p>
+<p>2. 网络结构简单且高效。多项式复杂度由layer depth决定。</p>
+<p>3. 相比于DNN，DCN的logloss更低，而且参数的数量将近少了一个数量级。</p>
+<p>4. 但是经过对cross network的分析如下，最终得到的输出就相当于X0 不断乘以一个数（标量），而且它们的特征交互是发生在元素级（bit-wise）。这种处理方式可能是存在问题的。</p>
+
+
+
+<p>（当然，指出这些问题的就是我们下一篇论文XDeepFM啦，我们下篇再见）<br><br><br>实现DCN的一个Demo，感兴趣的童鞋可以看下我的<a href="https://link.zhihu.com/?target=https%3A//github.com/Jesse-csj/TensorFlow_Practice" target="_blank" rel="noopener">github</a>。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/30/DCN/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-DCN模型解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-30T19:19:37+08:00" content="2019-07-30">
-          07-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/29/NFM/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-NFM模型解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-29T20:18:19+08:00" content="2019-07-29">
-          07-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/24/DeepFM/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-DeepFM模型解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-24T22:30:28+08:00" content="2019-07-24">
-          07-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/24/Wide-Deep/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-Wide＆Deep模型解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-24T07:33:22+08:00" content="2019-07-24">
-          07-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/22/PNN/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-PNN模型解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-22T16:01:40+08:00" content="2019-07-22">
-          07-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/21/FNN/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-FNN模型解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-21T16:01:40+08:00" content="2019-07-21">
-          07-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/20/（读论文）计算广告之CTR预估-FM算法解析/" itemprop="url">
-              
-                <span itemprop="name">（读论文）推荐系统之ctr预估-FM算法解析</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-20T16:01:40+08:00" content="2019-07-20">
-          07-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #555;font-size:14px;">-------------本文结束-------------</div>
+    
+</div>
+
+
+
+  
+      </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/推荐系统/" rel="tag"># 推荐系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/05/LR/" rel="next" title="（读论文）推荐系统之ctr预估-LR与GBDT+LR模型解析">
+                <i class="fa fa-chevron-left"></i> （读论文）推荐系统之ctr预估-LR与GBDT+LR模型解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -698,6 +588,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -718,8 +612,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -820,6 +723,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、背景及相关工作"><span class="nav-text">1、背景及相关工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、DEEP-amp-CROSS-NETWORK"><span class="nav-text">2、DEEP &amp; CROSS NETWORK</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Embedding-and-stacking-layer"><span class="nav-text">2.1 Embedding and stacking layer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Cross-network"><span class="nav-text">2.2 Cross network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Deep-network"><span class="nav-text">2.3 Deep network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-Combination-layer"><span class="nav-text">2.4 Combination layer</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、CROSS-NETWORK-ANALYSIS"><span class="nav-text">3、CROSS NETWORK ANALYSIS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、总结（具体的对比实验和实现细节等请参阅原论文）"><span class="nav-text">4、总结（具体的对比实验和实现细节等请参阅原论文）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -991,6 +910,10 @@ setInterval("createtime()",250);
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
