@@ -109,7 +109,7 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/10.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/11.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/12.jpg">
-<meta property="og:updated_time" content="2019-08-27T02:14:06.365Z">
+<meta property="og:updated_time" content="2019-08-27T02:17:49.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析">
 <meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 文有配图… 迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域">
@@ -468,10 +468,14 @@
 <p>CTR预估(click-through-rate prediction)是广告行业比较常见的问题，根据用户的历史行为来判断用户对广告点击的可能性。在常见工业场景中，该问题的输入往往是数以万计的稀疏特征向量，在进行特征交叉后会维数会更高，比较常见的就是采用逻辑回归模型加一些正则化，因为逻辑回归模型计算开销小且容易实现并行。之前提到的facebook的一篇论文<a href="https://zhuanlan.zhihu.com/p/76794626" target="_blank" rel="noopener">（LR+GBDT）</a>中先用树模型做分类之后再加一个逻辑回归模型，最后得出效果出奇的好，应该也是工业界比较常用的方法，同时树模型的选择或者说是再构造特征的特性也逐渐被大家所关注。另一种比较有效的就是因子分解模型系列，包括FM及其的其他变种，它们的主要思想就是构造交叉特征或者是二阶的特征来一起进行训练。</p>
 <p>这篇文章中，作者主要提出了一种piece-wise的线性模型，并且给出了其在大规模数据上的训练算法，称之为LS-PLM(Large Scale Piecewise Linear Model)，LS-PLM采用了分治的思想，先分成几个局部再用线性模型拟合，这两部都采用监督学习的方式，来优化总体的预测误差，总的来说有以下优势：</p>
 <ul>
-<li><strong>端到端的非线性学习</strong>： 从模型端自动挖掘数据中蕴藏的非线性模式，省去了大量的人工特征设计，这 使得MLR算法可以端到端地完成训练，在不同场景中的迁移和应用非常轻松。通过分区来达到拟合非线性函数的效果；</li>
-<li><strong>可伸缩性（scalability）</strong>：与逻辑回归模型相似，都可以很好的处理复杂的样本与高维的特征，并且做到了分布式并行；</li>
-<li><strong>稀疏性</strong>: 对于在线学习系统，模型的稀疏性较为重要，所以采用了L_{1}和L_{2，1}正则化，模型的学习和在线预测性能更好。当然，目标函数非凸非光滑为算法优带来了新的挑战。</li>
+<li><p><strong>端到端的非线性学习</strong>： 从模型端自动挖掘数据中蕴藏的非线性模式，省去了大量的人工特征设计，这 使得MLR算法可以端到端地完成训练，在不同场景中的迁移和应用非常轻松。通过分区来达到拟合非线性函数的效果；</p>
+</li>
+<li><p><strong>可伸缩性（scalability）</strong>：与逻辑回归模型相似，都可以很好的处理复杂的样本与高维的特征，并且做到了分布式并行；</p>
+</li>
+<li><p><strong>稀疏性</strong>: 对于在线学习系统，模型的稀疏性较为重要，所以采用了$L_{1}和L_{2，1}$正则化，模型的学习和在线预测性能更好。当然，目标函数非凸非光滑为算法优带来了新的挑战。</p>
+</li>
 </ul>
+<p>实时</p>
 <h1 id="2、MLR总览"><a href="#2、MLR总览" class="headerlink" title="2、MLR总览"></a>2、MLR总览</h1><p><br></p>
 <p>MLR就像它的名字一样，由很多个LR模型组合而成。用分片线性模式来拟合高维空间的非线性模式，形式化表述如下：</p>
 <img src="/2019/08/12/MLR/1.png"> 
