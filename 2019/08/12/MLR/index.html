@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/10.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/11.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/12.jpg">
-<meta property="og:updated_time" content="2019-08-27T03:31:31.363Z">
+<meta property="og:updated_time" content="2019-08-27T06:44:11.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析">
 <meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 文有配图… 迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域">
@@ -532,7 +532,7 @@
 <p>下面是实验结果：</p>
 <img src="/2019/08/12/MLR/12.jpg"> 
 <p>可以看到Common Feature Trick效果还是非常明显的。</p>
-<h1 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h1><p><br></p>
+<h1 id="5、总结"><a href="#5、总结" class="headerlink" title="5、总结"></a>5、总结</h1><p><br></p>
 <p>文末说LS-PLM在2012年就应用于阿里巴巴的ctr预估，到2017年才发表论文。不出意料，现在的模型应该已经不再是MLR这么简单了。另外，从MLR和LR进行级联，以便加强强特征来看，MLR还是有很大的局限性。个人感觉模型理论上来说确实非常棒，利用分片线性来模型高维非线性，但是虽然取得了非常不错的成绩，但是带来的挑战也不小：比如初值问题、非凸问题的局部极值、虽然MLR比LR好，但不知道和全局最优相比还有多远；第二，在初值的Pre-train方面需要改进和优化模型函数等等；第三，目前规模化能力方面也需要能够吞吐更多特征和数据，比如采用更快的收敛算法等等；最后，整体的MLR算法的抽象能力也需进一步得到强化。</p>
 <p><br><br><br><br>实现MLR的一个Demo，感兴趣的童鞋可以看下我的<a href="https://link.zhihu.com/?target=https%253A//github.com/Jesse-csj/TensorFlow_Practice" target="_blank" rel="noopener">[github]</a><br><br></p>
 
@@ -759,7 +759,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、背景"><span class="nav-text">1、背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、MLR总览"><span class="nav-text">2、MLR总览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、模型细节"><span class="nav-text">3、模型细节</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-结构化先验"><span class="nav-text">3.1 结构化先验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-线性偏置"><span class="nav-text">3.2 线性偏置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-模型级联"><span class="nav-text">3.3 模型级联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-增量训练"><span class="nav-text">3.4 增量训练</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、一些trick"><span class="nav-text">4、一些trick</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-并行化"><span class="nav-text">4.1 并行化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Common-Feature-Trick"><span class="nav-text">4.2 Common Feature Trick</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、总结"><span class="nav-text">五、总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、背景"><span class="nav-text">1、背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、MLR总览"><span class="nav-text">2、MLR总览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、模型细节"><span class="nav-text">3、模型细节</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-结构化先验"><span class="nav-text">3.1 结构化先验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-线性偏置"><span class="nav-text">3.2 线性偏置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-模型级联"><span class="nav-text">3.3 模型级联</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-增量训练"><span class="nav-text">3.4 增量训练</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、一些trick"><span class="nav-text">4、一些trick</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-并行化"><span class="nav-text">4.1 并行化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-Common-Feature-Trick"><span class="nav-text">4.2 Common Feature Trick</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、总结"><span class="nav-text">5、总结</span></a></li></ol></div>
             
 
           </div>
