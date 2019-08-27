@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是2017年斯坦福与Google联合提出的DCN模型，和明天要分享的XDeepFM是配套的，同时这篇论文是Google 对 Wide &amp;amp; Deep工作的一个后续研究。本人写文章的顺序尽量严格按照时间顺序来的~话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。 原文：Deep &amp;amp; Cross Network for">
+<meta name="description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是2017年斯坦福与Google联合提出的DCN模型，和明天要分享的XDeepFM是配套的，同时这篇论文是Google 对 Wide &amp;amp; Deep工作的一个后续研究。本人写文章的顺序尽量严格按照时间顺序来的~话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。 原文：《Deep &amp;amp; Cross Network fo">
 <meta name="keywords" content="推荐系统,DNN,Cross network">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（读论文）推荐系统之ctr预估-DCN模型解析">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/30/DCN/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是2017年斯坦福与Google联合提出的DCN模型，和明天要分享的XDeepFM是配套的，同时这篇论文是Google 对 Wide &amp;amp; Deep工作的一个后续研究。本人写文章的顺序尽量严格按照时间顺序来的~话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。 原文：Deep &amp;amp; Cross Network for">
+<meta property="og:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是2017年斯坦福与Google联合提出的DCN模型，和明天要分享的XDeepFM是配套的，同时这篇论文是Google 对 Wide &amp;amp; Deep工作的一个后续研究。本人写文章的顺序尽量严格按照时间顺序来的~话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。 原文：《Deep &amp;amp; Cross Network fo">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/30/DCN/1.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/30/DCN/2.png">
@@ -106,10 +106,10 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/30/DCN/9.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/30/DCN/10.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/30/DCN/11.png">
-<meta property="og:updated_time" content="2019-08-27T07:58:01.648Z">
+<meta property="og:updated_time" content="2019-08-27T09:03:47.586Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-DCN模型解析">
-<meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是2017年斯坦福与Google联合提出的DCN模型，和明天要分享的XDeepFM是配套的，同时这篇论文是Google 对 Wide &amp;amp; Deep工作的一个后续研究。本人写文章的顺序尽量严格按照时间顺序来的~话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。 原文：Deep &amp;amp; Cross Network for">
+<meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是2017年斯坦福与Google联合提出的DCN模型，和明天要分享的XDeepFM是配套的，同时这篇论文是Google 对 Wide &amp;amp; Deep工作的一个后续研究。本人写文章的顺序尽量严格按照时间顺序来的~话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。 原文：《Deep &amp;amp; Cross Network fo">
 <meta name="twitter:image" content="https://jesse-csj.github.io/2019/07/30/DCN/1.png">
 
 
@@ -460,7 +460,7 @@
       
         <p>本人才疏学浅，不足之处欢迎大家指出和交流。</p>
 <p>今天要分享的是2017年斯坦福与Google联合提出的DCN模型，和明天要分享的XDeepFM是配套的，同时这篇论文是Google 对 Wide &amp; Deep工作的一个后续研究。本人写文章的顺序尽量严格按照时间顺序来的~话不多说，来看看今天分享的深度模型（串行结构）有哪些创新之处吧。</p>
-<p>原文：Deep &amp; Cross Network for Ad Click Predictions<br><a id="more"></a></p>
+<p>原文：《Deep &amp; Cross Network for Ad Click Predictions》<br><a id="more"></a></p>
 <p>地址：<a href="https://arxiv.org/pdf/1708.05123.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1708.05123.pdf</a></p>
 <h1 id="1、背景及相关工作"><a href="#1、背景及相关工作" class="headerlink" title="1、背景及相关工作"></a>1、背景及相关工作</h1><p><br></p>
 <p>（每篇文章都重复下这些背景哈，希望大家别看烦，尽量换种方式）：传统的CTR预估模型需要大量的人工特征工程，耗时耗力；引入DNN之后，依靠神经网络强大的学习能力，可以一定程度上实现自动学习特征组合。但是DNN的缺点在于隐式的学习特征组合带来的不可解释性，以及低效率的学习(并不是所有的特征组合都是有用的)。这时交叉网络应运而生，同时联合DNN，发挥两者的共同优势。传统的CTR预估模型需要大量的人工特征工程，耗时耗力；引入DNN之后，依靠神经网络强大的学习能力，可以一定程度上实现自动学习特征组合。但是DNN的缺点在于隐式的学习特征组合带来的不可解释性，以及低效率的学习(并不是所有的特征组合都是有用的)。这时交叉网络应运而生，同时联合DNN，发挥两者的共同优势。</p>

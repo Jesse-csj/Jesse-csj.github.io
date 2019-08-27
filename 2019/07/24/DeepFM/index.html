@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="今天第二篇（最近更新的都是Deep模型，传统的线性模型会后面找个时间更新的哈）。本篇介绍华为的DeepFM模型 (2017年)，此模型在 Wide&amp;amp;Deep 的基础上进行改进，成功解决了一些问题，具体的话下面一起来看下吧。 原文：Deepfm: a factorization-machine based neural network for ctr prediction">
+<meta name="description" content="今天第二篇（最近更新的都是Deep模型，传统的线性模型会后面找个时间更新的哈）。本篇介绍华为的DeepFM模型 (2017年)，此模型在 Wide&amp;amp;Deep 的基础上进行改进，成功解决了一些问题，具体的话下面一起来看下吧。 原文：《Deepfm: a factorization-machine based neural network for ctr prediction》">
 <meta name="keywords" content="推荐系统,DNN,FM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（读论文）推荐系统之ctr预估-DeepFM模型解析">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/24/DeepFM/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="今天第二篇（最近更新的都是Deep模型，传统的线性模型会后面找个时间更新的哈）。本篇介绍华为的DeepFM模型 (2017年)，此模型在 Wide&amp;amp;Deep 的基础上进行改进，成功解决了一些问题，具体的话下面一起来看下吧。 原文：Deepfm: a factorization-machine based neural network for ctr prediction">
+<meta property="og:description" content="今天第二篇（最近更新的都是Deep模型，传统的线性模型会后面找个时间更新的哈）。本篇介绍华为的DeepFM模型 (2017年)，此模型在 Wide&amp;amp;Deep 的基础上进行改进，成功解决了一些问题，具体的话下面一起来看下吧。 原文：《Deepfm: a factorization-machine based neural network for ctr prediction》">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/DeepFM/1.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/DeepFM/2.png">
@@ -102,10 +102,10 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/DeepFM/5.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/DeepFM/6.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/DeepFM/7.png">
-<meta property="og:updated_time" content="2019-08-27T07:56:10.693Z">
+<meta property="og:updated_time" content="2019-08-27T09:00:49.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-DeepFM模型解析">
-<meta name="twitter:description" content="今天第二篇（最近更新的都是Deep模型，传统的线性模型会后面找个时间更新的哈）。本篇介绍华为的DeepFM模型 (2017年)，此模型在 Wide&amp;amp;Deep 的基础上进行改进，成功解决了一些问题，具体的话下面一起来看下吧。 原文：Deepfm: a factorization-machine based neural network for ctr prediction">
+<meta name="twitter:description" content="今天第二篇（最近更新的都是Deep模型，传统的线性模型会后面找个时间更新的哈）。本篇介绍华为的DeepFM模型 (2017年)，此模型在 Wide&amp;amp;Deep 的基础上进行改进，成功解决了一些问题，具体的话下面一起来看下吧。 原文：《Deepfm: a factorization-machine based neural network for ctr prediction》">
 <meta name="twitter:image" content="https://jesse-csj.github.io/2019/07/24/DeepFM/1.png">
 
 
@@ -455,7 +455,7 @@
 
       
         <p>今天第二篇（最近更新的都是Deep模型，传统的线性模型会后面找个时间更新的哈）。本篇介绍华为的DeepFM模型 (2017年)，此模型在 Wide&amp;Deep 的基础上进行改进，成功解决了一些问题，具体的话下面一起来看下吧。</p>
-<p>原文：Deepfm: a factorization-machine based neural network for ctr prediction<br><a id="more"></a></p>
+<p>原文：《Deepfm: a factorization-machine based neural network for ctr prediction》<br><a id="more"></a></p>
 <p>地址：<a href="http://www.ijcai.org/proceedings/2017/0239.pdf" target="_blank" rel="noopener">http://www.ijcai.org/proceedings/2017/0239.pdf</a></p>
 <h1 id="1、问题由来"><a href="#1、问题由来" class="headerlink" title="1、问题由来"></a>1、问题由来</h1><h2 id="1-1、背景"><a href="#1-1、背景" class="headerlink" title="1.1、背景"></a>1.1、背景</h2><p>CTR 预估 数据特点：</p>
 <ol>

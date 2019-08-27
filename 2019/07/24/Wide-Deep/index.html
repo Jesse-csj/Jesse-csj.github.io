@@ -87,21 +87,21 @@
 
 
 
-<meta name="description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：Wide &amp;amp; Deep Learning for Recommender Systems">
+<meta name="description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：《Wide &amp;amp; Deep Learning for Recommender Systems》">
 <meta name="keywords" content="推荐系统,DNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（读论文）推荐系统之ctr预估-Wide＆Deep模型解析">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/24/Wide-Deep/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：Wide &amp;amp; Deep Learning for Recommender Systems">
+<meta property="og:description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：《Wide &amp;amp; Deep Learning for Recommender Systems》">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/Wide-Deep/1.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/Wide-Deep/2.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/24/Wide-Deep/3.png">
-<meta property="og:updated_time" content="2019-08-27T07:53:33.835Z">
+<meta property="og:updated_time" content="2019-08-27T09:01:17.240Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-Wide＆Deep模型解析">
-<meta name="twitter:description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：Wide &amp;amp; Deep Learning for Recommender Systems">
+<meta name="twitter:description" content="在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。原文：《Wide &amp;amp; Deep Learning for Recommender Systems》">
 <meta name="twitter:image" content="https://jesse-csj.github.io/2019/07/24/Wide-Deep/1.png">
 
 
@@ -450,7 +450,7 @@
       
 
       
-        <p>在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。<br>原文：Wide &amp; Deep Learning for Recommender Systems<br><a id="more"></a></p>
+        <p>在读了FM和FNN/PNN的论文后，来学习一下16年的一篇Google的论文，文章将传统的LR和DNN组合构成一个wide&amp;deep模型（并行结构），既保留了LR的拟合能力，又具有DNN的泛化能力，并且不需要单独训练模型，可以方便模型的迭代，一起来看下吧。<br>原文：《Wide &amp; Deep Learning for Recommender Systems》<br><a id="more"></a></p>
 <p>地址： <a href="https://arxiv.org/pdf/1606.07792.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1606.07792.pdf</a></p>
 <h1 id="1、问题由来"><a href="#1、问题由来" class="headerlink" title="1、问题由来"></a><strong>1、问题由来</strong></h1><h2 id="1-1、背景"><a href="#1-1、背景" class="headerlink" title="1.1、背景"></a><strong>1.1、背景</strong></h2><p>本文提出时是针对推荐系统中应用的，当然也可以应用在ctr预估中。<br>首先介绍论文中通篇出现的两个名词：</p>
 <ul>

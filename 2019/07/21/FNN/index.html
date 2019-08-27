@@ -87,22 +87,22 @@
 
 
 
-<meta name="description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data">
+<meta name="description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：《Deep learning over multi-field categorical data》">
 <meta name="keywords" content="推荐系统,DNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（读论文）推荐系统之ctr预估-FNN模型解析">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/21/FNN/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data">
+<meta property="og:description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：《Deep learning over multi-field categorical data》">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/FNN/1.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/FNN/4.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/FNN/2.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/21/FNN/3.png">
-<meta property="og:updated_time" content="2019-08-27T07:54:20.758Z">
+<meta property="og:updated_time" content="2019-08-27T09:01:00.740Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-FNN模型解析">
-<meta name="twitter:description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：Deep learning over multi-field categorical data">
+<meta name="twitter:description" content="今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。 原论文：《Deep learning over multi-field categorical data》">
 <meta name="twitter:image" content="https://jesse-csj.github.io/2019/07/21/FNN/1.png">
 
 
@@ -452,7 +452,7 @@
 
       
         <h1 id><a href="#" class="headerlink" title=" "></a> </h1><p>今天要介绍的论文也是之前看到的一篇经典的推荐相关的论文（FNN），最近要快点更新啊，要赶上最新看的进度。</p>
-<p>原论文：Deep learning over multi-field categorical data</p>
+<p>原论文：《Deep learning over multi-field categorical data》</p>
 <a id="more"></a>
 <p>地址：<a href="https://arxiv.org/pdf/1601.02376.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1601.02376.pdf</a></p>
 <h1 id="1、问题由来"><a href="#1、问题由来" class="headerlink" title="1、问题由来"></a><strong>1、问题由来</strong></h1><p>基于传统机器学习模型（如LR、FM等）的CTR预测方案又被称为基于浅层模型的方案，其优点是模型简单，预测性能较好，可解释性强；缺点主要在于很难自动提取高阶组合特征携带的信息，目前一般通过特征工程来手动的提取高阶组合特征。而随着深度学习在计算机视觉、语音识别、自然语言处理等领域取得巨大成功，其在探索特征间高阶隐含信息的能力也被应用到了CTR预测中。较早有影响力的基于深度学习模型的CTR预测方案是在2016年提出的基于因子分解机的神经网络(Factorization Machine supported Neural Network, FNN)模型，就是我们今天要分享的内容，一起来看下。</p>
