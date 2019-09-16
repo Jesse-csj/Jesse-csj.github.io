@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/10.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/11.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/12.jpg">
-<meta property="og:updated_time" content="2019-08-27T07:57:29.227Z">
+<meta property="og:updated_time" content="2019-09-16T02:39:26.492Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析">
 <meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 文有配图… 迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域">
@@ -461,7 +461,7 @@
       
         <p>本人才疏学浅，不足之处欢迎大家指出和交流。</p>
 <p>文有配图… 迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域CTR预估算法的全新升级。总的来说，MLR算法创新地提出并实现了直接在原始空间学习特征之间的非线性关系，基于数据自动发掘可推广的模式，相比于人工来说效率和精度均有了大幅提升。下面我们一起来学习下吧。</p>
-<p>原文：《Learning Piece-wise Linear Models from Large Scale Data for Ad Click Prediction》</p>
+<p>原文：《Learning Piece-wise Linear Models from Large Scale Data for Ad Click Prediction》<br><a id="more"></a></p>
 <p>地址：<a href="https://arxiv.org/abs/1704.05194" target="_blank" rel="noopener">https://arxiv.org/abs/1704.05194</a></p>
 <h1 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h1><p><br></p>
 <p>CTR预估(click-through-rate prediction)是广告行业比较常见的问题，根据用户的历史行为来判断用户对广告点击的可能性。在常见工业场景中，该问题的输入往往是数以万计的稀疏特征向量，在进行特征交叉后会维数会更高，比较常见的就是采用逻辑回归模型加一些正则化，因为逻辑回归模型计算开销小且容易实现并行。之前提到的facebook的一篇论文<a href="https://zhuanlan.zhihu.com/p/76794626" target="_blank" rel="noopener">（LR+GBDT）</a>中先用树模型做分类之后再加一个逻辑回归模型，最后得出效果出奇的好，应该也是工业界比较常用的方法，同时树模型的选择或者说是再构造特征的特性也逐渐被大家所关注。另一种比较有效的就是因子分解模型系列，包括FM及其的其他变种，它们的主要思想就是构造交叉特征或者是二阶的特征来一起进行训练。</p>
@@ -593,6 +593,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/09/12/DIN/" rel="prev" title="（读论文）推荐系统之ctr预估-Wide＆Deep模型解析">
+                （读论文）推荐系统之ctr预估-Wide＆Deep模型解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -670,7 +674,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -852,7 +856,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">18.7k</span> 字
+      博客全站共： <span class="post-count">20.7k</span> 字
     </span>
 </div>
 <!-- 新增访客统计代码 END-->
