@@ -87,42 +87,31 @@
 
 
 
-<meta name="description" content="许久未更… 今天分享的是微博＆腾讯关于CTR预估的一篇文章：GateNet:Gating-Enhanced Deep Network for Click-Through Rate Prediction，要点：在点击率预测中，当前的深度学习模型中基本都包括embedding layer和MLP hidden layers。另一方面，门控机制（gating mechanism）也广泛应用于许多研究领域">
+<meta name="description" content="由于秋招原因许久未更，现开始逐步看今天最近的论文。 今天分享的是微博＆腾讯关于CTR预估的一篇文章：GateNet:Gating-Enhanced Deep Network for Click-Through Rate Prediction.要点：在点击率预测中，当前的深度学习模型中基本都包括embedding layer和MLP hidden layers。另一方面，门控机制（gating me">
 <meta name="keywords" content="推荐系统,DNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（读论文）推荐系统之ctr预估-GateNet模型解析">
 <meta property="og:url" content="https://jesse-csj.github.io/2020/10/19/GateNet/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="许久未更… 今天分享的是微博＆腾讯关于CTR预估的一篇文章：GateNet:Gating-Enhanced Deep Network for Click-Through Rate Prediction，要点：在点击率预测中，当前的深度学习模型中基本都包括embedding layer和MLP hidden layers。另一方面，门控机制（gating mechanism）也广泛应用于许多研究领域">
+<meta property="og:description" content="由于秋招原因许久未更，现开始逐步看今天最近的论文。 今天分享的是微博＆腾讯关于CTR预估的一篇文章：GateNet:Gating-Enhanced Deep Network for Click-Through Rate Prediction.要点：在点击率预测中，当前的深度学习模型中基本都包括embedding layer和MLP hidden layers。另一方面，门控机制（gating me">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://pic3.zhimg.com/80/v2-37d58de7637338d39fea80aae24f2726_720w.jpg">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=e_%7Bi%7D">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=g_%7Bi%7D">
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-6abb7cc1ae5276a09efbde60822facec_720w.jpg">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=e_%7Bi%7D">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=g_%7Bi%7D">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=ge_%7Bi%7D">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-d9fba15a1f272a61da00759a4a34cfef_720w.jpg">
 <meta property="og:image" content="https://pic3.zhimg.com/80/v2-9218f6574ad679c6292a9e44cda2ec92_720w.png">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=g_%7Bi%7D">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=e_%7Bi%7D">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=g_%7Bi%7D">
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-241be08455d687142b00dd3afd57d968_720w.jpg">
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-8449ba534a4179b1d328737944b493d0_720w.jpg">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=a%5E%7B%28l%29%7D">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=l">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-0882a51f179c0268da020084841f6e03_720w.png">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=a%5E%7B%28l%29%7D">
 <meta property="og:image" content="https://pic3.zhimg.com/80/v2-f01171a7ecd0e264bf29eb3b51237836_720w.jpg">
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-d426ab3372713cfe6b63264307837ea0_720w.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-9729c4da3a49216d8581badaa068a57b_720w.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-32f0659ac628793c137b01fc74259dd9_720w.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-9de1ad9f8e76c820ac3c666629e8ffed_720w.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-fefe8cadc97074830c11178867bc7ef5_720w.jpg">
-<meta property="og:updated_time" content="2020-10-19T02:46:29.827Z">
+<meta property="og:updated_time" content="2020-10-19T03:12:46.524Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-GateNet模型解析">
-<meta name="twitter:description" content="许久未更… 今天分享的是微博＆腾讯关于CTR预估的一篇文章：GateNet:Gating-Enhanced Deep Network for Click-Through Rate Prediction，要点：在点击率预测中，当前的深度学习模型中基本都包括embedding layer和MLP hidden layers。另一方面，门控机制（gating mechanism）也广泛应用于许多研究领域">
+<meta name="twitter:description" content="由于秋招原因许久未更，现开始逐步看今天最近的论文。 今天分享的是微博＆腾讯关于CTR预估的一篇文章：GateNet:Gating-Enhanced Deep Network for Click-Through Rate Prediction.要点：在点击率预测中，当前的深度学习模型中基本都包括embedding layer和MLP hidden layers。另一方面，门控机制（gating me">
 <meta name="twitter:image" content="https://pic3.zhimg.com/80/v2-37d58de7637338d39fea80aae24f2726_720w.jpg">
 
 
@@ -450,7 +439,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -471,7 +460,7 @@
       
 
       
-        <p>许久未更… 今天分享的是微博＆腾讯关于CTR预估的一篇文章：GateNet:Gating-Enhanced Deep Network for Click-Through Rate Prediction，<strong>要点</strong>：在点击率预测中，当前的深度学习模型中基本都包括embedding layer和MLP hidden layers。另一方面，<strong>门控机制（gating mechanism）</strong>也广泛应用于许多研究领域，如计算机视觉和自然语言处理。目前已有一些研究证明了门控机制提高了非凸深度神经网络的可训练性，于是本文将门控机制与深度CTR模型相结合，并通过实验证明融合模型的性能取得了较大的提升。下面一起来看下细节。</p>
+        <p>由于秋招原因许久未更，现开始逐步看今天最近的论文。 今天分享的是微博＆腾讯关于<strong>CTR预估</strong>的一篇文章：GateNet:Gating-Enhanced Deep Network for Click-Through Rate Prediction.<br><strong>要点</strong>：在点击率预测中，当前的深度学习模型中基本都包括embedding layer和MLP hidden layers。另一方面，<strong>门控机制（gating mechanism）</strong>也广泛应用于许多研究领域，如计算机视觉和自然语言处理。目前已有一些研究证明了门控机制提高了非凸深度神经网络的可训练性，于是本文将门控机制与深度CTR模型相结合，并通过实验证明融合模型的性能取得了较大的提升。下面一起来看下细节。</p>
 <p>原文：《<a href="https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/2007.03519.pdf" target="_blank" rel="noopener">GateNet:Gating-Enhanced Deep Network for Click-Through Rate Prediction</a>》</p>
 <a id="more"></a>
 <h1 id="一、引入"><a href="#一、引入" class="headerlink" title="一、引入"></a>一、引入</h1><p>首先是常见的CTR和深度CTR模型，如FM,DeepFM,Wide＆Deep,DCN,xDeepFM等，之前都已经介绍过，还不了解的同学可以查看之前的文章，这里就不详细介绍了。接下来简单介绍下门机制。</p>
@@ -480,21 +469,21 @@
 <p>由于目前推荐系统中常用的深度学习模型基本都包括embedding layer和MLP hidden layers，本文就在此基础上将门机制和这两种layer相结合，产生<strong>Feature Embedding Gate和Hidden Gate</strong>，接下来对二者分别介绍模型细节。</p>
 <h2 id><a href="#" class="headerlink" title=" "></a> </h2><h1 id="二、模型"><a href="#二、模型" class="headerlink" title="二、模型"></a>二、模型</h1><h2 id="2-1-Feature-Embedding-Gate"><a href="#2-1-Feature-Embedding-Gate" class="headerlink" title="2.1 Feature Embedding Gate"></a>2.1 Feature Embedding Gate</h2><p>Feature Embedding Gate主要是在嵌入层环节增加了门控机制，用于从特征中选择更为重要的特征（<strong>信息选择</strong>）。如果模型中带有Feature Embedding Gate，其网络结构如下图所示：</p>
 <p><img src="https://pic3.zhimg.com/80/v2-37d58de7637338d39fea80aae24f2726_720w.jpg" alt></p>
-<p>假设输入的离散特征经过Embedding layer得到E=[e1,e2,e3,…,ei,…ef]，其中f代表特征域的个数，<img src="https://www.zhihu.com/equation?tex=e_%7Bi%7D" alt="[公式]"> 代表第i个域的embedding向量，长度为K。</p>
-<p>接下来，E会通过Feature Embedding Gate进行转换。首先，对每一个embedding向量，通过下面的公式来计算门值 <img src="https://www.zhihu.com/equation?tex=g_%7Bi%7D" alt="[公式]"> ，代表该嵌入向量的特征重要程度：</p>
+<p>假设输入的离散特征经过Embedding layer得到E=[e1,e2,e3,…,ei,…ef]，其中f代表特征域的个数，ei 代表第i个域的embedding向量，长度为K。</p>
+<p>接下来，E会通过Feature Embedding Gate进行转换。首先，对每一个embedding向量，通过下面的公式来计算门值 gi ，代表该嵌入向量的特征重要程度：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-6abb7cc1ae5276a09efbde60822facec_720w.jpg" alt></p>
-<p>然后，将嵌入向量 <img src="https://www.zhihu.com/equation?tex=e_%7Bi%7D" alt="[公式]"> 和门值 <img src="https://www.zhihu.com/equation?tex=g_%7Bi%7D" alt="[公式]"> 计算哈达玛积，得到 <img src="https://www.zhihu.com/equation?tex=ge_%7Bi%7D" alt="[公式]"> ，并得到最终的输出GE,如下公式：</p>
+<p>然后，将嵌入向量ei和门值 gi 计算哈达玛积，得到gei ，并得到最终的输出GE,如下公式：</p>
 <p><img src="https://pic4.zhimg.com/80/v2-d9fba15a1f272a61da00759a4a34cfef_720w.jpg" alt></p>
 <p><img src="https://pic3.zhimg.com/80/v2-9218f6574ad679c6292a9e44cda2ec92_720w.png" alt></p>
-<p>上面只是对Feature Embedding Gate的一个简要的介绍，其具体的做法包括多种（后面会有实验对比效果），比如输出的 <img src="https://www.zhihu.com/equation?tex=g_%7Bi%7D" alt="[公式]"> 是一个跟 <img src="https://www.zhihu.com/equation?tex=e_%7Bi%7D" alt="[公式]"> 同样长度的向量，那么此时我们称门为bit-wise gate，如果输出的 <img src="https://www.zhihu.com/equation?tex=g_%7Bi%7D" alt="[公式]"> 是一个值，那么此时称门为vector-wise gate。分别如下：</p>
+<p>上面只是对Feature Embedding Gate的一个简要的介绍，其具体的做法包括多种（后面会有实验对比效果），比如输出的 gi 是一个跟 ei 同样长度的向量，那么此时我们称门为bit-wise gate，如果输出的gi 是一个值，那么此时称门为vector-wise gate。分别如下：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-241be08455d687142b00dd3afd57d968_720w.jpg" alt></p>
 <p>另一种就是是否所有的域都用同一个参数矩阵W，如果每个域的参数矩阵都不相同，那么被称之为field private，如果所有域的参数矩阵相同，则称之为field sharing。</p>
 <p>后续会用实验对比这四种做法的效果。（<strong>插一句</strong>，有没有觉得和之前一篇新浪的FiBiNet的行文很像，特别是这个参数矩阵相同和不同的这个实验点完全一样，我又去翻了下，果然作者都有张俊林老师，哈哈~）</p>
-<h3 id="2-2-Hidden-Gate"><a href="#2-2-Hidden-Gate" class="headerlink" title="2.2 Hidden Gate"></a>2.2 Hidden Gate</h3><p>同理，Hidden Gate就是在<strong>多层感知机环节</strong>增加了门控机制，用于选择更加重要的特征交互传递到更深层的网络。如果模型中带有Hidden Gate，其网络结构如下图所示：</p>
+<h2 id="2-2-Hidden-Gate"><a href="#2-2-Hidden-Gate" class="headerlink" title="2.2 Hidden Gate"></a>2.2 Hidden Gate</h2><p>同理，Hidden Gate就是在<strong>多层感知机环节</strong>增加了门控机制，用于选择更加重要的特征交互传递到更深层的网络。如果模型中带有Hidden Gate，其网络结构如下图所示：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-8449ba534a4179b1d328737944b493d0_720w.jpg" alt></p>
-<p>假设 <img src="https://www.zhihu.com/equation?tex=a%5E%7B%28l%29%7D" alt="[公式]"> 是第 <img src="https://www.zhihu.com/equation?tex=l" alt="[公式]"> 层隐藏层的输出：</p>
+<p>假设a⁽ˡ⁾是第l层隐藏层的输出：</p>
 <p><img src="https://pic4.zhimg.com/80/v2-0882a51f179c0268da020084841f6e03_720w.png" alt></p>
-<p>接下来将 <img src="https://www.zhihu.com/equation?tex=a%5E%7B%28l%29%7D" alt="[公式]"> 输入到hidden gate中，计算方式如下：</p>
+<p>接下来将 a⁽ˡ⁾ 输入到hidden gate中，计算方式如下：</p>
 <p><img src="https://pic3.zhimg.com/80/v2-f01171a7ecd0e264bf29eb3b51237836_720w.jpg" alt></p>
 <p>损失函数采取交叉熵损失函数。其余部分均与普通DNN相同。</p>
 <h2 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h2><p>三、实验</p>
@@ -510,7 +499,7 @@
 <p>作者最后对两种gate进行结合，效果如下：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-fefe8cadc97074830c11178867bc7ef5_720w.jpg" alt></p>
 <p>实验发现<strong>同时加入两种gate的效果其实还不如单独一种gate好</strong>，具体的原因还需要进一步验证，本文暂未提及。</p>
-<p>本文介绍就到此结束，门控机制介绍的较为简略，感兴趣的同学可以看一波LSTM之类的介绍。另外，最近不忙开始逐步恢复更新今年较新的论文啦~</p>
+<p>本文介绍就到此结束，总的来说个人感觉像是使用了门控机制的两层attention来结合点击率预测，不是很有新意。在本文中门控机制介绍的较为简略，感兴趣的同学可以看一波LSTM之类的介绍。另外，最近不忙开始逐步恢复更新今年较新的论文啦~</p>
 
       
     </div>
@@ -773,7 +762,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、引入"><span class="nav-text">一、引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#门机制（gating-mechanism）"><span class="nav-text">门机制（gating mechanism）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-text"> </span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#二、模型"><span class="nav-text">二、模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Feature-Embedding-Gate"><span class="nav-text">2.1 Feature Embedding Gate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Hidden-Gate"><span class="nav-text">2.2 Hidden Gate</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-text"> </span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、引入"><span class="nav-text">一、引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#门机制（gating-mechanism）"><span class="nav-text">门机制（gating mechanism）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-text"> </span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#二、模型"><span class="nav-text">二、模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Feature-Embedding-Gate"><span class="nav-text">2.1 Feature Embedding Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Hidden-Gate"><span class="nav-text">2.2 Hidden Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-text"> </span></a></li></ol></li></div>
             
 
           </div>
@@ -825,7 +814,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">24.7k</span> 字
+      博客全站共： <span class="post-count">24.8k</span> 字
     </span>
 </div>
 <!-- 新增访客统计代码 END-->
