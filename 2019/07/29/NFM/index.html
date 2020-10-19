@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 周末没更新呀…今天要分享的是另一个Deep模型NFM(串行结构)。NFM也是用FM+DNN来对问题建模的，相比于之前提到的Wide&amp;amp;Deep(Google)、DeepFM(华为+哈工大)、PNN(上交)和之后会分享的的DCN(Google)、DIN(阿里)等，NFM有什么优点呢，下面就走进模型我们一起来看看吧。 原文：《Neural Factor">
+<meta name="description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是另一个Deep模型NFM（串行结构）。NFM也是用FM+DNN来对ctr问题建模的，相比于之前提到的Wide&amp;amp;Deep(Google)、DeepFM(华为+哈工大)、PNN(上交)和之后会分享的的DCN(Google)、DIN(阿里)等，NFM有什么优点呢，下面就走进模型我们一起来看看吧。 原文：Neural Factorizati">
 <meta name="keywords" content="推荐系统,FM,Bi-Interaction">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（读论文）推荐系统之ctr预估-NFM模型解析">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/29/NFM/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 周末没更新呀…今天要分享的是另一个Deep模型NFM(串行结构)。NFM也是用FM+DNN来对问题建模的，相比于之前提到的Wide&amp;amp;Deep(Google)、DeepFM(华为+哈工大)、PNN(上交)和之后会分享的的DCN(Google)、DIN(阿里)等，NFM有什么优点呢，下面就走进模型我们一起来看看吧。 原文：《Neural Factor">
+<meta property="og:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是另一个Deep模型NFM（串行结构）。NFM也是用FM+DNN来对ctr问题建模的，相比于之前提到的Wide&amp;amp;Deep(Google)、DeepFM(华为+哈工大)、PNN(上交)和之后会分享的的DCN(Google)、DIN(阿里)等，NFM有什么优点呢，下面就走进模型我们一起来看看吧。 原文：Neural Factorizati">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/NFM/1.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/NFM/2.png">
@@ -101,10 +101,10 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/NFM/4.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/NFM/5.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/NFM/6.png">
-<meta property="og:updated_time" content="2019-08-27T09:01:32.303Z">
+<meta property="og:updated_time" content="2020-10-19T13:15:45.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-NFM模型解析">
-<meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 周末没更新呀…今天要分享的是另一个Deep模型NFM(串行结构)。NFM也是用FM+DNN来对问题建模的，相比于之前提到的Wide&amp;amp;Deep(Google)、DeepFM(华为+哈工大)、PNN(上交)和之后会分享的的DCN(Google)、DIN(阿里)等，NFM有什么优点呢，下面就走进模型我们一起来看看吧。 原文：《Neural Factor">
+<meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是另一个Deep模型NFM（串行结构）。NFM也是用FM+DNN来对ctr问题建模的，相比于之前提到的Wide&amp;amp;Deep(Google)、DeepFM(华为+哈工大)、PNN(上交)和之后会分享的的DCN(Google)、DIN(阿里)等，NFM有什么优点呢，下面就走进模型我们一起来看看吧。 原文：Neural Factorizati">
 <meta name="twitter:image" content="https://jesse-csj.github.io/2019/07/29/NFM/1.png">
 
 
@@ -454,9 +454,9 @@
 
       
         <p>本人才疏学浅，不足之处欢迎大家指出和交流。</p>
-<p>周末没更新呀…今天要分享的是另一个Deep模型NFM(串行结构)。NFM也是用FM+DNN来对问题建模的，相比于之前提到的Wide&amp;Deep(Google)、DeepFM(华为+哈工大)、PNN(上交)和之后会分享的的DCN(Google)、DIN(阿里)等，NFM有什么优点呢，下面就走进模型我们一起来看看吧。</p>
-<p>原文：《Neural Factorization Machines for Sparse Predictive Analytics》<br><a id="more"></a></p>
-<p>地址：<a href="https://arxiv.org/pdf/1708.05027.pdf" target="_blank" rel="noopener">https://arxiv.org/pdf/1708.05027.pdf</a></p>
+<p>今天要分享的是另一个Deep模型NFM（串行结构）。NFM也是用FM+DNN来对ctr问题建模的，相比于之前提到的Wide&amp;Deep(Google)、DeepFM(华为+哈工大)、PNN(上交)和之后会分享的的DCN(Google)、DIN(阿里)等，NFM有什么优点呢，下面就走进模型我们一起来看看吧。</p>
+<p>原文：<a href="https://arxiv.org/pdf/1708.05027.pdf" target="_blank" rel="noopener">Neural Factorization Machines for Sparse Predictive Analytics</a><br><a id="more"></a></p>
+<p><br></p>
 <h1 id="1、问题由来"><a href="#1、问题由来" class="headerlink" title="1、问题由来"></a>1、问题由来</h1><p><br></p>
 <p>老生常谈，再聊数据特点：对于广告中的大量的类别特征，特征组合也是非常多的。传统的做法是通过人工特征工程或者利用决策树来进行特征选择，选择出比较重要的特征。但是这样的做法都有一个缺点，就是：<strong>无法学习训练集中没有出现的特征组合</strong>。</p>
 <p>最近几年，Embedding-based方法开始成为主流，通过把高维稀疏的输入_embed_到低维度的稠密的隐向量空间中，模型可以学习到训练集中没有出现过的特征组合。</p>
@@ -466,11 +466,13 @@
 <hr>
 <p> <a href="#_msoanchor_1"></a>FM：以线性的方式学习二阶特征交互，对于捕获现实数据非线性和复杂的内在结构表达力不够；</p>
 <p>深度网络：例如Wide&amp;Deep 和DeepCross，简单地拼接特征embedding向量不会考虑任何的特征之间的交互, 但是能够学习特征交互的非线性层的深层网络结构又很难训练优化；</p>
-<p>而NFM摒弃了直接把嵌入向量拼接输入到神经网络的做法，在嵌入层之后增加了_Bi-Interaction_操作来对二阶组合特征进行建模。这使得low level的输入表达的信息更加的丰富，极大的提高了后面隐藏层学习高阶非线性组合特征的能力。</p>
-<h1 id="2、NFM"><a href="#2、NFM" class="headerlink" title="2、NFM"></a>2、NFM</h1><h2 id="2-1-NFM-Model"><a href="#2-1-NFM-Model" class="headerlink" title="2.1 NFM Model"></a>2.1 NFM Model</h2><p>与FM（因式分解机）相似，NFM使用实值特征向量。给定一个稀疏向量x∈Rn作为输入，其中特征值为xi=0表示第i个特征不存在，NFM预估的目标为:<br><img src="/2019/07/29/NFM/1.png"><br>其中第一项和第二项是线性回归部分，与FM相似，FM模拟数据的全局偏差和特征权重。第三项f(x)是NFM的核心组成部分,用于建模特征交互。它是一个多层前馈神经网络。如图2所示，接下来，我们一层一层地阐述f(x)的设计。<br>模型整体结构图如下所示：<br><img src="/2019/07/29/NFM/2.png"></p>
+<p><strong>而NFM摒弃了直接把嵌入向量拼接输入到神经网络的做法，在嵌入层之后增加了_Bi-Interaction_操作来对二阶组合特征进行建模</strong>。这使得low level的输入表达的信息更加的丰富，极大的提高了后面隐藏层学习高阶非线性组合特征的能力。</p>
+<p><br></p>
+<h1 id="2、NFM"><a href="#2、NFM" class="headerlink" title="2、NFM"></a>2、NFM</h1><h2 id="2-1-NFM-Model"><a href="#2-1-NFM-Model" class="headerlink" title="2.1 NFM Model"></a>2.1 NFM Model</h2><p>与FM（因式分解机）相似，NFM使用实值特征向量。给定一个稀疏向量x∈Rn作为输入，其中特征值为xi=0表示第i个特征不存在，NFM预估的目标为:<br><img src="/2019/07/29/NFM/1.png"></p>
+<p>其中第一项和第二项是线性回归部分，与FM相似，FM模拟数据的全局偏差和特征权重。第三项f(x)是NFM的核心组成部分,用于建模特征交互。它是一个多层前馈神经网络。如下图所示，接下来，我们一层一层地阐述f(x)的设计。<br><br><br><strong>模型整体结构</strong>图如下所示：<br><img src="/2019/07/29/NFM/2.png"></p>
 <h3 id="2-1-1-Embedding-Layer"><a href="#2-1-1-Embedding-Layer" class="headerlink" title="2.1.1 Embedding Layer"></a>2.1.1 Embedding Layer</h3><p>和其他的DNN模型处理稀疏输入一样，Embedding将输入转换到低维度的稠密的嵌入空间中进行处理。这里做稍微不同的处理是，使用原始的特征值乘以Embedding vector，使得模型也可以处理real valued feature。</p>
 <h3 id="2-1-2-Bi-Interaction-Layer"><a href="#2-1-2-Bi-Interaction-Layer" class="headerlink" title="2.1.2 Bi-Interaction Layer"></a>2.1.2 Bi-Interaction Layer</h3><p>Bi是Bi-linear的缩写，这一层其实是一个pooling层操作，它把很多个向量转换成一个向量，形式化如下：<br><img src="/2019/07/29/NFM/3.png"></p>
-<p>fbi的输入是整个的嵌入向量，xi ，xj是特征取值，vi， vj是特征对应的嵌入向量。中间的操作表示对应位置相乘。所以原始的嵌入向量任意两个都进行组合，对应位置相乘结果得到一个新向量；然后把这些新向量相加，就得到了Bi-Interaction的输出。这个输出只有一个向量。</p>
+<p>fbi的输入是整个的嵌入向量，xi ，xj是特征取值，vi， vj是特征对应的嵌入向量。中间的操作表示对应位置相乘。所以原始的嵌入向量任意两个都进行组合，对应位置相乘结果得到一个新向量；然后把这些新向量相加，就得到了Bi-Interaction的输出。这个输出只有一个向量,维度仍然是K，可以理解为就是FM的二阶输出。</p>
 <p>注：Bi-Interaction并没有引入额外的参数，而且它的计算复杂度也是线性的，参考FM的优化方法，化简如下：<br><img src="/2019/07/29/NFM/4.png"></p>
 <h3 id="2-1-3-Hidden-Layer"><a href="#2-1-3-Hidden-Layer" class="headerlink" title="2.1.3 Hidden Layer"></a>2.1.3 Hidden Layer</h3><p>这个跟其他的模型基本一样，堆积隐藏层以期来学习高阶组合特征。一般选用constant的效果要好一些。</p>
 <h3 id="2-1-4-Prediction-Layer"><a href="#2-1-4-Prediction-Layer" class="headerlink" title="2.1.4 Prediction Layer"></a>2.1.4 Prediction Layer</h3><p>最后一层隐藏层Zl到输出层最后预测结果形式化如下：<br><img src="/2019/07/29/NFM/5.png"><br>其中h是中间的网络参数。考虑到前面的各层隐藏层权重矩阵，f(x)形式化如下：<br><img src="/2019/07/29/NFM/6.png"></p>
@@ -478,7 +480,8 @@
 <h2 id="2-2-NFM-vs-Wide-amp-Deep、DeepCross"><a href="#2-2-NFM-vs-Wide-amp-Deep、DeepCross" class="headerlink" title="2.2 NFM vs Wide&amp;Deep、DeepCross"></a>2.2 NFM vs Wide&amp;Deep、DeepCross</h2><p><strong>实质：</strong></p>
 <p>NFM最重要的区别就在于Bi-Interaction Layer。Wide&amp;Deep和DeepCross都是用拼接操作(concatenation)替换了Bi-Interaction。</p>
 <p>Concatenation操作的最大缺点就是它并没有考虑任何的特征组合信息，所以就全部依赖后面的MLP去学习特征组合，但是很不幸，MLP的学习优化非常困难。</p>
-<p>使用Bi-Interaction考虑到了二阶特征组合，使得输入的表示包含更多的信息，减轻了后面MLP部分的学习压力，所以可以用更简单的模型（实验中只一层隐层），取得更好的效果。</p>
+<p>使用Bi-Interaction考虑到了二阶特征组合，使得输入的表示包含更多的信息，减轻了后面MLP部分的学习压力，所以可以用更简单的模型（实验中只用了一层隐层），取得更好的效果。</p>
+<p><br></p>
 <h1 id="3、总结（具体的对比实验和实现细节等请参阅原论文）"><a href="#3、总结（具体的对比实验和实现细节等请参阅原论文）" class="headerlink" title="3、总结（具体的对比实验和实现细节等请参阅原论文）"></a>3、总结（具体的对比实验和实现细节等请参阅原论文）</h1><p><br></p>
 <p>NFM主要的特点如下：</p>
 <p>1. NFM核心就是在NN中引入了Bilinear Interaction(Bi-Interaction) pooling操作。基于此，NN可以在low level就学习到包含更多信息的组合特征。</p>
@@ -806,7 +809,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">25.4k</span> 字
+      博客全站共： <span class="post-count">25.5k</span> 字
     </span>
 </div>
 <!-- 新增访客统计代码 END-->

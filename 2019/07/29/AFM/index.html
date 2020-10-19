@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 因个人原因最近都没更新，今天补上一篇FM家族的论文（AFM），接下来会将阿里的几个模型进行汇总下分开来分享，希望大家一起学习呀。 话不多说，今天要分享的是一个Attentional Factorization Machine模型，是17年FM家族的成员。它和NFM是同一个作者，其在FM上的改进，最大的特点就是使用一个attention network来学">
+<meta name="description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 因个人原因最近都没更新，今天补上一篇FM家族的论文（AFM），接下来会将阿里的几个模型进行汇总下分享，希望大家一起学习呀。 话不多说，今天要分享的是一个Attentional Factorization Machine模型，是17年FM家族的成员。它和NFM是同一个作者，其在FM上的改进，最大的特点就是使用一个attention network来学习不同">
 <meta name="keywords" content="推荐系统,FM,Attention">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（读论文）推荐系统之ctr预估-AFM模型解析">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/07/29/AFM/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 因个人原因最近都没更新，今天补上一篇FM家族的论文（AFM），接下来会将阿里的几个模型进行汇总下分开来分享，希望大家一起学习呀。 话不多说，今天要分享的是一个Attentional Factorization Machine模型，是17年FM家族的成员。它和NFM是同一个作者，其在FM上的改进，最大的特点就是使用一个attention network来学">
+<meta property="og:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 因个人原因最近都没更新，今天补上一篇FM家族的论文（AFM），接下来会将阿里的几个模型进行汇总下分享，希望大家一起学习呀。 话不多说，今天要分享的是一个Attentional Factorization Machine模型，是17年FM家族的成员。它和NFM是同一个作者，其在FM上的改进，最大的特点就是使用一个attention network来学习不同">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/AFM/1.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/AFM/2.png">
@@ -104,10 +104,10 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/AFM/7.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/AFM/8.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/07/29/AFM/9.png">
-<meta property="og:updated_time" content="2020-10-19T08:40:04.594Z">
+<meta property="og:updated_time" content="2020-10-19T12:48:13.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-AFM模型解析">
-<meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 因个人原因最近都没更新，今天补上一篇FM家族的论文（AFM），接下来会将阿里的几个模型进行汇总下分开来分享，希望大家一起学习呀。 话不多说，今天要分享的是一个Attentional Factorization Machine模型，是17年FM家族的成员。它和NFM是同一个作者，其在FM上的改进，最大的特点就是使用一个attention network来学">
+<meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 因个人原因最近都没更新，今天补上一篇FM家族的论文（AFM），接下来会将阿里的几个模型进行汇总下分享，希望大家一起学习呀。 话不多说，今天要分享的是一个Attentional Factorization Machine模型，是17年FM家族的成员。它和NFM是同一个作者，其在FM上的改进，最大的特点就是使用一个attention network来学习不同">
 <meta name="twitter:image" content="https://jesse-csj.github.io/2019/07/29/AFM/1.png">
 
 
@@ -419,7 +419,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k 
+                  2k 
                 </span>
               
 
@@ -457,13 +457,12 @@
 
       
         <p>本人才疏学浅，不足之处欢迎大家指出和交流。</p>
-<p>因个人原因最近都没更新，今天补上一篇FM家族的论文（AFM），接下来会将阿里的几个模型进行汇总下分开来分享，希望大家一起学习呀。</p>
-<p>话不多说，今天要分享的是一个Attentional Factorization Machine模型，是17年FM家族的成员。它和NFM是同一个作者，其在FM上的改进，最大的特点就是使用一个<strong>attention network</strong>来学习不同组合特征的重要性。下面我们一起来看下。</p>
-<p>原文：《Attentional Factorization Machines: Learning the Weight of Feature Interactions via Attention Network》<br><a id="more"></a></p>
-<p>地址： <a href="https://www.ijcai.org/proceedings/2017/0435.pdf" target="_blank" rel="noopener">https://www.ijcai.org/proceedings/2017/0435.pdf</a></p>
+<p>因个人原因最近都没更新，今天补上一篇FM家族的论文（AFM），接下来会将阿里的几个模型进行汇总下分享，希望大家一起学习呀。</p>
+<p>话不多说，今天要分享的是一个Attentional Factorization Machine模型，是17年FM家族的成员。它和NFM是同一个作者，其在FM上的改进，最大的特点就是使用一个<strong>attention network</strong>来学习不同组合特征<strong>(二阶交叉)</strong>的重要性。下面我们一起来看下。</p>
+<p>原文：<a href="https://www.ijcai.org/proceedings/2017/0435.pdf" target="_blank" rel="noopener">《Attentional Factorization Machines: Learning the Weight of Feature Interactions via Attention Network》</a><br><a id="more"></a></p>
 <p><br></p>
 <h1 id="1、Introduction"><a href="#1、Introduction" class="headerlink" title="1、Introduction"></a>1、Introduction</h1><p><br></p>
-<p>首先介绍对于监督学习问题，类别特征作为输入，一般采用One-hot编码，所以需要引入特征交互来做出更精确的预测；但是如果直接以product的方式来显示交互，对于稀疏输入数据集，只能观察到一些交叉特征；所以提出FM，利用隐变量来做内积实现交互，但是FM也存在问题，也就是所有交互特征的权重是一样的，但是在实际中，对于预测性较低的特征，其对应权重也较低，所以AFM就是基于这个思想；</p>
+<p>首先介绍对于监督学习问题，类别特征作为输入，一般采用One-hot编码，所以需要引入特征交互来做出更精确的预测；但是如果直接以product的方式来显示交互，对于稀疏输入数据集，只能观察到一些交叉特征；所以提出FM，利用隐变量来做内积实现交互，但是FM也存在问题，也就是所有交互特征的权重是一样的，但是在实际中，对于预测性较低的特征，其对应权重也较低，所以AFM就是基于这个思想来做交叉特征的权重。</p>
 <p><br></p>
 <h1 id="2、FM"><a href="#2、FM" class="headerlink" title="2、FM"></a>2、FM</h1><p><br></p>
 <p>FM全称Factorization Machine（详情可见之前的文章FM），通过隐向量内积来对每一对特征组合进行建模。</p>
@@ -481,13 +480,13 @@
 <p>AFM的模型结构如下：</p>
 <img src="/2019/07/29/AFM/1.png">
 <p>可以看到Sparse Input和Embedding Layer和FM中的是相同的，Embedding Layer把输入特征中非零部分特征embed成一个dense vector。剩下的三层为重点，如下：</p>
-<h3 id="Pair-wise-Interaction-Layer"><a href="#Pair-wise-Interaction-Layer" class="headerlink" title="Pair-wise Interaction Layer:"></a><strong>Pair-wise Interaction Layer:</strong></h3><p>这一层主要是对组合特征进行建模，原来的m个嵌入向量，通过element-wise product（两两做内积）操作得到了m(m-1)/2个组合向量，这些向量的维度和嵌入向量的维度相同均为k。形式化如下：</p>
+<h3 id="Pair-wise-Interaction-Layer"><a href="#Pair-wise-Interaction-Layer" class="headerlink" title="Pair-wise Interaction Layer:"></a><strong>Pair-wise Interaction Layer:</strong></h3><p>这一层主要是对组合特征进行建模，原来的m个嵌入向量，通过<strong>element-wise product</strong>（哈达玛积）操作得到了m(m-1)/2个组合向量，这些向量的维度和嵌入向量的维度相同均为k。形式化如下：</p>
 <img src="/2019/07/29/AFM/2.png">
 <p>也就是说Pair-wise Interaction Layer的输入是所有嵌入向量，输出也是一组向量。输出是任意两个嵌入向量的element-wise product。任意两个嵌入向量都组合得到一个Interacted vector，所以m个嵌入向量得到m(m-1)/2个向量。</p>
 <p>如果不考虑Attention机制，在Pair-wise Interaction Layer之后直接得到最终输出，可以形式化如下：</p>
 <img src="/2019/07/29/AFM/3.png">
 <p>其中p和b分别是权重矩阵和偏置。当p全为1的时候，我们发现这就是FM。这个只是说明AFM的表达能力是在FM之上的，实际的情况中后面还使用了Attention机制。NFM中的Bilinear Interaction Layer也是把任意两个嵌入向量做element-wise product，然后进行sum pooling（求和池化，同NFM）操作。</p>
-<h3 id="Attention-based-Pooling-Layer"><a href="#Attention-based-Pooling-Layer" class="headerlink" title="Attention-based Pooling Layer:"></a><strong>Attention-based Pooling Layer:</strong></h3><p>Attention机制的核心思想在于：当把不同的部分压缩在一起的时候，让不同的部分的贡献程度不一样。AFM通过在Interacted vector后增加一个weighted sum来实现Attention机制。形式化如下：</p>
+<h3 id="Attention-based-Pooling-Layer"><a href="#Attention-based-Pooling-Layer" class="headerlink" title="Attention-based Pooling Layer:"></a><strong>Attention-based Pooling Layer:</strong></h3><p>Attention机制的核心思想在于：当把不同的部分拼接在一起的时候，让不同的部分的贡献程度不一样。AFM通过在Interacted vector后增加一个weighted sum来实现Attention机制。形式化如下：</p>
 <img src="/2019/07/29/AFM/4.png">
 <p>这里aij是交互特征的Attention score，表示不同的组合特征对于最终的预测的贡献程度。可以看到：</p>
 <ol>
@@ -498,10 +497,10 @@
 </ol>
 <p><strong>但Attention score的学习是一个问题</strong>。一个常规的想法就是随着最小化loss来学习，但是存在一个问题是：对于训练集中从来没有一起出现过的特征组合的Attention score无法学习。</p>
 <p><strong>为了解决泛化问题</strong>，引入多层感知机（MLP），这里称为Attention network，其形式化定义如下：<br><img src="/2019/07/29/AFM/5.png"></p>
-<p>可以看到，Attention network实际上是一个one layer MLP，激活函数使用ReLU，网络大小用attention factor表示，就是神经元的个数。它的输入是两个嵌入向量element-wise product之后的结果(interacted vector，用来在嵌入空间中对组合特征进行编码)；它的输出是组合特征对应的Attention score（aij）。最后，使用softmax对得到的Attention score进行规范化。</p>
+<p>可以看到，本文中的Attention network实际上就是一个one layer MLP，激活函数使用ReLU，网络大小用attention factor表示，就是神经元的个数。它的输入是两个嵌入向量element-wise product之后的结果(interacted vector，用来在嵌入空间中对组合特征进行编码)；它的输出是组合特征对应的Attention score（aij）。最后，使用softmax对得到的Attention score进行规范化。</p>
 <p><strong>总结一下，AFM模型总形式化如下：</strong></p>
 <img src="/2019/07/29/AFM/6.png">
-<p>前面一部分是线性部分；后面一部分对每两个嵌入向量进行element-wise product得到Interacted vector；然后使用Attention机制得到每个组合特征的Attention score，并用这个score来进行weighted sum pooling；最后将这个k维的向量通过权重矩阵的预测结果。</p>
+<p>前面一部分是线性部分；后面一部分对每两个嵌入向量进行element-wise product得到Interacted vector；然后使用Attention机制得到每个组合特征的Attention score，并用这个score来进行weighted sum pooling；最后将这个k维的向量通过权重矩阵直接得到预测结果。</p>
 <h2 id="3-2-Learning"><a href="#3-2-Learning" class="headerlink" title="3.2 Learning"></a>3.2 Learning</h2><p><br></p>
 <p>AFM可以用于不同的任务：回归、分类、排序等，一般对于回归问题是平方损失，二分类是Logloss，本文使用平方损失函数，且使用SGD算法来最优化模型参数；</p>
 <p>防止过拟合： 防止过拟合常用的方法是Dropout或者L2 L1正则化。AFM的做法是：</p>
@@ -529,8 +528,8 @@
 <img src="/2019/07/29/AFM/9.png">
 <p><br></p>
 <h1 id="5、总结："><a href="#5、总结：" class="headerlink" title="5、总结："></a>5、总结：</h1><p><br></p>
-<p>AFM是在FM的基础上改进的。相比于其他的DNN模型，比如Wide&amp;Deep，DeepCross都是通过MLP来隐式学习组合特征。这些Deep Methods都缺乏解释性，因为并不知道各个组合特征的情况。相比之下，FM通过两个隐向量内积来学习组合特征，解释性就比较好。</p>
-<p>通过直接扩展FM，AFM引入Attention机制来学习不同组合特征的权重，即保证了模型的可解释性又提高了模型性能。</p>
+<p>AFM是在FM的基础上改进的。相比于其他的DNN模型，比如Wide&amp;Deep，DeepCross都是通过MLP来隐式学习组合特征。且这些Deep Methods都缺乏解释性，因为并不知道各个组合特征的情况。相比之下，FM通过两个隐向量内积来学习组合特征，解释性就比较好。</p>
+<p>通过直接扩展FM，AFM引入Attention机制来学习不同组合特征的权重，即保证了模型的可解释性又提高了模型性能(但个人觉得这里的缺点是使用了物理意义并不明显的哈达玛积)。</p>
 <p>但是，DNN的另一个作用是提取高阶组合特征，而AFM由于最后的加权累加，二次项并没有进行更深的网络去学习高阶交叉特征，这应该是缺点之一。<br><br></p>
 <p>实现AFM的一个Demo，感兴趣的童鞋可以看下我的<a href="https://github.com/Jesse-csj/TensorFlow_Practice" target="_blank" rel="noopener">[github]</a>。</p>
 
@@ -853,7 +852,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">25.4k</span> 字
+      博客全站共： <span class="post-count">25.5k</span> 字
     </span>
 </div>
 <!-- 新增访客统计代码 END-->
