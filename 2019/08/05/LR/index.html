@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/05/LR/3.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/05/LR/1.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/05/LR/2.png">
-<meta property="og:updated_time" content="2019-08-27T07:58:23.536Z">
+<meta property="og:updated_time" content="2020-10-19T09:09:24.154Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-LR与GBDT+LR模型解析">
 <meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 本系列接下来几天要分享的文章是关于线性模型的，在15年后深度模型在ctr预估领域百花齐放之时，仍觉得传统的LR模型有着基石的作用，于是有了今天的分享。话不多说，今天会介绍的是经典的LR模型及Facebook在2014年提出的GBDT+LR（重点）。当时深度学习几乎还没有应用到到计算广告领域，Facebook提出利用GBDT的叶节点编号作为非线性特征的表示">
@@ -460,6 +460,7 @@
 </li>
 </ol>
 <a id="more"></a>
+<p><br></p>
 <h1 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h1><p><br><br>这里是微软研究院在当时提出LR模型时的商业背景：搜索引擎主要靠商业广告收入，在广告位上面打广告，用户点击，之后广告商付费。在通用搜索引擎，通常广告位置是在搜索结果之前，或者在搜索结果右边，由此为查询选择正确的广告及其展示顺序会极大地影响用户看到并点击每个广告的概率。此排名对搜索引擎从广告中获得的收入产生了很大影响。此外，向用户展示他们喜欢点击的广告也会提高用户满意度。出于这些原因，能够准确估计系统中广告的点击率非常重要。（朴素的想法即是放用户可能点击的广告，并且放每次点击广告商付费多的广告）<br>于是就归结到点击率预估的<strong>模型选择和特征工程</strong>问题。<br><br></p>
 <h1 id="2、LR-Model"><a href="#2、LR-Model" class="headerlink" title="2、LR Model"></a>2、LR Model</h1><h2 id="2-1-LR的数学基础"><a href="#2-1-LR的数学基础" class="headerlink" title="2.1 LR的数学基础"></a>2.1 LR的数学基础</h2><p><br><br>为何在2012年之前LR模型占据了计算广告领域的极大部分市场呢，我们可以从数学角度稍作分析：<br>逻辑回归（logistics regression）作为广义线性模型的一种，它的假设是因变量y服从<strong>伯努利分布</strong>。那么在点击率预估这个问题上，“点击”这个事件是否发生就是模型的因变量y。而用户是否点击广告这个问题是一个经典的掷偏心硬币（二分类）问题，因此CTR模型的因变量显然应该服从伯努利分布。所以采用LR作为CTR模型是符合“点击”这一事件的物理意义的。<br>在了解这一基础假设的情况下，再来看LR的数学形式就极具解释性了：<br><img src="/2019/08/05/LR/3.png"><br>其中x是输入向量，θ 是我们要学习的参数向量。结合CTR模型的问题来说，x就是输入的特征向量，h(x)就是我们最终希望得到的点击率。</p>
 <h2 id="2-2、朴素的直觉和可解释性"><a href="#2-2、朴素的直觉和可解释性" class="headerlink" title="2.2、朴素的直觉和可解释性"></a>2.2、朴素的直觉和可解释性</h2><p><br><br>直观来讲，LR模型目标函数的形式就是各特征的加权和，最后再加以sigmoid函数。忽略其数学基础，仅靠我们的直觉认知也可以一定程度上得出使用LR作为CTR模型的合理性：<br><strong>使用各特征的加权和是为了综合不同特征对CTR的影响，而由于不同特征的重要程度不一样，所以为不同特征指定不同的权重来代表不同特征的重要程度。最后要加上sigmoid函数，是希望其值能够映射到0-1之间，使其符合CTR的概率意义。</strong></p>
@@ -478,10 +479,11 @@
 </ol>
 <h2 id="3-2、GBDT-LR总结"><a href="#3-2、GBDT-LR总结" class="headerlink" title="3.2、GBDT+LR总结"></a>3.2、GBDT+LR总结</h2><p>由于决策树的结构特点，事实上，决策树的深度就决定了特征交叉的维度。如果决策树的深度为4，通过三次节点分裂，最终的叶节点实际上是进行了3阶特征组合后的结果，如此强的特征组合能力显然是FM系的模型不具备的。但由于GBDT容易产生过拟合，以及GBDT这种特征转换方式实际上丢失了大量特征的数值信息，因此我们不能简单说GBDT由于特征交叉的能力更强，效果就比FM或FFM好（事实上FFM是2015年提出的）。在模型的选择和调试上，永远都是多种因素综合作用的结果。</p>
 <p>GBDT+LR比FM重要的意义在于，它大大推进了特征工程模型化这一重要趋势，某种意义上来说，之后深度学习的各类网络结构，以及embedding技术的应用，都是这一趋势的延续。</p>
+<p><br></p>
 <h1 id="4、总结（具体的对比实验和实现细节等请参阅原论文）"><a href="#4、总结（具体的对比实验和实现细节等请参阅原论文）" class="headerlink" title="4、总结（具体的对比实验和实现细节等请参阅原论文）"></a>4、总结（具体的对比实验和实现细节等请参阅原论文）</h1><p>本次简要介绍了传统的LR模型，其优点和缺点都非常突出，但不可否认的是其基石般的作用和地位。同时我们也介绍了GBDT+LR的改进方案以解决特征组合的问题，但GBDT也存在很容易过拟合的问题，接下来这段话摘自于知乎：</p>
 <img src="/2019/08/05/LR/2.png">
 <p>这里是引用阿里的盖坤大神的回答，他认为GBDT只是对历史的一个记忆罢了，没有推广性，或者说泛化能力。 番外：盖坤大神的团队在2017年提出了两个重要的用于CTR预估的模型，MLR（实际开始应用于2012年）和DIN，后面的线性模型和深度模型也会更新这两篇，下篇再见吧~</p>
-<p>实现GBDT+LR的一个Demo，感兴趣的童鞋可以看下我的<a href="[https://link.zhihu.com/?target=https%3A//github.com/Jesse-csj/TensorFlow_Practice](https://link.zhihu.com/?target=https%3A//github.com/Jesse-csj/TensorFlow_Practice">github</a>)。<br><br><br><strong>巨人的肩膀</strong>：<a href="https://blog.csdn.net/shenziheng1/article/details/89737467" target="_blank" rel="noopener">https://blog.csdn.net/shenziheng1/article/details/89737467</a></p>
+<p>实现GBDT+LR的一个Demo，感兴趣的童鞋可以看下我的<a href="[https://link.zhihu.com/?target=https%3A//github.com/Jesse-csj/TensorFlow_Practice](https://link.zhihu.com/?target=https%3A//github.com/Jesse-csj/TensorFlow_Practice">github</a>。<br><br><br><strong>巨人的肩膀</strong>：<a href="https://blog.csdn.net/shenziheng1/article/details/89737467" target="_blank" rel="noopener">https://blog.csdn.net/shenziheng1/article/details/89737467</a></p>
 
       
     </div>
@@ -640,7 +642,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -800,7 +802,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">22.3k</span> 字
+      博客全站共： <span class="post-count">26.1k</span> 字
     </span>
 </div>
 <!-- 新增访客统计代码 END-->

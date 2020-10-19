@@ -87,13 +87,13 @@
 
 
 
-<meta name="description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 文有配图… 迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域">
+<meta name="description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域CTR预估算">
 <meta name="keywords" content="推荐系统,LR,MLR">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析">
 <meta property="og:url" content="https://jesse-csj.github.io/2019/08/12/MLR/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 文有配图… 迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域">
+<meta property="og:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域CTR预估算">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/1.png">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/2.png">
@@ -107,10 +107,10 @@
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/10.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/11.jpg">
 <meta property="og:image" content="https://jesse-csj.github.io/2019/08/12/MLR/12.jpg">
-<meta property="og:updated_time" content="2019-09-16T02:39:26.492Z">
+<meta property="og:updated_time" content="2020-10-19T09:07:59.410Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析">
-<meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 文有配图… 迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域">
+<meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域CTR预估算">
 <meta name="twitter:image" content="https://jesse-csj.github.io/2019/08/12/MLR/1.png">
 
 
@@ -460,11 +460,11 @@
 
       
         <p>本人才疏学浅，不足之处欢迎大家指出和交流。</p>
-<p>文有配图… 迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域CTR预估算法的全新升级。总的来说，MLR算法创新地提出并实现了直接在原始空间学习特征之间的非线性关系，基于数据自动发掘可推广的模式，相比于人工来说效率和精度均有了大幅提升。下面我们一起来学习下吧。</p>
+<p>迟更几天，今天继续带来传统模型之MLR算法模型，这是一篇来自阿里盖坤团队的方案（LS-PLM），发表于2017年，但实际在2012年就已经提出并应用于实际业务中（膜拜ing），当时主流仍然是我们上一篇提到过的的LR模型，而本文作者创新性地提出了MLR(mixed logistic regression, 混合逻辑斯特回归)算法，引领了广告领域CTR预估算法的全新升级。总的来说，MLR算法创新地提出并实现了直接在原始空间学习特征之间的非线性关系，基于数据自动发掘可推广的模式，相比于人工来说效率和精度均有了大幅提升。下面我们一起来了解下细节。</p>
 <p>原文：《Learning Piece-wise Linear Models from Large Scale Data for Ad Click Prediction》<br><a id="more"></a></p>
 <p>地址：<a href="https://arxiv.org/abs/1704.05194" target="_blank" rel="noopener">https://arxiv.org/abs/1704.05194</a></p>
-<h1 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h1><p><br></p>
-<p>CTR预估(click-through-rate prediction)是广告行业比较常见的问题，根据用户的历史行为来判断用户对广告点击的可能性。在常见工业场景中，该问题的输入往往是数以万计的稀疏特征向量，在进行特征交叉后会维数会更高，比较常见的就是采用逻辑回归模型加一些正则化，因为逻辑回归模型计算开销小且容易实现并行。之前提到的facebook的一篇论文<a href="https://zhuanlan.zhihu.com/p/76794626" target="_blank" rel="noopener">（LR+GBDT）</a>中先用树模型做分类之后再加一个逻辑回归模型，最后得出效果出奇的好，应该也是工业界比较常用的方法，同时树模型的选择或者说是再构造特征的特性也逐渐被大家所关注。另一种比较有效的就是因子分解模型系列，包括FM及其的其他变种，它们的主要思想就是构造交叉特征或者是二阶的特征来一起进行训练。</p>
+<p><br></p>
+<h1 id="1、背景"><a href="#1、背景" class="headerlink" title="1、背景"></a>1、背景</h1><p><br><br>CTR预估(click-through-rate prediction)是广告行业比较常见的问题，根据用户的历史行为来判断用户对广告点击的可能性。在常见工业场景中，该问题的输入往往是数以万计的稀疏特征向量，在进行特征交叉后会维数会更高，比较常见的就是采用逻辑回归模型加一些正则化，因为逻辑回归模型计算开销小且容易实现并行。之前提到的facebook的一篇论文<a href="https://zhuanlan.zhihu.com/p/76794626" target="_blank" rel="noopener">（LR+GBDT）</a>中先用树模型做分类之后再加一个逻辑回归模型，最后得出效果出奇的好，应该也是工业界比较常用的方法，同时树模型的选择或者说是再构造特征的特性也逐渐被大家所关注。另一种比较有效的就是因子分解模型系列，包括FM及其的其他变种，它们的主要思想就是构造交叉特征或者是二阶的特征来一起进行训练。</p>
 <p>这篇文章中，作者主要提出了一种piece-wise的线性模型，并且给出了其在大规模数据上的训练算法，称之为LS-PLM(Large Scale Piecewise Linear Model)，LS-PLM采用了分治的思想，先分成几个局部再用线性模型拟合，这两部都采用监督学习的方式，来优化总体的预测误差，总的来说有以下优势：</p>
 <ul>
 <li><p><strong>端到端的非线性学习</strong>： 从模型端自动挖掘数据中蕴藏的非线性模式，省去了大量的人工特征设计，这 使得MLR算法可以端到端地完成训练，在不同场景中的迁移和应用非常轻松。通过分区来达到拟合非线性函数的效果；</p>
@@ -474,6 +474,7 @@
 <li><p><strong>稀疏性</strong>: 对于在线学习系统，模型的稀疏性较为重要，所以采用了$L_{1}$和\(L_{2,1}\)正则化，模型的学习和在线预测性能更好。当然，目标函数非凸非光滑为算法优带来了新的挑战。</p>
 </li>
 </ul>
+<p><br></p>
 <h1 id="2、MLR总览"><a href="#2、MLR总览" class="headerlink" title="2、MLR总览"></a>2、MLR总览</h1><p><br></p>
 <p>MLR就像它的名字一样，由很多个LR模型组合而成。用分片线性模式来拟合高维空间的非线性模式，形式化表述如下：</p>
 <img src="/2019/08/12/MLR/1.png"> 
@@ -489,6 +490,7 @@
 <p>理论上来说，增大m可以带来无限制的非线性拟合能力，但是同样会增加计算、存储的开销，同时会带来过拟合的风险。具体如何选取m要结合实际情况取舍；</p>
 <p>同时MLR还引入了<strong>结构化先验、分组稀疏、线性偏置、模型级联、增量训练、Common Feature Trick</strong>来提升模型性能。</p>
 <p>针对MLR上面提到的各种特性，下面我们一一来介绍细节：</p>
+<p><br></p>
 <h1 id="3、模型细节"><a href="#3、模型细节" class="headerlink" title="3、模型细节"></a>3、模型细节</h1><p><br></p>
 <h2 id="3-1-结构化先验"><a href="#3-1-结构化先验" class="headerlink" title="3.1 结构化先验"></a>3.1 结构化先验</h2><p>MLR中非常重要的就是如何划分原始特征空间。</p>
 <p>通过引入结构化先验，我们使用用户特征来划分特征空间，使用广告特征来进行基分类器的训练，减小了模型的探索空间，收敛更容易。</p>
@@ -508,6 +510,7 @@
 <p>反馈特征常用的如反馈CTR，是指系统上线一段时间之后得到的历史CTR值。</p>
 <h2 id="3-4-增量训练"><a href="#3-4-增量训练" class="headerlink" title="3.4 增量训练"></a>3.4 增量训练</h2><p>实验证明，MLR利用结构先验（用户特征进行聚类，广告特征进行分类）进行pretrain，然后再增量进行全空间参数寻优训练，会使得收敛步数更少，收敛更稳定。</p>
 <img src="/2019/08/12/MLR/8.jpg"> 
+<p><br></p>
 <h1 id="4、一些trick"><a href="#4、一些trick" class="headerlink" title="4、一些trick"></a>4、一些trick</h1><p><br></p>
 <p>论文的idea简单有效的，重点是工程中出来的论文，对工程实现上的优化细节都很详细，下面我们来看下：</p>
 <h2 id="4-1-并行化"><a href="#4-1-并行化" class="headerlink" title="4.1 并行化"></a>4.1 并行化</h2><p>论文里的实现基于分布式，包括两个维度的并行化，模型并行化，数据并行化。每一个计算节点中都包含两种角色：<strong>Server Node, Worker Node</strong>，这样做的好处有两点：</p>
@@ -533,6 +536,7 @@
 <p>下面是实验结果：</p>
 <img src="/2019/08/12/MLR/12.jpg"> 
 <p>可以看到Common Feature Trick效果还是非常明显的。</p>
+<p><br></p>
 <h1 id="5、总结"><a href="#5、总结" class="headerlink" title="5、总结"></a>5、总结</h1><p><br></p>
 <p>文末说LS-PLM在2012年就应用于阿里巴巴的ctr预估，到2017年才发表论文。不出意料，现在的模型应该已经不再是MLR这么简单了。另外，从MLR和LR进行级联，以便加强强特征来看，MLR还是有很大的局限性。个人感觉模型理论上来说确实非常棒，利用分片线性来模型高维非线性，但是虽然取得了非常不错的成绩，但是带来的挑战也不小：比如初值问题、非凸问题的局部极值、虽然MLR比LR好，但不知道和全局最优相比还有多远；第二，在初值的Pre-train方面需要改进和优化模型函数等等；第三，目前规模化能力方面也需要能够吞吐更多特征和数据，比如采用更快的收敛算法等等；最后，整体的MLR算法的抽象能力也需进一步得到强化。</p>
 <p><br><br><br><br>实现MLR的一个Demo，感兴趣的童鞋可以看下我的<a href="https://link.zhihu.com/?target=https%253A//github.com/Jesse-csj/TensorFlow_Practice" target="_blank" rel="noopener">[github]</a><br><br></p>
@@ -593,8 +597,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/16/AFM/" rel="prev" title="（读论文）推荐系统之ctr预估-AFM模型解析">
-                （读论文）推荐系统之ctr预估-AFM模型解析 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/10/12/DIN/" rel="prev" title="（读论文）推荐系统之ctr预估-DIN模型解析">
+                （读论文）推荐系统之ctr预估-DIN模型解析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -696,7 +700,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -856,7 +860,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">22.3k</span> 字
+      博客全站共： <span class="post-count">26.1k</span> 字
     </span>
 </div>
 <!-- 新增访客统计代码 END-->
