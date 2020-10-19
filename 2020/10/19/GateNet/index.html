@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-32f0659ac628793c137b01fc74259dd9_720w.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-9de1ad9f8e76c820ac3c666629e8ffed_720w.jpg">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-fefe8cadc97074830c11178867bc7ef5_720w.jpg">
-<meta property="og:updated_time" content="2020-10-19T03:12:46.524Z">
+<meta property="og:updated_time" content="2020-10-19T03:18:42.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（读论文）推荐系统之ctr预估-GateNet模型解析">
 <meta name="twitter:description" content="由于秋招原因许久未更，现开始逐步看今天最近的论文。 今天分享的是微博＆腾讯关于CTR预估的一篇文章：GateNet:Gating-Enhanced Deep Network for Click-Through Rate Prediction.要点：在点击率预测中，当前的深度学习模型中基本都包括embedding layer和MLP hidden layers。另一方面，门控机制（gating me">
@@ -467,7 +467,7 @@
 <h3 id="门机制（gating-mechanism）"><a href="#门机制（gating-mechanism）" class="headerlink" title="门机制（gating mechanism）"></a><strong>门机制（gating mechanism）</strong></h3><p>目前，门机制广泛用于CV和NLP，CV如Highway Network，它们利用转换门和进位门来分别表示通过转换输入和进位输出产生了多少输出。在NLP中，如LSTM，GRU，语言建模，序列对序列学习，他们利用门来防止梯度消失和解决长期依赖问题。</p>
 <p>此外，在推荐系统中使用门来自动调整建模共享信息和建模任务特定信息之间的参数。应用门机制的另一个推荐系统是hierarchical gating network(HGN)，它应用特征级和实例级的门模块来自适应地控制哪些item潜在特征和哪些相关item可以被传递到下游层。具体的细节大家可以参阅上面提到这些的原论文。简单来理解，<strong>门控机制即相当于一个调节阀，可以控制流入的信息流量的流入程度。</strong></p>
 <p>由于目前推荐系统中常用的深度学习模型基本都包括embedding layer和MLP hidden layers，本文就在此基础上将门机制和这两种layer相结合，产生<strong>Feature Embedding Gate和Hidden Gate</strong>，接下来对二者分别介绍模型细节。</p>
-<h2 id><a href="#" class="headerlink" title=" "></a> </h2><h1 id="二、模型"><a href="#二、模型" class="headerlink" title="二、模型"></a>二、模型</h1><h2 id="2-1-Feature-Embedding-Gate"><a href="#2-1-Feature-Embedding-Gate" class="headerlink" title="2.1 Feature Embedding Gate"></a>2.1 Feature Embedding Gate</h2><p>Feature Embedding Gate主要是在嵌入层环节增加了门控机制，用于从特征中选择更为重要的特征（<strong>信息选择</strong>）。如果模型中带有Feature Embedding Gate，其网络结构如下图所示：</p>
+<h1 id="二、模型"><a href="#二、模型" class="headerlink" title="二、模型"></a>二、模型</h1><h2 id="2-1-Feature-Embedding-Gate"><a href="#2-1-Feature-Embedding-Gate" class="headerlink" title="2.1 Feature Embedding Gate"></a>2.1 Feature Embedding Gate</h2><p>Feature Embedding Gate主要是在嵌入层环节增加了门控机制，用于从特征中选择更为重要的特征（<strong>信息选择</strong>）。如果模型中带有Feature Embedding Gate，其网络结构如下图所示：</p>
 <p><img src="https://pic3.zhimg.com/80/v2-37d58de7637338d39fea80aae24f2726_720w.jpg" alt></p>
 <p>假设输入的离散特征经过Embedding layer得到E=[e1,e2,e3,…,ei,…ef]，其中f代表特征域的个数，ei 代表第i个域的embedding向量，长度为K。</p>
 <p>接下来，E会通过Feature Embedding Gate进行转换。首先，对每一个embedding向量，通过下面的公式来计算门值 gi ，代表该嵌入向量的特征重要程度：</p>
@@ -481,12 +481,12 @@
 <p>后续会用实验对比这四种做法的效果。（<strong>插一句</strong>，有没有觉得和之前一篇新浪的FiBiNet的行文很像，特别是这个参数矩阵相同和不同的这个实验点完全一样，我又去翻了下，果然作者都有张俊林老师，哈哈~）</p>
 <h2 id="2-2-Hidden-Gate"><a href="#2-2-Hidden-Gate" class="headerlink" title="2.2 Hidden Gate"></a>2.2 Hidden Gate</h2><p>同理，Hidden Gate就是在<strong>多层感知机环节</strong>增加了门控机制，用于选择更加重要的特征交互传递到更深层的网络。如果模型中带有Hidden Gate，其网络结构如下图所示：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-8449ba534a4179b1d328737944b493d0_720w.jpg" alt></p>
-<p>假设a⁽ˡ⁾是第l层隐藏层的输出：</p>
+<p>假设 <strong>a⁽ˡ⁾</strong> 是第l层隐藏层的输出：</p>
 <p><img src="https://pic4.zhimg.com/80/v2-0882a51f179c0268da020084841f6e03_720w.png" alt></p>
-<p>接下来将 a⁽ˡ⁾ 输入到hidden gate中，计算方式如下：</p>
+<p>接下来将 <strong>a⁽ˡ⁾</strong> 输入到hidden gate中，计算方式如下：</p>
 <p><img src="https://pic3.zhimg.com/80/v2-f01171a7ecd0e264bf29eb3b51237836_720w.jpg" alt></p>
 <p>损失函数采取交叉熵损失函数。其余部分均与普通DNN相同。</p>
-<h2 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h2><p>三、实验</p>
+<h2 id><a href="#" class="headerlink" title=" "></a> </h2><p>三、实验</p>
 <p>首先来看下在网络中单独加入Feature Embedding Gate的效果：</p>
 <p><img src="https://pic1.zhimg.com/80/v2-d426ab3372713cfe6b63264307837ea0_720w.jpg" alt></p>
 <p>可以看到加入Feature Embedding Gate后，在多个模型以及多个数据集中都取得了更好的AUC。</p>
@@ -499,7 +499,7 @@
 <p>作者最后对两种gate进行结合，效果如下：</p>
 <p><img src="https://pic2.zhimg.com/80/v2-fefe8cadc97074830c11178867bc7ef5_720w.jpg" alt></p>
 <p>实验发现<strong>同时加入两种gate的效果其实还不如单独一种gate好</strong>，具体的原因还需要进一步验证，本文暂未提及。</p>
-<p>本文介绍就到此结束，总的来说个人感觉像是使用了门控机制的两层attention来结合点击率预测，不是很有新意。在本文中门控机制介绍的较为简略，感兴趣的同学可以看一波LSTM之类的介绍。另外，最近不忙开始逐步恢复更新今年较新的论文啦~</p>
+<p>本文介绍就到此结束，总的来说感觉像是使用了门控机制的两层attention来结合点击率预测，不是很有新意。在本文中门控机制介绍的较为简略，感兴趣的同学可以看一波LSTM之类的介绍。另外，最近不忙开始逐步恢复更新今年较新的论文啦~</p>
 
       
     </div>
@@ -632,7 +632,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -654,7 +654,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -762,7 +762,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、引入"><span class="nav-text">一、引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#门机制（gating-mechanism）"><span class="nav-text">门机制（gating mechanism）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-text"> </span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#二、模型"><span class="nav-text">二、模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Feature-Embedding-Gate"><span class="nav-text">2.1 Feature Embedding Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Hidden-Gate"><span class="nav-text">2.2 Hidden Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-text"> </span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、引入"><span class="nav-text">一、引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#门机制（gating-mechanism）"><span class="nav-text">门机制（gating mechanism）</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#二、模型"><span class="nav-text">二、模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Feature-Embedding-Gate"><span class="nav-text">2.1 Feature Embedding Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Hidden-Gate"><span class="nav-text">2.2 Hidden Gate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-text"> </span></a></li></ol></li></div>
             
 
           </div>
@@ -814,7 +814,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">24.8k</span> 字
+      博客全站共： <span class="post-count">22.3k</span> 字
     </span>
 </div>
 <!-- 新增访客统计代码 END-->
