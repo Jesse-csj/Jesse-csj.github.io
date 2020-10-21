@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="推荐系统,Attention,DNN,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -87,36 +87,17 @@
 
 
 
-<meta name="description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是阿里针对电子商务领域的CTR预估的Deep Interest Network理论，由盖坤大神团队提出于2017年。该模型要点为：结合Attention机制，充分利用/挖掘用户历史行为数据中的信息，下面一起来看下。 原文：《Deep Interest Network for Click-Through Rate Prediction》">
-<meta name="keywords" content="推荐系统,Attention,DNN">
-<meta property="og:type" content="article">
-<meta property="og:title" content="（读论文）推荐系统之ctr预估-DIN模型解析">
-<meta property="og:url" content="https://jesse-csj.github.io/2019/10/12/DIN/index.html">
+<meta name="description" content="分享与学习，算法与人生：csj个人站，专注于机器学习/深度学习/推荐系统/知识积累与分享。">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jesse&#39;s Blog">
+<meta property="og:url" content="https://jesse-csj.github.io/archives/2019/11/index.html">
 <meta property="og:site_name" content="Jesse&#39;s Blog">
-<meta property="og:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是阿里针对电子商务领域的CTR预估的Deep Interest Network理论，由盖坤大神团队提出于2017年。该模型要点为：结合Attention机制，充分利用/挖掘用户历史行为数据中的信息，下面一起来看下。 原文：《Deep Interest Network for Click-Through Rate Prediction》">
+<meta property="og:description" content="分享与学习，算法与人生：csj个人站，专注于机器学习/深度学习/推荐系统/知识积累与分享。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-7ff1103b4871d07ad984d628b0d9b195_720w.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-79b3bedfc3564e179eda19a36f8ad39b_720w.jpg">
-<meta property="og:image" content="https://pic3.zhimg.com/80/v2-bff54141fb596c7e59032ce3b5c00e22_720w.jpg">
-<meta property="og:image" content="https://pic3.zhimg.com/80/v2-a39c279a6ecb4f91ad976a04f09cbc4e_720w.png">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-974c499958fd7e8691b42be0aef0c5dd_720w.png">
-<meta property="og:image" content="https://pic3.zhimg.com/80/v2-dd4be3d1ad1e63a17e6567f45b78d0c2_720w.jpg">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-dff7b3f35e4d6dec8d994436c2b0f719_720w.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-a80dff84ded36a0d9290b49cabf2a85b_720w.jpg">
-<meta property="og:image" content="https://pic3.zhimg.com/80/v2-c3d6377a3fd62a5f650640301663444e_720w.jpg">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-7c883ed0ce7130c631a9723f71e2b929_720w.jpg">
-<meta property="og:image" content="https://pic1.zhimg.com/80/v2-7367f3537b83c3f941669b58343b7ac4_720w.jpg">
-<meta property="og:image" content="https://pic1.zhimg.com/80/v2-ec2e6fd529f3dd0f0cede1f73e3b0da8_720w.jpg">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-0e64614ffeb4b940dcd8e1ec1d7ae5c1_720w.jpg">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-8c99874f15242d4770216e43f7d21f1f_720w.jpg">
-<meta property="og:image" content="https://pic3.zhimg.com/80/v2-8f486013316db4282e4b5b2f1349d156_720w.jpg">
-<meta property="og:image" content="https://www.zhihu.com/equation?tex=b_%7B1%7D%2Cb_%7B2%7D%2C...%2Cb_%7Bk%7D%2C...b_%7Bn%7D">
-<meta property="og:image" content="https://pic1.zhimg.com/80/v2-6d5711fbca0d33a8facc074ad65ab9fc_720w.jpg">
-<meta property="og:updated_time" content="2020-10-19T09:05:09.198Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="（读论文）推荐系统之ctr预估-DIN模型解析">
-<meta name="twitter:description" content="本人才疏学浅，不足之处欢迎大家指出和交流。 今天要分享的是阿里针对电子商务领域的CTR预估的Deep Interest Network理论，由盖坤大神团队提出于2017年。该模型要点为：结合Attention机制，充分利用/挖掘用户历史行为数据中的信息，下面一起来看下。 原文：《Deep Interest Network for Click-Through Rate Prediction》">
-<meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-7ff1103b4871d07ad984d628b0d9b195_720w.jpg">
+<meta name="twitter:title" content="Jesse&#39;s Blog">
+<meta name="twitter:description" content="分享与学习，算法与人生：csj个人站，专注于机器学习/深度学习/推荐系统/知识积累与分享。">
 
 
 
@@ -146,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://jesse-csj.github.io/2019/10/12/DIN/">
+  <link rel="canonical" href="https://jesse-csj.github.io/archives/2019/11/">
 
 
 
 
 
-  <title>（读论文）推荐系统之ctr预估-DIN模型解析 | Jesse's Blog</title>
+  <title>归档 | Jesse's Blog</title>
   
 
 
@@ -171,7 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
     
 
@@ -330,318 +311,72 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        嗯..! 目前共计 15 篇日志。 继续努力。
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2019">2019</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://jesse-csj.github.io/2019/10/12/DIN/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jesse_jia">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jesse's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/2019/11/24/DIEN/" itemprop="url">
+              
+                <span itemprop="name">（读论文）推荐系统之ctr预估-DIEN模型解析</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">（读论文）推荐系统之ctr预估-DIN模型解析</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-12T16:03:03+08:00">
-                2019-10-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/ctr/" itemprop="url" rel="index">
-                    <span itemprop="name">ctr</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  3.5k 
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  12 分钟
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>本人才疏学浅，不足之处欢迎大家指出和交流。</p>
-<p>今天要分享的是阿里针对<strong>电子商务领域</strong>的CTR预估的Deep Interest Network理论，由盖坤大神团队提出于2017年。该模型要点为：结合<strong>Attention机制</strong>，<strong>充分利用/挖掘用户历史行为数据中的信息，</strong>下面一起来看下。</p>
-<p>原文：《Deep Interest Network for Click-Through Rate Prediction》<br><a id="more"></a><br>地址： <a href="https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1706.06978.pdf" target="_blank" rel="noopener">https://www.ijcai.org/proceedings/2017/0435.pdf</a></p>
-<p><br></p>
-<h1 id="1、-背景"><a href="#1、-背景" class="headerlink" title="1、 背景"></a>1、 背景</h1><p><br><br>自Youtube 提出来基于 embedding 和 MLP 的基础模型后，近年来深度学习在CTR预估领域已经有了广泛的应用，常见的算法有如如Wide&amp;Deep，DeepFM等。在这些方法中，大规模稀疏输入首先将特征映射到某固定维度的嵌入向量，然后通过多个MLP，以了解特征之间的非线性关系。这样，无论候选广告是什么，用户特征都被压缩为固定长度的表示向量。</p>
-<p>这种方法的优点在于：<strong>通过神经网络可以拟合高阶的非线性关系，同时减少了人工特征的工作量。</strong></p>
-<p>但是，使用固定长度的矢量将成为瓶颈，这给嵌入和MLP方法从丰富的历史行为中有效捕捉用户的不同兴趣带来了困难。</p>
-<p>于是文中提出了DIN网络来解决这个问题，该网络设计了一个<strong>局部激活单元</strong>来自适应地从和某个广告相关的历史行为中学习用户兴趣。这个表示向量会因广告而异，极大地提高了模型的表达能力。<br>提前来看下DIN具体的解决方案总结：</p>
-<ol>
-<li><strong>使用_用户兴趣分布_来表示用户多种多样的兴趣爱好</strong></li>
-<li><strong>使用_Attention机制_来实现Local Activation</strong></li>
-<li><strong>针对模型训练，提出了_Dice激活函数，自适应正则_，显著提升了模型性能与收敛速度</strong></li>
-</ol>
-<h2 id="1-1-数据特性"><a href="#1-1-数据特性" class="headerlink" title="1.1 数据特性"></a>1.1 数据特性</h2><p>在丰富的线上电商数据中，研究者们通过观察发现了用户行为数据中有两个很重要的特性：</p>
-<p><strong>Diversity：</strong><br>用户在访问电商网站时会对多种商品都感兴趣。也就是用户的兴趣非常的广泛。</p>
-<p><strong>Local Activation：</strong><br>用户是否会点击推荐给他的商品，仅仅取决于历史行为数据中的一小部分，而不是全部。</p>
-<p>举个栗子：</p>
-<p><img src="https://pic2.zhimg.com/80/v2-7ff1103b4871d07ad984d628b0d9b195_720w.jpg" alt></p>
-<p><strong>Diversity</strong>：一个年轻的母亲，从她的历史行为中，我们可以看到她的兴趣非常广泛：羊毛衫、手提袋、耳环、童装、运动装等等。</p>
-<p><strong>Local Activation</strong>：一个爱游泳的人，他之前购买过travel book、ice cream、potato chips、swimming cap。当前给他推荐的商品(或者说是广告)是goggle。那么他是否会点击这次广告，跟他之前是否购买过薯片、书籍、冰激凌没有任何相关性，而是与他之前购买过游泳帽有关。也就是说在这一次CTR预估中，部分历史数据(swimming cap)起了决定作用，而其他的基本都没起作用。</p>
-<p>针对上面提到的用户行为中存在的两种特性，阿里将其运用于自身的推荐系统中，推出了深度兴趣网络DIN，接下来，我们就一起来看一下推荐系统和模型的一些实现细节。<br><br></p>
-<h1 id="2、系统设计"><a href="#2、系统设计" class="headerlink" title="2、系统设计"></a>2、系统设计</h1><p><br><br><img src="https://pic4.zhimg.com/80/v2-79b3bedfc3564e179eda19a36f8ad39b_720w.jpg" alt></p>
-<p>阿里的推荐系统工作流程就如上图所示，可以简单描述为：</p>
-<ol>
-<li>检查用户历史行为数据。</li>
-<li>使用matching module产生候选ads。</li>
-<li>通过ranking module得到候选ads的点击概率，并根据概率排序得到推荐列表。</li>
-<li>记录下用户在当前展示广告下的反应(点击与否)。</li>
-</ol>
-<p>这是一个闭环的系统，对于用户行为数据(User Behavior Data)，系统自己生产并消费。</p>
-<h2 id="2-1、特征设计"><a href="#2-1、特征设计" class="headerlink" title="2.1、特征设计"></a><strong>2.1、特征设计</strong></h2><p> 论文中将所涉及到的特征分为四个部分：<strong>用户特征、用户行为特征、广告特征、上下文特征</strong>，并<strong>没有进行特征组合/交叉特征</strong>。而是通过DNN去学习特征间的交互信息。具体如下：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-bff54141fb596c7e59032ce3b5c00e22_720w.jpg" alt></p>
-<p>其中，只有用户行为特征是multi-hot的，即多值离散特征，原因就是一个用户会购买多个good_id,也会访问多个shop_id。针对这种特征，由于每个涉及到的非0值个数是不一样的，常见的做法就是将id转换成embedding之后，加一层pooling层，比如average-pooling，sum-pooling，max-pooling。DIN中使用的是weighted-sum，其实就是加权的sum-pooling，权重经过一个activation unit计算得到。即<code>Embedding -&gt; Pooling</code> + <code>Attention</code>，后面还会具体介绍。</p>
-<h2 id="2-2、评价指标"><a href="#2-2、评价指标" class="headerlink" title="2.2、评价指标"></a>2.2、评价指标</h2><h3 id="模型使用的评价指标是GAUC，我们先来看一下GAUC的计算公式："><a href="#模型使用的评价指标是GAUC，我们先来看一下GAUC的计算公式：" class="headerlink" title="模型使用的评价指标是GAUC，我们先来看一下GAUC的计算公式："></a>模型使用的评价指标是GAUC，我们先来看一下GAUC的计算公式：</h3><p><img src="https://pic3.zhimg.com/80/v2-a39c279a6ecb4f91ad976a04f09cbc4e_720w.png" alt></p>
-<p>AUC表示正样本得分比负样本得分高的概率。在CTR实际应用场景中，CTR预测常被用于对每个用户候选广告的排序。但是不同用户之间存在差异：有些用户本身就是点击率较高。以往的评价指标对样本不区分用户地进行AUC的计算。论文采用的GAUC实现了用户级别的AUC计算，<strong>在单个用户AUC的基础上，按照点击次数或展示次数进行加权平均，消除了用户偏差对模型的影响</strong>，更准确的描述了模型的表现效果，并且实践证明了GAUC相比于AUC更加稳定、可靠。<br><br></p>
-<h1 id="3、DIN"><a href="#3、DIN" class="headerlink" title="3、DIN"></a>3、DIN</h1><h2 id="3-1、Base-Model"><a href="#3-1、Base-Model" class="headerlink" title="3.1、Base Model"></a>3.1、Base Model</h2><p>在介绍DIN之前，我们先来看一下一个base，结构如下：</p>
-<p><img src="https://pic2.zhimg.com/80/v2-974c499958fd7e8691b42be0aef0c5dd_720w.png" alt></p>
-<p><img src="https://pic3.zhimg.com/80/v2-dd4be3d1ad1e63a17e6567f45b78d0c2_720w.jpg" alt></p>
-<p>可以看到，Base Model首先吧one-hot或multi-hot特征转换为特定长度的embedding，作为模型的输入，然后经过一个DNN的part，得到最终的预估值。特别地，针对multi-hot的特征，做了一次element-wise+的操作，这里其实就是sum-pooling，这样，不管特征中有多少个非0值，经过转换之后的长度都是一样的。</p>
-<p><strong>这里对multi-hot多值离散特征进行Pooling操作，就是对Diversity的建模。Base Model中还没有引入Attention机制。</strong></p>
-<h2 id="3-2、Deep-Interest-Network"><a href="#3-2、Deep-Interest-Network" class="headerlink" title="3.2、Deep Interest Network"></a>3.2、<strong>Deep Interest Network</strong></h2><p>仔细研究我们可以发现，Base Model有一个很大的问题，Pooling操作损失了很多信息，它对用户的历史行为是同等对待的，没有做任何处理，这显然是不合理的。一个很显然的例子，离现在越近的行为，越能反映你当前的兴趣。因此，对用户历史行为基于Attention机制进行一个加权，阿里提出了深度兴趣网络（Deep Interest Network)，先来看一下模型结构：</p>
-<p><img src="https://pic2.zhimg.com/80/v2-dff7b3f35e4d6dec8d994436c2b0f719_720w.jpg" alt></p>
-<p>首先给出结论，在这个模型中：</p>
-<ol>
-<li>Activation Unit实现Attention机制，对Local Activation建模</li>
-<li>Pooling(weighted sum)对Diversity建模</li>
-</ol>
-<p>第二点比较好理解，接下来重点来理解下第一点。</p>
-<p><strong>Attention</strong>：基于用户历史行为，充分挖掘用户兴趣和候选广告之间的关系。用户是否点击某个广告往往是基于他之前的部分兴趣，这是应用Attention机制的基础。Attention机制简单的理解就是对于不同的特征有不同的权重，这样某些特征就会主导这一次的预测，就好像模型对某些特征pay attention。但是，<strong>DIN中并不能直接用attention机制</strong>。因为<strong>对于不同的候选广告，用户兴趣表示(embedding vector)应该是不同的</strong>。也就是说用户针对不同的广告表现出不同的兴趣表示，即使是历史兴趣行为相同，但是各个行为的权重不同。这就是DIN针对Local Activation建模的含义。</p>
-<p>attention在这里的实际意义是：每个Ad，都有一堆历史行为对其产生attention的影响分，这些attention分值与历史行为共同对这个Ad下的用户表示做加权。（可以将行为结构信息保留下来，并且提供了注意焦点）如下：</p>
-<p>用户在某个广告下的Embedding表示Vu(Va)：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-a80dff84ded36a0d9290b49cabf2a85b_720w.jpg" alt></p>
-<p>其中，Vu是所有behavior ids的加权和，表示的是用户兴趣；Va是候选广告的嵌入向量；<strong>wᵢ</strong>是候选广告影响着每个behavior id的权重，也就是Local Activation。<strong>wᵢ</strong>通过Activation Unit计算得出，这一块用函数去拟合，表示为g(Vi,Va)。</p>
-<h2 id="3-3、-Dice激活函数"><a href="#3-3、-Dice激活函数" class="headerlink" title="3.3、 Dice激活函数"></a>3.3、 Dice激活函数</h2><h3 id="从Relu到PRelu："><a href="#从Relu到PRelu：" class="headerlink" title="从Relu到PRelu："></a><strong>从Relu到PRelu：</strong></h3><p>PReLU其实是ReLU的改良版，ReLU可以看作是<code>x*Max(x,0)</code>，相当于输出x经过了一个在0点的阶跃整流器。由于ReLU在x小于0的时候，梯度为0，可能导致网络停止更新，PReLU对整流器的左半部分形式进行了修改，使得x小于0时输出不为0。</p>
-<p>研究表明，PReLU能提高准确率但是也稍微增加了过拟合的风险。PReLU形式如下：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-c3d6377a3fd62a5f650640301663444e_720w.jpg" alt></p>
-<p>无论是ReLU还是PReLU突变点都在0，论文里认为，对于所有输入不应该都选择0点为突变点而是应该依赖于数据的。于是提出了一种<strong>data dependent</strong>的方法：<strong>Dice激活函数</strong>。形式如下：</p>
-<p><img src="https://pic2.zhimg.com/80/v2-7c883ed0ce7130c631a9723f71e2b929_720w.jpg" alt></p>
-<p>可以看出，pi是一个概率值，这个概率值决定着输出是取yi或者是alpha_i * yi，pi也起到了一个整流器的作用。<br>pi的计算分为两步：</p>
-<ol>
-<li>首先，对x进行均值归一化处理，这使得整流点是在数据的均值处，实现了data dependent的想法；</li>
-<li>其次，经过一个sigmoid函数的计算，得到了一个0到1的概率值。巧合的是最近google提出的Swish函数形式为<code>x*sigmoid(x)</code> 在多个实验上证明了比ReLU函数<code>x*Max(x,0)</code>表现更优。</li>
-</ol>
-<p>另外，期望和方差使用每次训练的mini batch data直接计算，并类似于Momentum使用了_指数加权平均_：</p>
-<p><img src="https://pic1.zhimg.com/80/v2-7367f3537b83c3f941669b58343b7ac4_720w.jpg" alt></p>
-<p>alpha是一个超参数，推荐值为0.99。</p>
-<h2 id="3-4、-自适应正则-Adaptive-Regularization"><a href="#3-4、-自适应正则-Adaptive-Regularization" class="headerlink" title="3.4、 自适应正则 Adaptive Regularization"></a>3.4、 自适应正则 Adaptive Regularization</h2><p>在深度ctr模型中，输入非常稀疏且维度高，模型稍微复杂导致参数非常多，通常的做法是加入L1、L2、Dropout等防止过拟合，论文中尝试后效果都不是很好。同时研究者们也发现用户数据符合长尾定律，也就是说很多的feature id只出现了几次，而一小部分feature id出现很多次。这在训练过程中增加了很多噪声，并且加重了过拟合。</p>
-<p>对于这个问题一个简单的处理办法就是：人工的去掉出现次数比较少的feature id。缺点是：损失的信息不好评估；阈值的设定非常的粗糙。</p>
-<p><strong>DIN给出的解决方案是：</strong></p>
-<ol>
-<li>针对feature id出现的频率，来自适应的调整他们正则化的强度；</li>
-<li>对于出现频率高的，给与较小的正则化强度；</li>
-<li>对于出现频率低的，给予较大的正则化强度。</li>
-</ol>
-<p><img src="https://pic1.zhimg.com/80/v2-ec2e6fd529f3dd0f0cede1f73e3b0da8_720w.jpg" alt></p>
-<p><img src="https://pic2.zhimg.com/80/v2-0e64614ffeb4b940dcd8e1ec1d7ae5c1_720w.jpg" alt></p>
-<p>其中B是mini batch样本，大小为b；ni是出现频率；Ii表示我们考虑特征非零的样本。</p>
-<p>这样做的原因是，作者实践发现出现频率高的物品无论是在模型评估还是线上收入中都有较大影响。<br><br></p>
-<h1 id="4、结果展示"><a href="#4、结果展示" class="headerlink" title="4、结果展示"></a>4、结果展示</h1><p><br><br>下图展示了用户兴趣分布：颜色越暖表示用户兴趣越高，可以看到用户的兴趣分布有多个峰。</p>
-<p><img src="https://pic4.zhimg.com/80/v2-8c99874f15242d4770216e43f7d21f1f_720w.jpg" alt></p>
-<p>利用候选的广告，反向激活历史兴趣。不同的历史兴趣爱好对于当前候选广告的权重不同，做到了local activation，如下图：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-8f486013316db4282e4b5b2f1349d156_720w.jpg" alt><br><br></p>
-<h1 id="5、实验"><a href="#5、实验" class="headerlink" title="5、实验"></a>5、实验</h1><p><br><br><strong>Amazon Dataset</strong></p>
-<p>作者选取了Electronics 子集 ，包含192,403 users, 63,001 goods, 801 categories and 1,689,188 samples。该数据集中的用户行为比较多，每个用户的商品有超过5个用户评论。特征包括goods_id, cate_id, user reviewed goods_id_list and cate_id_list。假设一个用户的行为是 <img src="https://www.zhihu.com/equation?tex=b_%7B1%7D%2Cb_%7B2%7D%2C...%2Cb_%7Bk%7D%2C...b_%7Bn%7D" alt="[公式]">，那么认为就是使用前面k个看过的物品预测第k+1个物品。Training dataset is generated with k = 1, 2, . . . , n 2 for each user，测试集是使用前面n-1个看过的物品预测最后一个物品。</p>
-<p>对所有模型使用 SGD as the optimizer with exponential decay， 学习率从1开始衰减到0.1。min-batch大小为32。</p>
-<p><strong>MovieLens Dataset</strong></p>
-<p>contains 138,493 users, 27,278 movies, 21 categories and 20,000,263 samples。</p>
-<p>为了让其适合ctr任务，作者将其转换为二分类数据。之前电影评分为0-5，作者将4、5标注为正样本，其余为负样本。根据userId来划分训练集和测试集。among all 138,493 users, of which 100,000 are randomly selected into training set (about 14,470,000 samples) and the rest 38,493 into the test set (about 5,530,000 samples).</p>
-<p>任务变成:根据用户的历史行为，判断用户是否会对某个电影打分超过3分。Features include movie_id, movie_cate_id and user rated movie_id_list, movie_cate_id_list。optimizer, learning rate and mini-batch size 和上一个数据集相同。</p>
-<p><strong>Alibaba Dataset</strong></p>
-<p>取自阿里展示广告系统 线上流量，两周做训练集，接下来的一天为测试集。训练集和测试集大小分别为20亿和1.4亿。</p>
-<p>For all the deep models, the dimensionality of embedding vector is 12 for the whole 16 groups of features. Layers of MLP issetby192⇥200⇥80⇥2.</p>
-<p>由于数据量大，mini-batch size 为5000，Adam 为优化器。同时使用了指数衰减 in which learning rate starts at 0.001 and decay rate is set to 0.9.</p>
-<p><img src="https://pic1.zhimg.com/80/v2-6d5711fbca0d33a8facc074ad65ab9fc_720w.jpg" alt></p>
-<p>所有实验重复5次，平均指标作为最终指标。</p>
-<p>1.DNN 均超过LR。<br>2.PNN和DeepFM 超过W&amp;D。<br>3.DIN效果最好,尤其在amazon上，作者归因于局部激活单元的作用。<br>4.Dice 是有效的。</p>
-<p>其他相关实验其参阅原论文，本次就聊到这里啦。</p>
-<p>实现DIN的一个Demo，感兴趣的童鞋可以看下我的<a href="https://link.zhihu.com/?target=https%3A//github.com/Jesse-csj/TensorFlow_Practice" target="_blank" rel="noopener">[github]</a>。</p>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <div>
-  
-    <div>
-    
-        <div style="text-align:center;color: #555;font-size:14px;">-------------本文结束-------------</div>
-    
-</div>
-
-
-
-  
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-11-24T07:33:22+08:00" content="2019-11-24">
+          11-24
+        </time>
       </div>
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/推荐系统/" rel="tag"># 推荐系统</a>
-          
-            <a href="/tags/Attention/" rel="tag"># Attention</a>
-          
-            <a href="/tags/DNN/" rel="tag"># DNN</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/08/12/MLR/" rel="next" title="（读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析">
-                <i class="fa fa-chevron-left"></i> （读论文）推荐系统之ctr预估-MLR(LS-PLM)模型解析
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/24/DIEN/" rel="prev" title="（读论文）推荐系统之ctr预估-DIEN模型解析">
-                （读论文）推荐系统之ctr预估-DIEN模型解析 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -649,10 +384,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -673,17 +404,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -820,22 +542,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1、-背景"><span class="nav-text">1、 背景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-数据特性"><span class="nav-text">1.1 数据特性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2、系统设计"><span class="nav-text">2、系统设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1、特征设计"><span class="nav-text">2.1、特征设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2、评价指标"><span class="nav-text">2.2、评价指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型使用的评价指标是GAUC，我们先来看一下GAUC的计算公式："><span class="nav-text">模型使用的评价指标是GAUC，我们先来看一下GAUC的计算公式：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3、DIN"><span class="nav-text">3、DIN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1、Base-Model"><span class="nav-text">3.1、Base Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2、Deep-Interest-Network"><span class="nav-text">3.2、Deep Interest Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3、-Dice激活函数"><span class="nav-text">3.3、 Dice激活函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从Relu到PRelu："><span class="nav-text">从Relu到PRelu：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4、-自适应正则-Adaptive-Regularization"><span class="nav-text">3.4、 自适应正则 Adaptive Regularization</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4、结果展示"><span class="nav-text">4、结果展示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5、实验"><span class="nav-text">5、实验</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -1014,10 +720,6 @@ setInterval("createtime()",250);
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
